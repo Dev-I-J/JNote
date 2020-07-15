@@ -1,1 +1,2 @@
+requirements.txt linguist-detectable=false
 *.txt linguist-detectable=true
