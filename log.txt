@@ -1,3 +1,0 @@
-DO NOT DELETE THIS FILE! 
-This file is used by JNote for logging the last opened file. 
-If you delete this file, JNote will continue to run, but fails to open, save, save as, create a new file and other IO Features.
