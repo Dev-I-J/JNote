@@ -17,7 +17,7 @@ And So On...
 
 JNote only supports Windows 64bit at this time. Support for other platforms may come soon!
 
-* [Windows 64bit](https://github.com/Dev-I-J/JNote/releases/download/v1.1.0/JNote-Windows-64bit-v1.1.0.zip) - https://github.com/Dev-I-J/JNote/releases/download/v1.0.0/JNote-Windows-64bit.zip
+* [Windows 64bit](https://github.com/Dev-I-J/JNote/releases/download/v1.1.0/JNote-Windows-64bit-v1.1.0.zip) - https://github.com/Dev-I-J/JNote/releases/download/v1.1.0/JNote-Windows-64bit-v1.1.0.zip
 
 ## Price
 
