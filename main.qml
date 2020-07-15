@@ -6,14 +6,11 @@ import QtQuick.Dialogs 1.3
 ApplicationWindow{
 	id: windowM
 	property string winTitle: "JNote: A Free NotePad"
+	property bool closing: false
 	visible: true
 	width: 800
 	height: 600
 	title: winTitle + " - Untitled"
-	onClosing: {
-		close.accepted = false;
-		confirmExit.open();
-	}
 
 	Component.onCompleted: {
 		PyQML.checkUpdates("startup");
@@ -27,6 +24,7 @@ ApplicationWindow{
 
 			MenuItem{
 				text: "New"
+				id: newDoc
 				icon.source: "Icons/new.png"
 				onTriggered: {
 					windowM.title = windowM.winTitle + " - Untitled";
@@ -55,20 +53,9 @@ ApplicationWindow{
 			}
 
 			MenuItem{
-				text: "New Window"
-				icon.source: "Icons/new-window.png"
-				onTriggered:{
-					var component = Qt.createComponent("main.qml");
-					if (component.status === Component.Ready){
-						component.createObject();
-					}
-				}
-			}
-
-			MenuItem{
 				text: "Exit"
 				icon.source: "Icons/exit.png"
-				onTriggered: windowM.close();
+				onTriggered: confirmExit.open();
 			}
 		}
 
@@ -318,15 +305,16 @@ ApplicationWindow{
 			}
 
 			Text{
-				id: text
+				id: updateText
 				property string newVersion: ""
+				property string currentVersion: ""
 			    text: 'An Update is available for JNote.
 Updates may contain bugfixes, security patches or new features.
 
 You can see the details of the update below.
 
-Current Version = v1.0.0
-New Version = ' + text.newVersion + '
+Current Version = ' + updateText.currentVersion + '
+New Version = ' + updateText.newVersion + '
 
 Do You Want To Update?';
 				Layout.alignment: Qt.AlignHCenter
@@ -441,6 +429,7 @@ The GitHub API Service is used to detect new versions.'
 					mainTextArea.tmpText = mainTextArea.text;
 					mainTextArea.text = "";
 					mainTextArea.text = mainTextArea.tmpText;
+					mainTextArea.tmpText = "";
 				}
 			}
 
@@ -508,7 +497,10 @@ The GitHub API Service is used to detect new versions.'
 		icon: StandardIcon.Warning
 		standardButtons: Dialog.No | Dialog.Yes
 		visible: false
-		onAccepted: Qt.quit();
+		onAccepted: {
+        	closing = true;
+        	windowM.close();
+      }
 	}
 
 	FileDialog{
@@ -536,6 +528,36 @@ The GitHub API Service is used to detect new versions.'
 	        path = path.replace(/^(file:\/{3})/,"");
 	        PyQML.fileSaveAs(path, mainTextArea.text);
 		}
+	}
+
+	Shortcut{
+		sequence: "Ctrl+N"
+		onActivated: {
+			windowM.title = windowM.winTitle + " - Untitled";
+			mainTextArea.text = "";
+			PyQML.fileNew();
+			statusText.text = "New Document Created";
+		}
+	}
+
+	Shortcut{
+		sequence: "Ctrl+O"
+		onActivated: fileOpenDialog.open();
+	}
+
+	Shortcut{
+		sequence: "Ctrl+S"
+		onActivated: PyQML.fileSave(mainTextArea.text);
+	}
+
+	Shortcut{
+		sequence: "Ctrl+Shift+S"
+		onActivated: fileSaveDialog.open();
+	}
+
+	Shortcut{
+		sequence: "Alt+F4"
+		onActivated: confirmExit.open();
 	}
 
 	Connections{
@@ -578,12 +600,13 @@ The GitHub API Service is used to detect new versions.'
 
 		function onUpdateAvailable(newVersionStr) {
 		    statusText.text = "A Newer Version of JNote is Available - " + newVersionStr;
-			text.newVersion = newVersionStr;
+			updateText.newVersion = newVersionStr;
 			update.open();
 		}
 
-		function onUpToDate() {
-		    statusText.text = "JNote is up to date - v1.0.0";
+		function onUpToDate(currentVersionStr) {
+		    statusText.text = "JNote is up to date - " + currentVersionStr;
+			updateText.currentVersion = currentVersionStr;
 			upToDate.open();
 		}
 
@@ -601,5 +624,10 @@ The GitHub API Service is used to detect new versions.'
 		    apiConnectError.open();
 			statusText.text = "Unable to connect to API";
 		}
+	}
+
+	onClosing: {
+		close.accepted = closing;
+		onTriggered: if(!closing) confirmExit.open();
 	}
 }

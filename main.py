@@ -13,6 +13,7 @@ class PyQML(QObject):
     fileOpenSuccessful = pyqtSignal(str, str, arguments=['text', 'path'])
     fileSavedAs = pyqtSignal(str, str, arguments=['path', 'newText'])
     updateAvailable = pyqtSignal(str, arguments=['newVersionStr'])
+    upToDate = pyqtSignal(str, arguments=['currentVersionStr'])
     confirmExitSignal = pyqtSignal()
     fileHandleError = pyqtSignal()
     apiConnectError = pyqtSignal()
@@ -21,7 +22,6 @@ class PyQML(QObject):
     fileUntitled = pyqtSignal()
     fatalError = pyqtSignal()
     fileSaved = pyqtSignal()
-    upToDate = pyqtSignal()
 
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -36,7 +36,11 @@ class PyQML(QObject):
         except FileNotFoundError:
             self.fileNotFound.emit()
         except UnicodeDecodeError:
-            self.fileOpenError.emit()
+            try:
+                text = open(path, "r", encoding="utf-8").read()
+                self.fileOpenSuccessful.emit(text, path)
+            except UnicodeDecodeError:
+                self.fileOpenError.emit()
         except IOError:
             self.fileHandleError.emit()
         except BaseException:
@@ -51,14 +55,15 @@ class PyQML(QObject):
         try:
             url = "https://api.github.com/repos/Dev-I-J/JNote/releases/latest"
             r = get(url)
-            currentVersion = Version("v1.0.0")
+            currentVersion = Version("v1.1.0")
+            currentVersionStr = "v1.1.0"
             newVersion = Version(r.json()['tag_name'])
             newVersionStr = r.json()['tag_name']
             if newVersion > currentVersion:
                 self.updateAvailable.emit(newVersionStr)
             else:
                 if state != "startup":
-                    self.upToDate.emit()
+                    self.upToDate.emit(currentVersionStr)
         except RequestException:
             self.apiConnectError.emit()
         except BaseException:
@@ -71,7 +76,12 @@ class PyQML(QObject):
             open("log.txt", "w").write(path)
             self.fileOpenSuccessful.emit(text, path)
         except UnicodeDecodeError:
-            self.fileOpenError.emit()
+            try:
+                text = open(path, "r", encoding="utf-8").read()
+                open("log.txt", "w").write(path)
+                self.fileOpenSuccessful.emit(text, path)
+            except UnicodeDecodeError:
+                self.fileOpenError.emit()
         except FileNotFoundError:
             self.fileNotFound.emit()
         except IOError:
