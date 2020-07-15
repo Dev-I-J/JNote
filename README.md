@@ -4,16 +4,14 @@ __JNote is a free NotePad__ application written in _Python and QML. (PyQt5)_
 
 ## Features
 
-The current version is v1.0.0 and it can,
+The current version is v1.1.0 and additional for basic functions of a note pad, it can
 
-* Create new plain text documents,
-* Open plain text files,
-* Save changes to file,
-* Save documents to disc.
+* Automatically Check For Updates,
+* Open the last opened file automatically when started,
+* Catches errors effectively,
+* Super Clean Code.
 
 And So On...
-
-Additionally, It can Open the last opened document when started and check for new versions automatically. (With 'api.github.com')
 
 ## Download
 
@@ -43,3 +41,12 @@ Additional Information about jnote
 * [PyQt5](https://pypi.org/project/PyQt5/) for the GUI.
 * [requests](https://pypi.org/project/requests/) for Pinging the GitHub API to check for updates.
 * [version-parser](https://pypi.org/project/version-parser/) for Comparing Versions.
+
+## Coming Soon!
+
+These functionality is scheduled to be shipped with the future major releases.
+
+* Command Line Access,
+* Auto Updating,
+* Settings dialog to control your preferences,
+* Dark Mode!!
