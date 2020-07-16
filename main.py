@@ -5,14 +5,16 @@ from PyQt5.QtGui import QIcon
 
 from requests import get, RequestException
 from version_parser.version import Version
+from markdown import markdown
 import sys
 
 
 class PyQML(QObject):
 
+    args = ['newVersionStr', 'currentVersionStr', 'info', 'date']
     fileOpenSuccessful = pyqtSignal(str, str, arguments=['text', 'path'])
     fileSavedAs = pyqtSignal(str, str, arguments=['path', 'newText'])
-    updateAvailable = pyqtSignal(str, arguments=['newVersionStr'])
+    updateAvailable = pyqtSignal(str, str, str, str, arguments=args)
     upToDate = pyqtSignal(str, arguments=['currentVersionStr'])
     confirmExitSignal = pyqtSignal()
     fileHandleError = pyqtSignal()
@@ -55,12 +57,18 @@ class PyQML(QObject):
         try:
             url = "https://api.github.com/repos/Dev-I-J/JNote/releases/latest"
             r = get(url)
-            currentVersion = Version("v1.1.0")
-            currentVersionStr = "v1.1.0"
+            currentVersion = Version("v1.2.0")
+            currentVersionStr = "v1.2.0"
             newVersion = Version(r.json()['tag_name'])
             newVersionStr = r.json()['tag_name']
             if newVersion > currentVersion:
-                self.updateAvailable.emit(newVersionStr)
+                info = markdown(r.json()['body'])
+                published_at = r.json()['published_at']
+                date = published_at[0:10]
+                self.updateAvailable.emit(newVersionStr,
+                                          currentVersionStr,
+                                          info,
+                                          date)
             else:
                 if state != "startup":
                     self.upToDate.emit(currentVersionStr)

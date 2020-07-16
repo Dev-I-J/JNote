@@ -293,7 +293,7 @@ ApplicationWindow{
 		title: 'Update - JNote'
 		standardButtons: Dialog.No | Dialog.Yes
 		width: 400
-		height: 400
+		height: 600
 		onYes: Qt.openUrlExternally("https://github.com/Dev-I-J/JNote/releases/latest")
 
 		ColumnLayout{
@@ -308,15 +308,9 @@ ApplicationWindow{
 				id: updateText
 				property string newVersion: ""
 				property string currentVersion: ""
-			    text: 'An Update is available for JNote.
-Updates may contain bugfixes, security patches or new features.
-
-You can see the details of the update below.
-
-Current Version = ' + updateText.currentVersion + '
-New Version = ' + updateText.newVersion + '
-
-Do You Want To Update?';
+				property string info: ""
+				property string date: ""
+			    text: '<p>An Update is available for JNote.<br><br>Updates may contain bugfixes, security patches or new features.<br><br>You can see the details of the update below.<br><br>Current Version = ' + updateText.currentVersion + '<br>New Version = ' + updateText.newVersion + '<br>Published At = ' + updateText.date +'<br>' + updateText.info + '<br><br>Do You Want To Update?'
 				Layout.alignment: Qt.AlignHCenter
 			}
 		}
@@ -598,9 +592,12 @@ The GitHub API Service is used to detect new versions.'
 			mainTextArea.text = newText;
 		}
 
-		function onUpdateAvailable(newVersionStr) {
+		function onUpdateAvailable(newVersionStr, currentVersionStr, info, date) {
 		    statusText.text = "A Newer Version of JNote is Available - " + newVersionStr;
 			updateText.newVersion = newVersionStr;
+			updateText.currentVersion = currentVersionStr;
+			updateText.info = info;
+			updateText.date = date;
 			update.open();
 		}
 
