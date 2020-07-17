@@ -13,8 +13,8 @@ ApplicationWindow{
     title: winTitle + " - Untitled"
 
     Component.onCompleted: {
-        PyQML.checkUpdates("startup");
-        PyQML.openLast();
+        JNote.checkUpdates("True");
+        JNote.openLast();
     }
 
     menuBar: MenuBar{
@@ -29,7 +29,7 @@ ApplicationWindow{
                 onTriggered: {
                     windowM.title = windowM.winTitle + " - Untitled";
                     mainTextArea.text = "";
-                    PyQML.fileNew();
+                    JNote.fileNew();
                     statusText.text = "New Document Created";
                 }
             }
@@ -43,7 +43,7 @@ ApplicationWindow{
             MenuItem{
                 text: "Save"
                 icon.source: "Icons/save.png"
-                onTriggered: PyQML.fileSave(mainTextArea.text);
+                onTriggered: JNote.fileSave(mainTextArea.text);
             }
 
             MenuItem{
@@ -133,7 +133,7 @@ ApplicationWindow{
             MenuItem{
                 text: "Check For Updates"
                 icon.source: "Icons/check-update.png"
-                onTriggered: PyQML.checkUpdates("");
+                onTriggered: JNote.checkUpdates("False");
             }
         }
     }
@@ -149,7 +149,7 @@ ApplicationWindow{
                 onClicked: {
                     windowM.title = windowM.winTitle + " - Untitled";
                     mainTextArea.text = "";
-                    PyQML.fileNew();
+                    JNote.fileNew();
                     statusText.text = "New Document Created";
                 }
             }
@@ -163,7 +163,7 @@ ApplicationWindow{
             ToolButton{
                 text: "Save"
                 icon.source: "Icons/save.png"
-                onClicked: PyQML.fileSave(mainTextArea.text);
+                onClicked: JNote.fileSave(mainTextArea.text);
             }
 
             ToolButton{
@@ -253,7 +253,6 @@ ApplicationWindow{
                 selectByKeyboard: true
                 persistentSelection: true
                 onPressed: statusText.text = "Ready"
-                focus: true
             }
 
             ScrollBar.vertical: ScrollBar {policy: ScrollBar.AlwaysOn}
@@ -506,7 +505,7 @@ The GitHub API Service is used to detect new versions.'
         onAccepted: {
             var path = fileUrl.toString();
             path = path.replace(/^(file:\/{3})/,"");
-            PyQML.fileOpen(path);
+            JNote.fileOpen(path);
             file_path(path);
         }
     }
@@ -520,7 +519,7 @@ The GitHub API Service is used to detect new versions.'
         onAccepted: {
             var path = fileUrl.toString();
             path = path.replace(/^(file:\/{3})/,"");
-            PyQML.fileSaveAs(path, mainTextArea.text);
+            JNote.fileSaveAs(path, mainTextArea.text);
         }
     }
 
@@ -529,7 +528,7 @@ The GitHub API Service is used to detect new versions.'
         onActivated: {
             windowM.title = windowM.winTitle + " - Untitled";
             mainTextArea.text = "";
-            PyQML.fileNew();
+            JNote.fileNew();
             statusText.text = "New Document Created";
         }
     }
@@ -541,7 +540,7 @@ The GitHub API Service is used to detect new versions.'
 
     Shortcut{
         sequence: "Ctrl+S"
-        onActivated: PyQML.fileSave(mainTextArea.text);
+        onActivated: JNote.fileSave(mainTextArea.text);
     }
 
     Shortcut{
@@ -555,7 +554,7 @@ The GitHub API Service is used to detect new versions.'
     }
 
     Connections{
-        target: PyQML
+        target: JNote
 
         function onFileOpenSuccessful(text, path) {
             mainTextArea.text = text;
