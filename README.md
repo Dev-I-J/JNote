@@ -30,7 +30,7 @@ __Assuming you already have _Python along with 'pip'_ and _Git_ installed on you
 2. Install Dependencies: `pip install -r requirements.txt`
 3. Install PyInstaller: `pip install PyInstaller`
 4. `cd` to JNote: `cd JNote`
-5. Build the Python File: `PyInstaller --name JNote --icon Icons/favicon.ico --add-data main.qml;. --add-data log.txt;. --add-data Icons;Icons --clean --noconsole main.py`
+5. Build the Python File: `python -m PyInstaller --name JNote --icon Icons/favicon.ico --add-data main.qml:. --add-data log.txt:. --add-data Icons:Icons --clean --windowed main.py`
 6. Go to the directory where you cloned the repo in the file manager, and you will find a folder called dist, and in there, another one called JNote. The Executable will be inside it.
 
 ### Windows
