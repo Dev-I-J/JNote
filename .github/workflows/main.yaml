@@ -5,7 +5,7 @@ on:
         branches: [master]
 
 jobs:
-    setup:
+    job:
         runs-on: macos-latest
         steps:
         - uses: actions/checkout@v2
@@ -17,3 +17,7 @@ jobs:
             python -m pip install -r requirements.txt
             python -m pip install PyInstaller
             PyInstaller --name JNote --icon Icons/favicon.ico --add-data main.qml:. --add-data log.txt:. --add-data Icons:Icons --clean --noconsole main.py
+        - uses: actions/download-artifact@v2
+          with:
+            name: MacOS-PKG
+            path: /Users/runner/work/JNote/JNote/dist/JNote
