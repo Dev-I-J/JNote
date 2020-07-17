@@ -20,8 +20,8 @@ jobs:
         - uses: actions/upload-artifact@v2
           with:
             name: MacOS-PKG
-            path: /Users/runner/work/JNote/JNote/
+            path: /Users/runner/work/JNote/JNote/dist
         - uses: actions/download-artifact@v2
           with:
             name: MacOS-PKG
-            path: /Users/runner/work/JNote/JNote/
+            path: /Users/runner/work/JNote/JNote/dist
