@@ -11,4 +11,4 @@ jobs:
 
     steps:
     - run: |
-        echo "Hello, World"
+        python3 -m pip install -r requirements.txt -y
