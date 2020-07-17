@@ -1,0 +1,14 @@
+name: Python
+
+on:
+  watch:
+    types: [started]
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    
+    if: github.actor == github.event.repository.owner.login
+
+    steps:
+    - run: |
+        echo "Hello, World"
