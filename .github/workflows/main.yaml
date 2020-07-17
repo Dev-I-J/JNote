@@ -17,11 +17,11 @@ jobs:
             python -m pip install -r requirements.txt
             python -m pip install PyInstaller
             python -m PyInstaller --name JNote --icon Icons/favicon.ico --add-data main.qml:. --add-data log.txt:. --add-data Icons:Icons --clean --windowed main.py
-        - uses: actions/upload-artifact@v2
+        - uses: actions/upload-artifact@v1
           with:
             name: MacOS-PKG
-            path: /Users/runner/work/JNote/JNote/dist
-        - uses: actions/download-artifact@v2
+            path: /Users/runner/work/JNote/JNote/dist/
+        - uses: actions/download-artifact@v1
           with:
             name: MacOS-PKG
-            path: /Users/runner/work/JNote/JNote/dist
+            path: /Users/runner/work/JNote/JNote/dist/
