@@ -45,6 +45,16 @@ jobs:
         - name: Build
           run: |
             python -m PyInstaller --name JNote --icon Icons/favicon.ico --add-data main.qml:. --add-data log.txt:. --add-data Icons:Icons --clean --windowed main.py
+        - name: Upload Artifact
+          uses: actions/upload-artifact@v1
+          with:
+            name: LINUX-PKG
+            path: /home/runner/work/JNote/JNote/dist/
+        - name: Download Artifact
+          uses: actions/download-artifact@v1
+          with:
+            name: LINUX-PKG
+            path: /home/runner/work/JNote/JNote/dist/
     windows:
         runs-on: windows-latest
         steps:
@@ -61,3 +71,13 @@ jobs:
         - name: Build
           run: |
             python -m PyInstaller --name "JNote" --icon "Icons\favicon.ico" --add-data "main.qml;." --add-data "log.txt;." --add-data "Icons;Icons" --clean --windowed main.py
+        - name: Upload Artifact
+          uses: actions/upload-artifact@v1
+          with:
+            name: WINDOWS-32-PKG
+            path: D:\a\JNote\JNote\dist\
+        - name: Download Artifact
+          uses: actions/download-artifact@v1
+          with:
+            name: WINDOWS-32-PKG
+            path: D:\a\JNote\JNote\dist\
