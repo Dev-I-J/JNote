@@ -13,7 +13,7 @@ ApplicationWindow{
     title: winTitle + " - Untitled"
 
     Component.onCompleted: {
-        JNote.checkUpdates("True");
+        JNote.checkUpdates(true);
         JNote.openLast();
     }
 
@@ -133,7 +133,7 @@ ApplicationWindow{
             MenuItem{
                 text: "Check For Updates"
                 icon.source: "Icons/check-update.png"
-                onTriggered: JNote.checkUpdates("False");
+                onTriggered: JNote.checkUpdates(false);
             }
         }
     }

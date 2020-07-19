@@ -55,12 +55,12 @@ class JNote(QObject):
         with open("log.txt", "w") as log:
             log.write("")
 
-    @pyqtSlot(str)
+    @pyqtSlot(bool)
     def checkUpdates(self, isSatrtup):
         try:
             url = "https://api.github.com/repos/Dev-I-J/JNote/releases/latest"
             with get(url) as r:
-                currentVersionStr = "v1.2.1"
+                currentVersionStr = "v1.2.2"
                 currentVersion = Version(currentVersionStr)
                 newVersionStr = r.json()['tag_name']
                 newVersion = Version(newVersionStr)
@@ -73,7 +73,7 @@ class JNote(QObject):
                                               info,
                                               date)
                 else:
-                    if isSatrtup == "False":
+                    if not isSatrtup:
                         self.upToDate.emit(currentVersionStr)
         except RequestException:
             self.apiConnectError.emit()
