@@ -13,13 +13,6 @@ The current version is v1.2.1 and additional for basic functions of a note pad, 
 
 And So On...
 
-## Download
-
-JNote supports Windows 64bit and Mac OS at this time. Support for other platforms may come soon!
-
-* [Windows 64bit](https://github.com/Dev-I-J/JNote/releases/download/v1.2.1/JNote-Windows-64bit-v1.2.1.zip) - https://github.com/Dev-I-J/JNote/releases/download/v1.2.1/JNote-Windows-64bit-v1.2.1.zip
-* [Mac OS](https://github.com/Dev-I-J/JNote/releases/download/v1.2.1/JNote-MacOS-v1.2.1.zip) - https://github.com/Dev-I-J/JNote/releases/download/v1.2.1/JNote-MacOS-v1.2.1.zip
-
 ## Build From Source
 
 __Assuming you already have _Python along with 'pip'_ and _Git_ installed on your computer__,
