@@ -12,6 +12,7 @@ import sys
 class JNote(QObject):
 
     args = ['newVersionStr', 'currentVersionStr', 'info', 'date']
+
     fileOpenSuccessful = pyqtSignal(str, str, arguments=['text', 'path'])
     fileSavedAs = pyqtSignal(str, str, arguments=['path', 'newText'])
     updateAvailable = pyqtSignal(str, str, str, str, arguments=args)
@@ -60,7 +61,7 @@ class JNote(QObject):
         try:
             url = "https://api.github.com/repos/Dev-I-J/JNote/releases/latest"
             with get(url) as r:
-                currentVersionStr = "v1.2.2"
+                currentVersionStr = "v1.3.1"
                 currentVersion = Version(currentVersionStr)
                 newVersionStr = r.json()['tag_name']
                 newVersion = Version(newVersionStr)

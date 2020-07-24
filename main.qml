@@ -451,8 +451,9 @@ The GitHub API Service is used to detect new versions.'
 
     MessageDialog{
         id: upToDate
+        property string currentVersion: "";
         title: "JNote is Up-To-Date"
-        text: "Congratulations!! JNote is up to date."
+        text: "Congratulations!! JNote is up to date - " + upToDate.currentVersion;
         icon: StandardIcon.Information
         visible: false
     }
@@ -602,7 +603,7 @@ The GitHub API Service is used to detect new versions.'
 
         function onUpToDate(currentVersionStr) {
             statusText.text = "JNote is up to date - " + currentVersionStr;
-            updateText.currentVersion = currentVersionStr;
+            upToDate.currentVersion = currentVersionStr;
             upToDate.open();
         }
 
