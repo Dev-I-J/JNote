@@ -487,7 +487,7 @@ The GitHub API Service is used to detect new versions.'
     MessageDialog{
         id: confirmExit
         title: "Confirm Exit"
-        text: "Do You Really Want No Quit?"
+        text: "Do You Really Want To Quit?"
         icon: StandardIcon.Warning
         standardButtons: Dialog.No | Dialog.Yes
         visible: false
