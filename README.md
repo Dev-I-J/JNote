@@ -45,7 +45,7 @@ JNote is licensed under the GNU GPLv3 Open Source License.
 
 ## Documentation
 
-Will be available soon at https://jnote.ml/docs/.
+Will be available soon at https://github.com/Dev-I-J/JNote/wiki.
 
 ## Additional Information
 
