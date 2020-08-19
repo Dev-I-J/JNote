@@ -4,11 +4,11 @@ __JNote is a free NotePad__ application written in _Python and QML. (PyQt5)_
 
 ## Features
 
-The current version is v1.2.1 and additional for basic functions of a note pad, it can
+The current version is v1.3.0 and additional for basic functions of a note pad, it can
 
 * Automatically Check For Updates,
 * Open the last opened file automatically when started,
-* Catches errors effectively,
+* Save and use the last used fonts on when started,
 * Super Clean Code.
 
 And So On...
@@ -49,7 +49,7 @@ Will be available soon at https://github.com/Dev-I-J/JNote/wiki.
 
 ## Additional Information
 
-Additional Information about jnote
+Additional Information about JNote
 
 ### Credits
 
