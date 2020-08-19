@@ -13,6 +13,7 @@ ApplicationWindow{
     title: winTitle + " - Untitled"
 
     Component.onCompleted: {
+        Settings.setLastUsedFontSettingsDict();
         JNote.checkUpdates(true);
         JNote.openLast();
     }
@@ -246,13 +247,24 @@ ApplicationWindow{
 
             TextArea.flickable: TextArea {
                 id: mainTextArea
-                property var tmpText: ""
+                property string tmpText: ""
+                property int lastUsedFontIndex: 2
+                property int lastUsedSizeIndex: 0
+                property string lastUsedColor: "#000000"
+                property string lastUsedFont: "Arial"
+                property int lastUsedSize: 8
                 font.family: "Arial"
+                font.pointSize: 8
                 wrapMode: TextArea.Wrap
                 selectByMouse: true
                 selectByKeyboard: true
                 persistentSelection: true
                 onPressed: statusText.text = "Ready"
+                Component.onCompleted: {
+                    mainTextArea.font = Settings.lastUsedFontSettings['font'];
+                    mainTextArea.font.pointSize = Settings.lastUsedFontSettings['size'];
+                    mainTextArea.color = Settings.lastUsedFontSettings['color'];
+                }
             }
 
             ScrollBar.vertical: ScrollBar {policy: ScrollBar.AlwaysOn}
@@ -317,6 +329,11 @@ ApplicationWindow{
 
     Dialog{
         id: fontDialog
+        property string fontFamily: "Arial"
+        property int fontSize: 8
+        property int fontSizeIndex: 1
+        property int fontIndex: 2
+        property string fontColor: "Black"
         width: 600
         height: 400
         title: "Select Font"
@@ -332,12 +349,14 @@ ApplicationWindow{
                 ComboBox{
                     id: fontSelector
                     model: Qt.fontFamilies()
-                    currentIndex: 2
+                    currentIndex: fontDialog.fontIndex
                     onActivated: {
+                        fontDialog.fontFamily = fontSelector.currentText;
+                        fontDialog.fontIndex = fontSelector.currentIndex;
+                        fontDialog.fontSize = sizeSelector.currentText;
+                        fontDialog.fontSizeIndex = sizeSelector.currentIndex;
                         previewText.font = fontSelector.currentText;
                         previewText.font.pointSize = sizeSelector.currentText;
-                        mainTextArea.font = fontSelector.currentText;
-                        mainTextArea.font.pointSize = sizeSelector.currentText;
                     }
                 }
 
@@ -346,7 +365,8 @@ ApplicationWindow{
                     model: ["8","11","14","16","20","24","28","32","40","56","64","72"]
                     onActivated: {
                         previewText.font.pointSize = sizeSelector.currentText;
-                        mainTextArea.font.pointSize = sizeSelector.currentText;
+                        fontDialog.fontSize = sizeSelector.currentText;
+                        fontDialog.fontSizeIndex = sizeSelector.currentIndex;
                     }
                 }
 
@@ -367,8 +387,49 @@ ApplicationWindow{
             id: colorSelector
             onAccepted: {
                 previewText.color = colorSelector.color;
-                mainTextArea.color = colorSelector.color;
+                fontDialog.fontColor = colorSelector.color;
             }
+        }
+        onAccepted: {
+            mainTextArea.font = fontDialog.fontFamily;
+            mainTextArea.lastUsedFontIndex = fontDialog.fontIndex;
+            mainTextArea.lastUsedFont = fontDialog.fontFamily;
+            mainTextArea.font.pointSize = fontDialog.fontSize;
+            mainTextArea.lastUsedSize = fontDialog.fontSize;
+            mainTextArea.lastUsedSizeIndex = fontDialog.fontSizeIndex;
+            mainTextArea.color = fontDialog.fontColor;
+            mainTextArea.lastUsedColor = fontDialog.fontColor;
+        }
+        onRejected: {
+            fontSelector.currentIndex = mainTextArea.lastUsedFontIndex;
+            sizeSelector.currentIndex = mainTextArea.lastUsedSizeIndex;
+            colorSelector.color = mainTextArea.lastUsedColor;
+            fontDialog.fontColor = mainTextArea.lastUsedColor;
+            fontDialog.fontIndex = mainTextArea.lastUsedFontIndex;
+            fontDialog.fontSizeIndex = mainTextArea.lastUsedSizeIndex;
+            fontDialog.fontFamily = mainTextArea.lastUsedFont;
+            fontDialog.fontSize = mainTextArea.lastUsedSize;
+            previewText.font = mainTextArea.lastUsedFont;
+            previewText.font.pointSize = mainTextArea.lastUsedSize;
+            previewText.color = mainTextArea.lastUsedColor;
+        }
+        Component.onCompleted: {
+            fontSelector.currentIndex = Settings.lastUsedFontSettings['fontIndex'];
+            sizeSelector.currentIndex = Settings.lastUsedFontSettings['sizeIndex'];
+            colorSelector.color = Settings.lastUsedFontSettings['color'];
+            fontDialog.fontColor = Settings.lastUsedFontSettings['color'];
+            fontDialog.fontIndex = Settings.lastUsedFontSettings['fontIndex'];
+            fontDialog.fontSizeIndex = Settings.lastUsedFontSettings['sizeIndex'];
+            fontDialog.fontFamily = Settings.lastUsedFontSettings['font'];
+            fontDialog.fontSize = Settings.lastUsedFontSettings['size'];
+            previewText.font = Settings.lastUsedFontSettings['font'];
+            previewText.font.pointSize = Settings.lastUsedFontSettings['size'];
+            previewText.color = Settings.lastUsedFontSettings['color'];
+            mainTextArea.lastUsedFont = Settings.lastUsedFontSettings['font'];
+            mainTextArea.lastUsedFontIndex = Settings.lastUsedFontSettings['fontIndex'];
+            mainTextArea.lastUsedSize = Settings.lastUsedFontSettings['size'];
+            mainTextArea.lastUsedSizeIndex = Settings.lastUsedFontSettings['sizeIndex'];
+            mainTextArea.lastUsedColor = Settings.lastUsedFontSettings['color'];
         }
     }
 
@@ -451,9 +512,9 @@ The GitHub API Service is used to detect new versions.'
 
     MessageDialog{
         id: upToDate
-        property string currentVersion: "";
+        property string currentVersion: ""
         title: "JNote is Up-To-Date"
-        text: "Congratulations!! JNote is up to date - " + upToDate.currentVersion;
+        text: "Congratulations!! JNote is up to date - " + upToDate.currentVersion
         icon: StandardIcon.Information
         visible: false
     }
@@ -485,14 +546,41 @@ The GitHub API Service is used to detect new versions.'
     }
 
     MessageDialog{
+        id: settingsError
+        title: "Failed To Save Settings"
+        text: "A Fatal Error Occured While JNote is Saving Your Preferenses."
+        icon: StandardIcon.Critical
+        onAccepted: Qt.quit()
+        onRejected: Qt.quit()
+        visible: false
+    }
+
+    MessageDialog{
+        id: settingsNotFoundError
+        title: "Failed To Find Settings File"
+        text: "JNote Was Not Able To Find settings.json; JNote will not work correctly without it!"
+        icon: StandardIcon.Critical
+        onAccepted: Qt.quit()
+        onRejected: Qt.quit()
+        visible: false
+    }
+
+    MessageDialog{
         id: confirmExit
         title: "Confirm Exit"
-        text: "Do You Really Want No Quit?"
+        text: "Do You Really Want To Quit?"
         icon: StandardIcon.Warning
         standardButtons: Dialog.No | Dialog.Yes
         visible: false
         onAccepted: {
-            closing = true;
+            Settings.setLastUsedFontSettings(
+                fontDialog.fontIndex,
+                fontDialog.fontFamily,
+                fontDialog.fontSizeIndex,
+                fontDialog.fontSize,
+                fontDialog.fontColor
+            );
+            windowM.closing = true;
             windowM.close();
       }
     }
@@ -552,6 +640,11 @@ The GitHub API Service is used to detect new versions.'
     Shortcut{
         sequence: "Alt+F4"
         onActivated: confirmExit.open();
+    }
+
+    Shortcut{
+        sequence: "Ctrl+Shift+F"
+        onActivated: fontDialog.open();
     }
 
     Connections{
@@ -623,8 +716,21 @@ The GitHub API Service is used to detect new versions.'
         }
     }
 
+    Connections {
+        target: Settings
+
+        function onSettingsNotFound() {
+            settingsNotFoundError.open();
+            statusText.text = "Unable to Find Settings File";
+        }
+        function onSettingsError() {
+            settingsError.open();
+            statusText.text = "Fatal Error While Saving Settings";
+        }
+    }
+
     onClosing: {
-        close.accepted = closing;
-        onTriggered: if(!closing) confirmExit.open();
+        close.accepted = windowM.closing;
+        onTriggered: if(!windowM.closing) confirmExit.open();
     }
 }
