@@ -23,7 +23,7 @@ jobs:
             python -m pip install PyInstaller
         - name: Build
           run: |
-            python -m PyInstaller --name JNote --icon Icons/favicon.ico --add-data main.qml:. --add-data log.txt:. --add-data Icons:Icons --clean --windowed main.py
+            python -m PyInstaller --name JNote --icon Icons/favicon.ico --add-data main.qml:. --add-data log.txt:. --add-data Icons:Icons --add-data settings.json:. --clean --windowed main.py
         - name: Upload Artifact
           uses: actions/upload-artifact@v1
           with:
@@ -54,7 +54,7 @@ jobs:
             python -m pip install PyInstaller
         - name: Build
           run: |
-            python -m PyInstaller --name JNote --icon Icons/favicon.ico --add-data main.qml:. --add-data log.txt:. --add-data Icons:Icons --clean --windowed main.py
+            python -m PyInstaller --name JNote --icon Icons/favicon.ico --add-data main.qml:. --add-data log.txt:. --add-data Icons:Icons --add-data settings.json:. --clean --windowed main.py
         - name: Upload Artifact
           uses: actions/upload-artifact@v1
           with:
@@ -85,7 +85,7 @@ jobs:
             python -m pip install PyInstaller
         - name: Build
           run: |
-            python -m PyInstaller --name "JNote" --icon "Icons\favicon.ico" --add-data "main.qml;." --add-data "log.txt;." --add-data "Icons;Icons" --clean --windowed main.py
+            python -m PyInstaller --name "JNote" --icon "Icons\favicon.ico" --add-data "main.qml;." --add-data "log.txt;." --add-data "Icons;Icons" --add-data "settings.json;." --clean --windowed main.py
         - name: Upload Artifact
           uses: actions/upload-artifact@v1
           with:
