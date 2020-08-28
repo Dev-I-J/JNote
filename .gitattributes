@@ -1,2 +1,3 @@
-log.txt linguist-detectable
-settings.json linguist-detectable
+log.txt linguist-detectable=true
+*.txt linguist-detectable=false
+*.json linguist-detectable=true
