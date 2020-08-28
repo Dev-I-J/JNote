@@ -1,3 +1,5 @@
+[![Run on Repl.it](https://repl.it/badge/github/Dev-I-J/JNote)](https://repl.it/github/Dev-I-J/JNote)
+
 # JNote - A Free NotePad
 
 __JNote is a free NotePad__ application written in _Python and QML. (PyQt5)_
