@@ -62,7 +62,7 @@ Additional Information about JNote
 * [PyQt5](https://pypi.org/project/PyQt5/) for the GUI.
 * [requests](https://pypi.org/project/requests/) for Pinging the GitHub API to check for updates.
 * [version-parser](https://pypi.org/project/version-parser/) for Comparing Versions.
-* [markdown](https://pypi.org/project/markdown) for Converting markdown from GitHub to HTML.
+* [markdown](https://pypi.org/project/markdown/) for Converting markdown from GitHub to HTML.
 
 ## Coming Soon!
 

@@ -1,1 +1,5 @@
 JNote.spec
+run.bat
+build
+dist
+__pycache__
