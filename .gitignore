@@ -3,3 +3,4 @@ run.bat
 build
 dist
 __pycache__
+buildenv
