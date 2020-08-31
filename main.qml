@@ -606,6 +606,7 @@ The GitHub API Service is used to detect new versions.'
             Settings.setSettingsInt("last-used-formatting", "sizeIndex", fontDialog.fontSizeIndex);
             Settings.setSettingsStr("last-used-formatting", "color", fontDialog.fontColor);
             Settings.setSettingsBool("last-used-formatting", "wrap", wrapText.checked);
+            Settings.addComments();
             windowM.closing = true;
             windowM.close();
       }
