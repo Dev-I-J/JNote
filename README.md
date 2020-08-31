@@ -10,7 +10,7 @@ The current version is v1.3.0 and additional for basic functions of a note pad, 
 
 * Automatically Check For Updates,
 * Open the last opened file automatically when started,
-* Save and use the last used fonts on when started,
+* Save and use the last used fonts when started,
 * Super Clean Code.
 
 And So On...
