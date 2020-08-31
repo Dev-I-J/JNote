@@ -1,4 +1,6 @@
 PyQt5
 requests
+pyperclip
 version-parser
 markdown
+toml

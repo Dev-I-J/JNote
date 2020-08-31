@@ -13,9 +13,8 @@ ApplicationWindow{
     title: winTitle + " - Untitled"
 
     Component.onCompleted: {
-        Settings.setLastUsedFontSettingsDict();
         JNote.checkUpdates(true);
-        JNote.openLast();
+        FileIO.openLast();
     }
 
     menuBar: MenuBar{
@@ -30,7 +29,7 @@ ApplicationWindow{
                 onTriggered: {
                     windowM.title = windowM.winTitle + " - Untitled";
                     mainTextArea.text = "";
-                    JNote.fileNew();
+                    FileIO.fileNew();
                     statusText.text = "New Document Created";
                 }
             }
@@ -44,7 +43,7 @@ ApplicationWindow{
             MenuItem{
                 text: "Save"
                 icon.source: "Icons/save.png"
-                onTriggered: JNote.fileSave(mainTextArea.text);
+                onTriggered: FileIO.fileSave(mainTextArea.text);
             }
 
             MenuItem{
@@ -80,6 +79,7 @@ ApplicationWindow{
             MenuItem{
                 text: "Paste"
                 icon.source: "Icons/paste.png"
+                enabled: mainTextArea.canPaste
                 onTriggered: mainTextArea.paste();
             }
 
@@ -150,7 +150,7 @@ ApplicationWindow{
                 onClicked: {
                     windowM.title = windowM.winTitle + " - Untitled";
                     mainTextArea.text = "";
-                    JNote.fileNew();
+                    FileIO.fileNew();
                     statusText.text = "New Document Created";
                 }
             }
@@ -164,7 +164,7 @@ ApplicationWindow{
             ToolButton{
                 text: "Save"
                 icon.source: "Icons/save.png"
-                onClicked: JNote.fileSave(mainTextArea.text);
+                onClicked: FileIO.fileSave(mainTextArea.text);
             }
 
             ToolButton{
@@ -192,6 +192,7 @@ ApplicationWindow{
             ToolButton{
                 text: "Paste"
                 icon.source: "Icons/paste.png"
+                enabled: mainTextArea.canPaste
                 onClicked: mainTextArea.paste();
             }
 
@@ -261,14 +262,17 @@ ApplicationWindow{
                 persistentSelection: true
                 onPressed: statusText.text = "Ready"
                 Component.onCompleted: {
-                    mainTextArea.font = Settings.lastUsedFontSettings['font'];
-                    mainTextArea.font.pointSize = Settings.lastUsedFontSettings['size'];
-                    mainTextArea.color = Settings.lastUsedFontSettings['color'];
+                    mainTextArea.font = Settings.getSettings("last-used-formatting")["font"];
+                    mainTextArea.font.pointSize = Settings.getSettings("last-used-formatting")["size"];
+                    mainTextArea.color = Settings.getSettings("last-used-formatting")["color"];
+                    if (Settings.getSettings("last-used-file")["untitled"]) {
+                        mainTextArea.text = Settings.getSettings("last-used-file")["text"]
+                    }
                 }
             }
 
-            ScrollBar.vertical: ScrollBar {policy: ScrollBar.AlwaysOn}
-            ScrollBar.horizontal: ScrollBar {policy: ScrollBar.AlwaysOn}
+            ScrollBar.vertical: ScrollBar {}
+            ScrollBar.horizontal: ScrollBar {}
         }
     }
 
@@ -331,7 +335,7 @@ ApplicationWindow{
         id: fontDialog
         property string fontFamily: "Arial"
         property int fontSize: 8
-        property int fontSizeIndex: 1
+        property int fontSizeIndex: 0
         property int fontIndex: 2
         property string fontColor: "Black"
         width: 600
@@ -414,22 +418,23 @@ ApplicationWindow{
             previewText.color = mainTextArea.lastUsedColor;
         }
         Component.onCompleted: {
-            fontSelector.currentIndex = Settings.lastUsedFontSettings['fontIndex'];
-            sizeSelector.currentIndex = Settings.lastUsedFontSettings['sizeIndex'];
-            colorSelector.color = Settings.lastUsedFontSettings['color'];
-            fontDialog.fontColor = Settings.lastUsedFontSettings['color'];
-            fontDialog.fontIndex = Settings.lastUsedFontSettings['fontIndex'];
-            fontDialog.fontSizeIndex = Settings.lastUsedFontSettings['sizeIndex'];
-            fontDialog.fontFamily = Settings.lastUsedFontSettings['font'];
-            fontDialog.fontSize = Settings.lastUsedFontSettings['size'];
-            previewText.font = Settings.lastUsedFontSettings['font'];
-            previewText.font.pointSize = Settings.lastUsedFontSettings['size'];
-            previewText.color = Settings.lastUsedFontSettings['color'];
-            mainTextArea.lastUsedFont = Settings.lastUsedFontSettings['font'];
-            mainTextArea.lastUsedFontIndex = Settings.lastUsedFontSettings['fontIndex'];
-            mainTextArea.lastUsedSize = Settings.lastUsedFontSettings['size'];
-            mainTextArea.lastUsedSizeIndex = Settings.lastUsedFontSettings['sizeIndex'];
-            mainTextArea.lastUsedColor = Settings.lastUsedFontSettings['color'];
+            fontSelector.currentIndex = Settings.getSettings("last-used-formatting")["fontIndex"];
+            sizeSelector.currentIndex = Settings.getSettings("last-used-formatting")["sizeIndex"];
+            colorSelector.color = Settings.getSettings("last-used-formatting")["color"];
+            fontDialog.fontColor = Settings.getSettings("last-used-formatting")["color"];
+            fontDialog.fontIndex = Settings.getSettings("last-used-formatting")["fontIndex"];
+            fontDialog.fontSizeIndex = Settings.getSettings("last-used-formatting")["sizeIndex"];
+            fontDialog.fontFamily = Settings.getSettings("last-used-formatting")["font"];
+            fontDialog.fontSize = Settings.getSettings("last-used-formatting")["size"];
+            previewText.font = Settings.getSettings("last-used-formatting")["font"];
+            previewText.font.pointSize = Settings.getSettings("last-used-formatting")["size"];
+            previewText.color = Settings.getSettings("last-used-formatting")["color"];
+            mainTextArea.lastUsedFont = Settings.getSettings("last-used-formatting")["font"];
+            mainTextArea.lastUsedFontIndex = Settings.getSettings("last-used-formatting")["fontIndex"];
+
+            mainTextArea.lastUsedSize = Settings.getSettings("last-used-formatting")["size"];
+            mainTextArea.lastUsedSizeIndex = Settings.getSettings("last-used-formatting")["sizeIndex"];
+            mainTextArea.lastUsedColor = Settings.getSettings("last-used-formatting")["color"];
         }
     }
 
@@ -476,6 +481,7 @@ The GitHub API Service is used to detect new versions.'
 
         ColumnLayout{
             RadioButton{
+                id: wrapText
                 text: "Wrap"
                 checked: true
                 onClicked: {
@@ -488,8 +494,23 @@ The GitHub API Service is used to detect new versions.'
             }
 
             RadioButton{
+                id: doNotWrapText
                 text: "Don't Wrap"
                 onClicked: mainTextArea.wrapMode = TextArea.NoWrap;
+            }
+        }
+        Component.onCompleted: {
+            if (Settings.getSettings("last-used-formatting")["wrap"]) {
+                wrapText.checked = true;
+                mainTextArea.wrapMode = TextArea.Wrap;
+                mainTextArea.tmpText = mainTextArea.text;
+                mainTextArea.text = "";
+                mainTextArea.text = mainTextArea.tmpText;
+                mainTextArea.tmpText = "";
+            }
+            else {
+                doNotWrapText.checked = true;
+                mainTextArea.wrapMode = TextArea.NoWrap;
             }
         }
     }
@@ -573,13 +594,18 @@ The GitHub API Service is used to detect new versions.'
         standardButtons: Dialog.No | Dialog.Yes
         visible: false
         onAccepted: {
-            Settings.setLastUsedFontSettings(
-                fontDialog.fontIndex,
-                fontDialog.fontFamily,
-                fontDialog.fontSizeIndex,
-                fontDialog.fontSize,
-                fontDialog.fontColor
-            );
+            if (Settings.getSettings("last-used-file")["untitled"]) {
+                Settings.setSettingsStr("last-used-file", "text", mainTextArea.text);
+            }
+            else {
+                Settings.setSettingsStr("last-used-file", "text", "");
+            }
+            Settings.setSettingsStr("last-used-formatting", "font", fontDialog.fontFamily);
+            Settings.setSettingsInt("last-used-formatting", "fontIndex", fontDialog.fontIndex);
+            Settings.setSettingsInt("last-used-formatting", "size", fontDialog.fontSize);
+            Settings.setSettingsInt("last-used-formatting", "sizeIndex", fontDialog.fontSizeIndex);
+            Settings.setSettingsStr("last-used-formatting", "color", fontDialog.fontColor);
+            Settings.setSettingsBool("last-used-formatting", "wrap", wrapText.checked);
             windowM.closing = true;
             windowM.close();
       }
@@ -594,7 +620,7 @@ The GitHub API Service is used to detect new versions.'
         onAccepted: {
             var path = fileUrl.toString();
             path = path.replace(/^(file:\/{3})/,"");
-            JNote.fileOpen(path);
+            FileIO.fileOpen(path);
             file_path(path);
         }
     }
@@ -608,7 +634,7 @@ The GitHub API Service is used to detect new versions.'
         onAccepted: {
             var path = fileUrl.toString();
             path = path.replace(/^(file:\/{3})/,"");
-            JNote.fileSaveAs(path, mainTextArea.text);
+            FileIO.fileSaveAs(path, mainTextArea.text);
         }
     }
 
@@ -617,7 +643,7 @@ The GitHub API Service is used to detect new versions.'
         onActivated: {
             windowM.title = windowM.winTitle + " - Untitled";
             mainTextArea.text = "";
-            JNote.fileNew();
+            FileIO.fileNew();
             statusText.text = "New Document Created";
         }
     }
@@ -629,7 +655,7 @@ The GitHub API Service is used to detect new versions.'
 
     Shortcut{
         sequence: "Ctrl+S"
-        onActivated: JNote.fileSave(mainTextArea.text);
+        onActivated: FileIO.fileSave(mainTextArea.text);
     }
 
     Shortcut{
@@ -647,8 +673,31 @@ The GitHub API Service is used to detect new versions.'
         onActivated: fontDialog.open();
     }
 
-    Connections{
+    Connections {
         target: JNote
+
+        function onUpdateAvailable(newVersionStr, currentVersionStr, info, date) {
+            statusText.text = "A Newer Version of JNote is Available - " + newVersionStr;
+            updateText.newVersion = newVersionStr;
+            updateText.currentVersion = currentVersionStr;
+            updateText.info = info;
+            updateText.date = date;
+            update.open();
+        }
+
+        function onUpToDate(currentVersionStr) {
+            statusText.text = "JNote is up to date - " + currentVersionStr;
+            upToDate.currentVersion = currentVersionStr;
+            upToDate.open();
+        }
+
+        function onFatalError() {
+            statusText.text = "A Fatal Error Occured!";
+            fatalError.open();
+        }
+    }
+    Connections{
+        target: FileIO
 
         function onFileOpenSuccessful(text, path) {
             mainTextArea.text = text;
@@ -679,25 +728,9 @@ The GitHub API Service is used to detect new versions.'
             statusText.text = "Document Saved";
         }
 
-        function onFileSavedAs(path, newText) {
+        function onFileSavedAs(path) {
             statusText.text = "Document Saved At " + path;
             windowM.title = windowM.winTitle + " - " + path;
-            mainTextArea.text = newText;
-        }
-
-        function onUpdateAvailable(newVersionStr, currentVersionStr, info, date) {
-            statusText.text = "A Newer Version of JNote is Available - " + newVersionStr;
-            updateText.newVersion = newVersionStr;
-            updateText.currentVersion = currentVersionStr;
-            updateText.info = info;
-            updateText.date = date;
-            update.open();
-        }
-
-        function onUpToDate(currentVersionStr) {
-            statusText.text = "JNote is up to date - " + currentVersionStr;
-            upToDate.currentVersion = currentVersionStr;
-            upToDate.open();
         }
 
         function onFatalError() {
@@ -719,13 +752,18 @@ The GitHub API Service is used to detect new versions.'
     Connections {
         target: Settings
 
-        function onSettingsNotFound() {
+        function onSettingsFileNotFound() {
             settingsNotFoundError.open();
             statusText.text = "Unable to Find Settings File";
         }
         function onSettingsError() {
             settingsError.open();
             statusText.text = "Fatal Error While Saving Settings";
+        }
+
+        function onFatalError() {
+            statusText.text = "A Fatal Error Occured!";
+            fatalError.open();
         }
     }
 
