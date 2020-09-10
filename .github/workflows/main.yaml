@@ -4,7 +4,7 @@ on:
         branches: [master]
 jobs:
     macos:
-        if: "! contains(toJSON(github.event.commits.*.message), '[skip-ci]')"
+        if: "contains(toJSON(github.event.commits.*.message), '[deploy]')"
         runs-on: macos-latest
         steps:
         - uses: actions/checkout@v2
@@ -24,7 +24,7 @@ jobs:
             python -m pip install PyInstaller
         - name: Build
           run: |
-            python -m PyInstaller --name JNote --icon Icons/favicon.ico --add-data main.qml:. --add-data log.txt:. --add-data Icons:Icons --add-data settings.json:. --clean --windowed main.py
+            python -m PyInstaller --name JNote --icon icons/favicon.ico --add-data main.qml:. --add-data settings.toml:. --add-data icons:icons --clean --windowed main.py
         - name: Upload Artifact
           uses: actions/upload-artifact@v1
           with:
@@ -36,7 +36,7 @@ jobs:
             name: MACOS-PKG
             path: /Users/runner/work/JNote/JNote/dist/
     linux:
-        if: "! contains(toJSON(github.event.commits.*.message), '[skip-ci]')"
+        if: "contains(toJSON(github.event.commits.*.message), '[deploy]')"
         runs-on: ubuntu-latest
         steps:
         - uses: actions/checkout@v2
@@ -56,7 +56,7 @@ jobs:
             python -m pip install PyInstaller
         - name: Build
           run: |
-            python -m PyInstaller --name JNote --icon Icons/favicon.ico --add-data main.qml:. --add-data log.txt:. --add-data Icons:Icons --add-data settings.json:. --clean --windowed main.py
+            python -m PyInstaller --name JNote --icon icons/favicon.ico --add-data main.qml:. --add-data icons:icons --add-data settings.toml:. --clean --windowed main.py
         - name: Upload Artifact
           uses: actions/upload-artifact@v1
           with:
