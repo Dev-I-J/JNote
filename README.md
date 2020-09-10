@@ -18,7 +18,7 @@ And Many More Cool Features...
 
 ## Download
 
-https://github.com/Dev-I-J/JNote/releases/latest
+Download At - https://github.com/Dev-I-J/JNote/releases/latest
 
 ## Build From Source
 
