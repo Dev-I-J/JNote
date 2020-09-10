@@ -19,7 +19,7 @@ def run():
     settings = Settings()
 
     app = QApplication(sys.argv)
-    app.setWindowIcon(QIcon('Icons/favicon.png'))
+    app.setWindowIcon(QIcon('icons/favicon.png'))
     app.setOrganizationName("JNote")
     app.setOrganizationDomain("jnote.ml")
 

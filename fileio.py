@@ -11,16 +11,22 @@ class FileIO(Settings):
 
     @pyqtSlot()
     def fileNew(self):
-        """Clear the path in settings when new doc is created"""
+        """Update settings when a new document is created"""
         self.setSettingsBool("last-used-file", "untitled", True)
         self.setSettingsStr("last-used-file", "path", "")
+        self.setSettingsStr("last-used-file", "text", "")
+        self.newDocumentCreated.emit()
 
-    @pyqtSlot(str)
+    @pyqtSlot(str, result=str)
     def fileOpen(self, fPath):
         """Open File"""
+        fileText = ""
         try:
-            with open(fPath, "r", encoding="utf-8") as fText:
-                self.fileOpenSuccessful.emit(fText.read(), fPath)
+            with open(fPath, "r", encoding="utf-8") as text:
+                self.fileOpenSuccessful.emit()
+                fileText = text.read()
+                self.setSettingsBool("last-used-file", "untitled", False)
+                self.setSettingsStr("last-used-file", "path", fPath)
         except UnicodeDecodeError:
             self.fileOpenError.emit()
         except FileNotFoundError:
@@ -29,9 +35,7 @@ class FileIO(Settings):
             self.fileHandleError.emit()
         except BaseException:
             self.fatalError.emit()
-        else:
-            self.setSettingsBool("last-used-file", "untitled", False)
-            self.setSettingsStr("last-used-file", "path", fPath)
+        return fileText
 
     @pyqtSlot(str)
     def fileSave(self, fText):
@@ -58,7 +62,7 @@ class FileIO(Settings):
         try:
             with open(fPath, "w+") as outFile:
                 outFile.write(fText)
-                self.fileSavedAs.emit(fPath)
+                self.fileSavedAs.emit()
         except FileNotFoundError:
             self.fileNotFound.emit()
         except IOError:
@@ -66,17 +70,18 @@ class FileIO(Settings):
         except BaseException:
             self.fatalError.emit()
         else:
-            self.log(fPath, False)
+            self.setSettingsBool("last-used-file", "untitled", False)
+            self.setSettingsStr("last-used-file", "path", fPath)
 
-    @pyqtSlot()
-    def openLast(self):
+    @pyqtSlot(result=str)
+    def getLastOpenFilePath(self):
         """(re)Open last opened file"""
+        filePath = ""
         try:
             untitled = self.getSettings("last-used-file")["untitled"]
             if not untitled:
-                fPath = self.getSettings("last-used-file")["path"]
-                with open(fPath, "r", encoding="utf-8") as fText:
-                    self.fileOpenSuccessful.emit(fText.read(), fPath)
+                path = self.getSettings("last-used-file")["path"]
+                filePath = path
         except FileNotFoundError:
             self.fileNotFound.emit()
         except UnicodeDecodeError:
@@ -85,3 +90,4 @@ class FileIO(Settings):
             self.fileHandleError.emit()
         except BaseException:
             self.fatalError.emit()
+        return filePath

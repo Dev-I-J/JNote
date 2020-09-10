@@ -7,14 +7,18 @@
 # Doing so will do nothing but only ruin your experience!!!
 
 [last-used-formatting]
-font = "Consolas"
-fontIndex = 55
-size = 14
-sizeIndex = 2
-color = "#aaa1a7"
+font = "Bahnschrift Light"
+fontIndex = 9
+size = 15
+sizeIndex = 7
+color = "#55ff00"
 wrap = true
+underline = false
+strikeout = false
+bold = true
+italic = false
 
 [last-used-file]
 untitled = true
 path = ""
-text = ""
+text = "16:37 PM 10/09/202016:37 PM 10/09/202016:37 PM 10/09/202016:37 PM 10/09/202016:37 PM 10/09/202016:37 PM 10/09/202016:37 PM 10/09/202016:37 PM 10/09/202016:37 PM 10/09/202016:37 PM 10/09/202016:37 PM 10/09/202016:37 PM 10/09/202016:37 PM 10/09/202016:37 PM 10/09/202016:37 PM 10/09/202016:37 PM 10/09/202016:37 PM 10/09/2020"

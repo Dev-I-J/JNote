@@ -61,16 +61,17 @@ class Settings(JNote):
     @pyqtSlot(str, result='QVariant')
     def getSettings(self, category):
         """Get any setting"""
+        toml_object = {}
         try:
             with open("settings.toml", "r") as settings:
                 toml_object = toml.load(settings)
-            return toml_object[category]
         except FileNotFoundError:
             self.settingsFileNotFound.emit()
         except toml.TomlDecodeError:
             self.settingsError.emit()
         except BaseException:
             self.fatalError.emit()
+        return toml_object[category]
 
     @pyqtSlot()
     def addComments(self):
