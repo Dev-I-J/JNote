@@ -52,7 +52,7 @@ JNote is licensed under the GNU GPLv3 Open Source License.
 
 ## Documentation
 
-Available at https://github.com/Dev-I-J/JNote/wiki.
+Available at https://jnote-notepad.readthedocs.org.
 
 ## Additional Information
 
@@ -61,17 +61,17 @@ Additional Information about JNote
 ### Credits
 
 * All The Icons are provided by [Icons8](https://icons8.com).
-* The app is build with [PyInstaler](https://pypi.org/project/PyInstaller)
+* The app is build with [PyInstaller](https://pypi.org/project/PyInstaller)
 * Special Thanks to [Atom](https://atom.io) for providing the awesome Editor.
 
 ### Python Modules Used in Development
 
-* [PyQt5](https://pypi.org/project/PyQt5/) for the GUI.
-* [requests](https://pypi.org/project/requests/) for Pinging the GitHub API to check for updates.
-* [version-parser](https://pypi.org/project/version-parser/) for Comparing Versions.
-* [py-gfm](https://pypi.org/project/py-gfm/) GitHub Flavored Markdown Extension for `markdown` module.
-* [markdown](https://pypi.org/project/markdown/) for Converting markdown from GitHub to HTML.
-* [toml](https://pypi.org/project/toml/) for parsing the settings file.
+* [`PyQt5`](https://pypi.org/project/PyQt5/) for the GUI.
+* [`requests`](https://pypi.org/project/requests/) for Pinging the GitHub API to check for updates.
+* [`version-parser`](https://pypi.org/project/version-parser/) for Comparing Versions.
+* [`py-gfm`](https://pypi.org/project/py-gfm/) GitHub Flavored Markdown Extension for `markdown` module.
+* [`markdown`](https://pypi.org/project/markdown/) for Converting markdown from GitHub to HTML.
+* [`toml`](https://pypi.org/project/toml/) for parsing the settings file.
 
 ## Coming Soon!
 
