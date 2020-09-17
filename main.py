@@ -1,5 +1,3 @@
-#!python
-
 from PyQt5.QtQml import QQmlApplicationEngine
 from PyQt5.QtWidgets import QApplication
 from PyQt5.QtCore import QUrl
@@ -13,6 +11,12 @@ import sys
 
 
 def run():
+    """
+    Function To Run The Script
+
+    Returns:
+        app.exec_(): Executes The App
+    """
 
     jnote = JNote()
     fileio = FileIO()

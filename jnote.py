@@ -33,11 +33,12 @@ class JNote(QObject):
 
     @pyqtSlot(bool)
     def checkUpdates(self, isSatrtup):
-        """Check for updates"""
+        """Check For Updates"""
+
         try:
             url = "https://api.github.com/repos/Dev-I-J/JNote/releases/latest"
             with get(url) as r:
-                currentVersionStr = "v1.4.0"
+                currentVersionStr = "v1.4.1"
                 currentVersion = Version(currentVersionStr)
                 newVersionStr = r.json()['tag_name']
                 newVersion = Version(newVersionStr)
@@ -55,6 +56,7 @@ class JNote(QObject):
                     self.updateAvailable.emit()
                 else:
                     if not isSatrtup:
+                        self.updateInfo["currentVersion"] = currentVersionStr
                         self.upToDate.emit()
         except RequestException:
             self.apiConnectError.emit()
@@ -63,11 +65,12 @@ class JNote(QObject):
 
     @pyqtSlot(result=str)
     def insertDateTime(self):
-        """Get current date and time (formatted)"""
+        """Get Current Date and Time"""
+
         datetimestr = ""
         try:
             dtobject = datetime.datetime.now()
-            datetimestr = dtobject.strftime("%H:%M %p %d/%m/%Y")
+            datetimestr = dtobject.strftime("%I:%M %p %d/%m/%Y")
             self.dateTimeInserted.emit()
         except BaseException:
             self.fatalerror.emit()
@@ -75,7 +78,7 @@ class JNote(QObject):
 
     @pyqtSlot(str, str, bool, bool, result=list)
     def findText(self, pattern, text, casesensitive, regex):
-        """Find Text"""
+        """Find Given Text"""
         result = []
         if regex:
             if not casesensitive:
