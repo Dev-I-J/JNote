@@ -1,12 +1,12 @@
-[![Run on Repl.it](https://repl.it/badge/github/Dev-I-J/JNote)](https://repl.it/github/Dev-I-J/JNote)
-
 # JNote - A Free NotePad
+
+[![Run on Repl.it](https://repl.it/badge/github/Dev-I-J/JNote)](https://repl.it/github/Dev-I-J/JNote)
 
 __JNote is a free NotePad__ application written in _Python and QML. (PyQt5)_
 
 ## Features
 
-The current version is v1.4.0 and additional for basic functions of a note pad, it can
+The current version is v1.4.1 and additional for basic functions of a note pad, it can
 
 * Automatically Check For Updates,
 * Open the last opened file automatically when started,
@@ -18,7 +18,7 @@ And Many More Cool Features...
 
 ## Download
 
-Download At - https://github.com/Dev-I-J/JNote/releases/latest
+Download [Here](https://github.com/Dev-I-J/JNote/releases/latest)
 
 ## Build From Source
 
@@ -52,7 +52,7 @@ JNote is licensed under the GNU GPLv3 Open Source License.
 
 ## Documentation
 
-Available at https://jnote-notepad.readthedocs.org.
+Available [Here](https://jnote-notepad.readthedocs.org).
 
 ## Additional Information
 
@@ -73,9 +73,9 @@ Additional Information about JNote
 * [`markdown`](https://pypi.org/project/markdown/) for Converting markdown from GitHub to HTML.
 * [`toml`](https://pypi.org/project/toml/) for parsing the settings file.
 
-## Coming Soon!
+## Coming Soon
 
-These functionality is scheduled to be shipped with the future major releases.
+These functionalities are scheduled to be shipped with the future major releases.
 
 * Command Line Access,
 * Auto Updating,
