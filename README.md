@@ -1,6 +1,7 @@
 # JNote - A Free NotePad
 
 [![Run on Repl.it](https://repl.it/badge/github/Dev-I-J/JNote)](https://repl.it/github/Dev-I-J/JNote)
+[![Documentation Status](https://readthedocs.org/projects/jnote-notepad/badge/?version=latest)](https://jnote-notepad.readthedocs.io/en/latest/?badge=latest)
 
 __JNote is a free NotePad__ application written in _Python and QML. (PyQt5)_
 
@@ -52,7 +53,7 @@ JNote is licensed under the GNU GPLv3 Open Source License.
 
 ## Documentation
 
-Available [Here](https://jnote-notepad.readthedocs.org).
+Available [Here](https://jnote-notepad.readthedocs.io/en/latest/).
 
 ## Additional Information
 
