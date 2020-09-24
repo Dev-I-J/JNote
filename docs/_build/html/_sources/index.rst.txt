@@ -77,8 +77,4 @@ These functionalities are scheduled to be shipped with the future major releases
 * Settings dialog to control your preferences,
 * Dark Mode!!
 
-Indexes And Tables
-==================
-
-* :ref:`genindex`
-* :ref:`search`
+:ref:`genindex`

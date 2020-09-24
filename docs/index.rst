@@ -76,3 +76,5 @@ These functionalities are scheduled to be shipped with the future major releases
 * Auto Updating,
 * Settings dialog to control your preferences,
 * Dark Mode!!
+
+:ref:`genindex`
