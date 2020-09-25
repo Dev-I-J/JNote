@@ -1,2 +1,0 @@
-First Steps With JNote
-======================
