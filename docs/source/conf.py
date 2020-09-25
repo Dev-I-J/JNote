@@ -67,8 +67,6 @@ master_doc = 'index'
 
 def setup(app):
     app.add_config_value('recommonmark_config', {
-            'url_resolver': lambda url: github_doc_root + url,
-            'enable_eval_rst': True,
-            'enable_auto_toc_tree': False
+            'auto_toc_maxwidth': 4
             }, True)
     app.add_transform(AutoStructify)

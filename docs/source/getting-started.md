@@ -26,14 +26,3 @@ Follow the below steps to install JNote on your computer.
 3. Go to the extract folder.
 
 4. Open JNote by double clicking the JNote executable.
-
-```eval_rst
-.. index:: Getting Started
-    :name: getting-started
-
-.. index:: Requirements
-    :name: requirements
-
-.. index:: Installation
-    :name: installation
-```

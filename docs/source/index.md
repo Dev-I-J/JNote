@@ -8,16 +8,10 @@
 # Welcome to JNote's documentation
 
 JNote is a Free and Open-Source Note Pad Application.
-To Get Started, See the [Getting Started](getting-started) Guide.
+To Get Started, See the [Getting Started](getting-started.md) Guide.
 
-```eval_rst
-.. toctree::
-   :maxdepth: 2
-   :caption: Contents:
-
-   getting-started
-   first-steps-with-jnote
-```
+* [Getting Started](getting-started.md)
+* [First Steps With JNote](first-steps-with-jnote.md)
 
 ## Features
 
@@ -43,9 +37,9 @@ JNote is licensed under the [GNU GPLv3](https://www.gnu.org/licenses/gpl-3.0-sta
 
 Available [On This Site](https://jnote-notepad.readthedocs.io).
 
-## Useful Links
+## Source Code
 
-* [Source Code](https://github.com/Dev-I-J/JNote)
+Available [Here](https://github.com/Dev-I-J/JNote)
 
 ## Additional Information
 
@@ -73,43 +67,3 @@ These functionalities are scheduled to be shipped with the future major releases
 * Auto Updating,
 * Settings dialog to control your preferences,
 * Dark Mode!!
-
-# Indexes and Tables
-
-* [Index](genindex)
-* [Search Page](search)
-
-```eval_rst
-.. index:: Welcome to JNote's documentation
-   :name: welcome-to-jnote-s-documentation
-
-.. index:: Features
-   :name: features
-
-.. index:: Price
-   :name: price
-
-.. index:: License
-   :name: license
-
-.. index:: Documentation
-   :name: documentation
-
-.. index:: Useful Links
-   :name: useful-links
-
-.. index:: Additional Information
-   :name: additional-information
-
-.. index:: Credits
-   :name: credits
-
-.. index:: Python Modules Used in Development
-   :name: python-modules-used-in-development
-
-.. index:: Coming Soon
-   :name: coming-soon
-
-.. index:: Indexes and Tables
-   :name: indexes-and-tables
-```
