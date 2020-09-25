@@ -10,8 +10,15 @@
 JNote is a Free and Open-Source Note Pad Application.
 To Get Started, See the [Getting Started](getting-started.md) Guide.
 
-* [Getting Started](getting-started.md)
-* [First Steps With JNote](first-steps-with-jnote.md)
+```eval_rst
+
+.. toctree
+   :maxwidth: 4
+
+   getting-started
+   first-steps-with-jnote
+
+```
 
 ## Features
 

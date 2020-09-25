@@ -67,6 +67,6 @@ master_doc = 'index'
 
 def setup(app):
     app.add_config_value('recommonmark_config', {
-            'auto_toc_maxdepth': 4
+            'enable_eval_rst': True
             }, True)
     app.add_transform(AutoStructify)
