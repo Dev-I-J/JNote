@@ -62,6 +62,8 @@ html_static_path = ['_static']
 
 github_doc_root = 'https://github.com/Dev-I-J/JNote/tree/master/docs/'
 
+master_doc = 'index'
+
 
 def setup(app):
     app.add_config_value('recommonmark_config', {
