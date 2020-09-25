@@ -14,10 +14,6 @@ Welcome to JNote's documentation!
    :maxdepth: 2
    :caption: Contents:
 
-   index
-   getting-started
-   first-steps-with-jnote
-
 JNote is a Free and Open-Source Note Pad Application. 
 To Get Started, See the :ref:`getting-started` Guide.
 
