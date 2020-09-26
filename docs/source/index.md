@@ -12,8 +12,9 @@ To Get Started, See the [Getting Started](getting-started.md) Guide.
 
 ```eval_rst
 
-.. toctree
-   :maxwidth: 4
+.. toctree::
+   :maxdepth: 4
+   :caption: Contents:
 
    getting-started
    first-steps-with-jnote
