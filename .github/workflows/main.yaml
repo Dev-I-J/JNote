@@ -4,7 +4,7 @@ on:
         branches: [master]
 jobs:
     macos:
-        if: "contains(toJSON(github.event.commits.*.message), '[deploy]')"
+        if: "contains(toJSON(github.event.commits.*.message), '[build]')"
         runs-on: macos-latest
         steps:
         - uses: actions/checkout@v2
@@ -36,7 +36,7 @@ jobs:
             name: MACOS-PKG
             path: /Users/runner/work/JNote/JNote/dist/
     linux:
-        if: "contains(toJSON(github.event.commits.*.message), '[deploy]')"
+        if: "contains(toJSON(github.event.commits.*.message), '[build]')"
         runs-on: ubuntu-latest
         steps:
         - uses: actions/checkout@v2
