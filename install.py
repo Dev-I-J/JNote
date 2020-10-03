@@ -1,5 +1,6 @@
 from sys import platform
 import pip
+import os
 
 _all_ = [
     "toml",
@@ -31,4 +32,5 @@ if __name__ == '__main__':
     elif platform == "darwin":
         install(darwin)
     else:
+        os.system("apt-get install libmagic-dev")
         install(linux)

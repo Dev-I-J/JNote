@@ -18,12 +18,8 @@ jobs:
             pip install virtualenv
             virtualenv buildenv
             source buildenv/bin/activate
-        - name: Install Dependencies
-          run: |
             python install.py
             pip install PyInstaller
-        - name: Build
-          run: |
             PyInstaller --name JNote --icon icons/favicon.ico --add-data main.qml:. --add-data settings.toml:. --add-data icons:icons --clean --windowed main.py
         - name: Upload Artifact
           uses: actions/upload-artifact@v1
@@ -50,12 +46,8 @@ jobs:
             pip install virtualenv
             virtualenv buildenv
             source buildenv/bin/activate
-        - name: Install Dependencies
-          run: |
             python install.py
             pip install PyInstaller
-        - name: Build
-          run: |
             PyInstaller --name JNote --icon icons/favicon.ico --add-data main.qml:. --add-data icons:icons --add-data settings.toml:. --clean --windowed main.py
         - name: Upload Artifact
           uses: actions/upload-artifact@v1
