@@ -1,8 +1,0 @@
-toml
-PyQt5
-py-gfm
-charamel
-requests
-markdown
-version-parser
-python-magic-bin

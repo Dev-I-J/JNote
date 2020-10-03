@@ -20,7 +20,7 @@ jobs:
             source buildenv/bin/activate
         - name: Install Dependencies
           run: |
-            pip install -r requirements.txt
+            python install.py
             pip install PyInstaller
         - name: Build
           run: |
@@ -52,7 +52,7 @@ jobs:
             source buildenv/bin/activate
         - name: Install Dependencies
           run: |
-            pip install -r requirements.txt
+            python install.py
             pip install PyInstaller
         - name: Build
           run: |

@@ -1,6 +1,7 @@
 # JNote - A Free NotePad
 
 ![PyInstaller Build](https://github.com/Dev-I-J/JNote/workflows/PyInstaller%20Build/badge.svg)
+
 [![Documentation Status](https://readthedocs.org/projects/jnote-notepad/badge/?version=latest)](https://jnote-notepad.readthedocs.io/en/latest/?badge=latest)
 
 [![Run on Repl.it](https://repl.it/badge/github/Dev-I-J/JNote)](https://repl.it/github/Dev-I-J/JNote)
@@ -9,7 +10,7 @@ __JNote is a free NotePad__ application written in _Python and QML. (PyQt5)_
 
 ## Features
 
-The current version is v1.4.1 and additional for basic functions of a note pad, it can
+The current version is v1.5.0 and additional for basic functions of a note pad, it can
 
 * Automatically Check For Updates,
 * Open the last opened file automatically when started,
@@ -30,7 +31,7 @@ __Assuming you already have _Python along with 'pip'_ and _Git_ installed on you
 ### Linux / Mac OS
 
 1. Clone This Repo in Terminal: `git clone https://github.com/Dev-I-J/JNote`
-2. Install Dependencies: `pip install -r requirements.txt`
+2. Install Dependencies: `python install.py`
 3. Install PyInstaller: `pip install PyInstaller`
 4. `cd` to JNote: `cd JNote`
 5. Build the Python File: `python -m PyInstaller --name JNote --icon icons/favicon.ico --add-data main.qml:. --add-data icons:icons --add-data settings.toml:. --clean --windowed main.py`
@@ -39,7 +40,7 @@ __Assuming you already have _Python along with 'pip'_ and _Git_ installed on you
 ### Windows
 
 1. Clone This Repo in CMD: `git clone https://github.com/Dev-I-J/JNote`
-2. Install Dependencies: `pip install -r requirements.txt`
+2. Install Dependencies: `python install.py`
 3. Install PyInstaller: `pip install PyInstaller`
 4. `cd` to JNote: `cd JNote`
 5. Build the Python File: `PyInstaller --name "JNote" --icon "icons\favicon.ico" --add-data "main.qml;." --add-data "icons;icons" --add-data "settings.toml;." --clean --noconsole main.py`
@@ -75,6 +76,8 @@ Additional Information about JNote
 * [`py-gfm`](https://pypi.org/project/py-gfm/) GitHub Flavored Markdown Extension for `markdown` module.
 * [`markdown`](https://pypi.org/project/markdown/) for Converting markdown from GitHub to HTML.
 * [`toml`](https://pypi.org/project/toml/) for parsing the settings file.
+* [`python-magic`](https://pypi.org/project/python-magic/) for getting the `MIME` type of files on Linux.
+* [`python-magic-bin`](https://pypi.org/project/python-magic-bin/) for getting the `MIME` type of files on Non-Linux Platforms.
 
 ## Coming Soon
 
