@@ -38,7 +38,7 @@ class JNote(QObject):
         try:
             url = "https://api.github.com/repos/Dev-I-J/JNote/releases/latest"
             with get(url) as r:
-                currentVersionStr = "v1.4.1"
+                currentVersionStr = "v1.5.0"
                 currentVersion = Version(currentVersionStr)
                 newVersionStr = r.json()['tag_name']
                 newVersion = Version(newVersionStr)
@@ -47,8 +47,7 @@ class JNote(QObject):
                         GithubFlavoredMarkdownExtension()
                     ])
                     details, sep, exclude = raw_info.partition("Package Table")
-                    published_at = r.json()['published_at']
-                    date = published_at[0:10]
+                    date = r.json()['published_at'][0:10]
                     self.updateInfo["newVersion"] = newVersionStr
                     self.updateInfo["currentVersion"] = currentVersionStr
                     self.updateInfo["details"] = details
