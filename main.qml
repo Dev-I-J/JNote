@@ -98,7 +98,7 @@ ApplicationWindow{
             MenuItem{
                 text: "Find"
                 icon.source: "icons/find.png"
-                onTriggered: find.open()
+                onTriggered: findDialog.open()
             }
         }
 
@@ -114,7 +114,7 @@ ApplicationWindow{
             MenuItem{
                 text: "Select Wrap Mode"
                 icon.source: "icons/word-wrap.png"
-                onTriggered: wrap.open()
+                onTriggered: wrapDialog.open()
             }
         }
 
@@ -124,19 +124,32 @@ ApplicationWindow{
             MenuItem{
                 text: "About"
                 icon.source: "icons/about.png"
-                onTriggered: about.open()
+                onTriggered: aboutDialog.open()
             }
 
             MenuItem{
                 text: "License"
                 icon.source: "icons/software-license.png"
-                onTriggered: license.open()
+                onTriggered: licenseDialog.open()
             }
 
             MenuItem{
                 text: "Check For Updates"
                 icon.source: "icons/check-update.png"
                 onTriggered: JNote.checkUpdates(false)
+            }
+
+            MenuItem{
+                text: "Icons By: Icons8"
+                icon.source: "icons/icons8.png"
+                background: Rectangle{
+                    color: "#00cc00"
+                    MouseArea{
+                        anchors.fill: parent
+                        cursorShape: Qt.PointingHandCursor
+                    }
+                }
+                onTriggered: Qt.openUrlExternally("https://icons8.com")
             }
         }
     }
@@ -274,7 +287,7 @@ ApplicationWindow{
                         mainTextArea.text = Settings.getSettings("last-used-file")["text"]
                     }
                     else {
-                        mainTextArea.text = FileIO.fileOpen(FileIO.getLastOpenFilePath())
+                        mainTextArea.text = FileIO.openLastOpenFile()
                         statusText.text = "Document " + Settings.getSettings("last-used-file")["path"] + " Opened Successfuly"
                         windowM.title = windowM.winTitle + " - " + Settings.getSettings("last-used-file")["path"]
                     }
@@ -287,7 +300,32 @@ ApplicationWindow{
     }
 
     Dialog{
-        id: license
+        id: aboutDialog
+        width: 400
+        height: 400
+        title: "About - JNote"
+        visible: false
+
+        ColumnLayout{
+            anchors.fill: parent
+
+            Image{
+                source: "icons/logo.png"
+                Layout.alignment: Qt.AlignHCenter
+            }
+
+            TextArea{
+                text: 'JNote is a Free and Open Source Plain Text Editor licensed\nunder the GNU GPL v3 Open Source License Tou can use this application for free for\nPersonal use, Educational Use, and even Commercial Use for free! The code is availableon GiHub for free at this url - https://www.github.com/Dev-I-J/JNote.\n\nAll the icons used in this application is provided by Icons8 for FREE.\n\nDeveloper info - This application is written in Python and QML.\nThe modules PyQt5, requests, version_parser and sys are used.\nThe GitHub API Service is used to detect new versions.'
+                Layout.alignment: Qt.AlignHCenter
+                readOnly: true
+                selectByMouse: true
+                selectByKeyboard: true
+            }
+        }
+    }
+
+    Dialog{
+        id: licenseDialog
         visible: false
         title: 'License - JNote'
         width: 400
@@ -302,8 +340,7 @@ ApplicationWindow{
             }
 
             TextArea{
-                text: 'JNote is licensed under The GNU General Public License v3
-(https://www.gnu.org/licenses/gpl-3.0.txt)'
+                text: 'JNote is licensed under The GNU General Public License v3\n(https://www.gnu.org/licenses/gpl-3.0.txt)'
                 readOnly: true
                 selectByMouse: true
                 selectByKeyboard: true
@@ -313,7 +350,7 @@ ApplicationWindow{
     }
 
     Dialog{
-        id: update
+        id: updateDialog
         visible: false
         title: 'Update - JNote'
         standardButtons: Dialog.No | Dialog.Yes
@@ -559,41 +596,7 @@ ApplicationWindow{
     }
 
     Dialog{
-        id: about
-        width: 400
-        height: 400
-        title: "About - JNote"
-        visible: false
-
-        ColumnLayout{
-            anchors.fill: parent
-
-            Image{
-                source: "icons/logo.png"
-                Layout.alignment: Qt.AlignHCenter
-            }
-
-            TextArea{
-                text: 'JNote is a Free and Open Source Plain Text Editor licensed
-under the GNU GPL v3 Open Source License Tou can use this application for free for
-Personal use, Educational Use, and even Commercial Use for free! The code is available
-on GiHub for free at this url - https://www.github.com/Dev-I-J/JNote.
-
-All the icons used in this application is provided by Icons8 for FREE.
-
-Developer info - This application is written in Python and QML.
-The modules PyQt5, requests, version_parser and sys are used.
-The GitHub API Service is used to detect new versions.'
-                Layout.alignment: Qt.AlignHCenter
-                readOnly: true
-                selectByMouse: true
-                selectByKeyboard: true
-            }
-        }
-    }
-
-    Dialog{
-        id: wrap
+        id: wrapDialog
         width: 200
         height: 100
         title: "Select Wrap Mode"
@@ -636,7 +639,7 @@ The GitHub API Service is used to detect new versions.'
     }
 
     Dialog {
-        id: find
+        id: findDialog
         title: "Find"
         width: 200
         height: 100
@@ -853,7 +856,7 @@ The GitHub API Service is used to detect new versions.'
 
     Shortcut{
         sequence: "Ctrl+F"
-        onActivated: find.open()
+        onActivated: findDialog.open()
     }
 
     Shortcut{
@@ -870,7 +873,7 @@ The GitHub API Service is used to detect new versions.'
             updateText.currentVersion = JNote.updateInfo["currentVersion"]
             updateText.info = JNote.updateInfo["details"]
             updateText.date = JNote.updateInfo["date"]
-            update.open()
+            updateDialog.open()
         }
 
         function onUpToDate() {

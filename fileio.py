@@ -1,5 +1,7 @@
 from PyQt5.QtCore import pyqtSlot
 from settings import Settings
+from charamel import Detector
+import magic
 
 
 class FileIO(Settings):
@@ -13,6 +15,7 @@ class FileIO(Settings):
     def fileNew(self):
         """Update settings when a new document is created"""
         self.setSettingsBool("last-used-file", "untitled", True)
+        self.setSettingsStr("last-used-file", "encoding" "utf-8")
         self.setSettingsStr("last-used-file", "path", "")
         self.setSettingsStr("last-used-file", "text", "")
         self.newDocumentCreated.emit()
@@ -22,11 +25,18 @@ class FileIO(Settings):
         """Open File"""
         fileText = ""
         try:
-            with open(fPath, "r", encoding="utf-8") as text:
-                self.fileOpenSuccessful.emit()
-                fileText = text.read()
-                self.setSettingsBool("last-used-file", "untitled", False)
-                self.setSettingsStr("last-used-file", "path", fPath)
+            mime = magic.from_file(fPath, mime=True)
+            if mime.startswith("text/"):
+                with open(fPath, "rb") as binaryFile:
+                    binary = binaryFile.read()
+                    coding = Detector().detect(binary).value
+                    fileText = binary.decode(coding)
+                    self.setSettingsBool("last-used-file", "untitled", False)
+                    self.setSettingsStr("last-used-file", "path", fPath)
+                    self.setSettingsStr("last-used-file", "encoding", coding)
+                    self.fileOpenSuccessful.emit()
+            else:
+                self.fileOpenError.emit()
         except UnicodeDecodeError:
             self.fileOpenError.emit()
         except FileNotFoundError:
@@ -44,7 +54,8 @@ class FileIO(Settings):
             untitled = self.getSettings("last-used-file")["untitled"]
             if not untitled:
                 fPath = self.getSettings("last-used-file")["path"]
-                with open(fPath, "w") as outFile:
+                fCoding = self.getSettings("last-used-file")["encoding"]
+                with open(fPath, "w", encoding=fCoding) as outFile:
                     outFile.write(fText)
                 self.fileSaved.emit()
             else:
@@ -60,7 +71,8 @@ class FileIO(Settings):
     def fileSaveAs(self, fPath, fText):
         """Save File As"""
         try:
-            with open(fPath, "w+") as outFile:
+            fCoding = self.getSettings("last-used-file")["encoding"]
+            with open(fPath, "w+", encoding=fCoding) as outFile:
                 outFile.write(fText)
                 self.fileSavedAs.emit()
         except FileNotFoundError:
@@ -74,14 +86,14 @@ class FileIO(Settings):
             self.setSettingsStr("last-used-file", "path", fPath)
 
     @pyqtSlot(result=str)
-    def getLastOpenFilePath(self):
+    def openLastOpenFile(self):
         """(re)Open last opened file"""
-        filePath = ""
+        fileText = ""
         try:
-            untitled = self.getSettings("last-used-file")["untitled"]
-            if not untitled:
-                path = self.getSettings("last-used-file")["path"]
-                filePath = path
+            fPath = self.getSettings("last-used-file")["path"]
+            fCoding = self.getSettings("last-used-file")["encoding"]
+            with open(fPath, "r", encoding=fCoding) as text:
+                fileText = text.read()
         except FileNotFoundError:
             self.fileNotFound.emit()
         except UnicodeDecodeError:
@@ -90,4 +102,4 @@ class FileIO(Settings):
             self.fileHandleError.emit()
         except BaseException:
             self.fatalError.emit()
-        return filePath
+        return fileText
