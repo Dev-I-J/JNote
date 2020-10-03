@@ -11,20 +11,20 @@ jobs:
         - name: Setup Python
           uses: actions/setup-python@v2
           with:
-            python-version: '3.8.0'
+            python-version: '3.8.6'
             architecture: 'x64'
         - name: Setup Virtual Env
           run: |
-            python -m pip install virtualenv
-            python -m virtualenv buildenv
+            pip install virtualenv
+            virtualenv buildenv
             source buildenv/bin/activate
         - name: Install Dependencies
           run: |
-            python -m pip install -r requirements.txt
-            python -m pip install PyInstaller
+            pip install -r requirements.txt
+            pip install PyInstaller
         - name: Build
           run: |
-            python -m PyInstaller --name JNote --icon icons/favicon.ico --add-data main.qml:. --add-data settings.toml:. --add-data icons:icons --clean --windowed main.py
+            PyInstaller --name JNote --icon icons/favicon.ico --add-data main.qml:. --add-data settings.toml:. --add-data icons:icons --clean --windowed main.py
         - name: Upload Artifact
           uses: actions/upload-artifact@v1
           with:
@@ -43,20 +43,20 @@ jobs:
         - name: Setup Python
           uses: actions/setup-python@v2
           with:
-            python-version: '3.8.0'
+            python-version: '3.8.6'
             architecture: 'x64'
         - name: Setup Virtual Env
           run: |
-            python -m pip install virtualenv
-            python -m virtualenv buildenv
+            pip install virtualenv
+            virtualenv buildenv
             source buildenv/bin/activate
         - name: Install Dependencies
           run: |
-            python -m pip install -r requirements.txt
-            python -m pip install PyInstaller
+            pip install -r requirements.txt
+            pip install PyInstaller
         - name: Build
           run: |
-            python -m PyInstaller --name JNote --icon icons/favicon.ico --add-data main.qml:. --add-data icons:icons --add-data settings.toml:. --clean --windowed main.py
+            PyInstaller --name JNote --icon icons/favicon.ico --add-data main.qml:. --add-data icons:icons --add-data settings.toml:. --clean --windowed main.py
         - name: Upload Artifact
           uses: actions/upload-artifact@v1
           with:
