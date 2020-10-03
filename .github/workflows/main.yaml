@@ -13,7 +13,7 @@ jobs:
           with:
             python-version: '3.8.6'
             architecture: 'x64'
-        - name: Setup Virtual Env
+        - name: Setup Virtual Environment
           run: |
             pip install virtualenv
             virtualenv buildenv
@@ -45,7 +45,7 @@ jobs:
           with:
             python-version: '3.8.6'
             architecture: 'x64'
-        - name: Setup Virtual Env
+        - name: Setup Virtual Environment
           run: |
             pip install virtualenv
             virtualenv buildenv
