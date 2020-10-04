@@ -9,4 +9,4 @@ jobs:
       language: shell
 before_install: pip3 install --upgrade pip
 install: pip3 install --upgrade pyinstaller
-script: python3 -m pyi-makespec main.py
+script: pyi-makespec main.py
