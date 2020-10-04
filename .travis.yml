@@ -1,0 +1,12 @@
+language: python
+jobs:
+  include:
+    - name: "PyInstaller SPEC - Linux"
+      python: 3.7
+    - name: "PyInstaller SPEC - Mac"
+      os: osx
+      osx_image: xcode11
+      language: shell
+before_install: pip3 install --upgrade pip
+install: pip3 install --upgrade pyinstaller
+script: python3 -m pyi-makespec main.py

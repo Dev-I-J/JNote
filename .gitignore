@@ -1,6 +1,2 @@
-JNote.spec
-run.bat
-build
-dist
-__pycache__
 buildenv
+docs/build
