@@ -28,7 +28,7 @@ jobs:
             PyInstaller --name JNote --icon icons/favicon.ico --add-data main.qml:. --add-data settings.toml:. --add-data icons:icons --clean --console main.py
             cd /Users/runner/work/JNote/JNote/dist/JNote
             ls
-            open ./JNote.app
+            open ./JNote
         - name: Clean
           run: |
             cd /Users/runner/work/JNote/JNote/
