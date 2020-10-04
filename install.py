@@ -27,7 +27,7 @@ def install(packages):
 if __name__ == '__main__':
 
     install(_all_)
-    if platform == 'windows':
+    if platform == 'win32':
         install(windows)
     elif platform == "darwin":
         install(darwin)
