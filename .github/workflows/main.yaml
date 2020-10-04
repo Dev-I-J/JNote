@@ -27,6 +27,7 @@ jobs:
             source buildenv/bin/activate
             PyInstaller --name JNote --icon icons/favicon.ico --add-data main.qml:. --add-data settings.toml:. --add-data icons:icons --clean --console main.py
             cd /Users/runner/work/JNote/JNote/dist/
+            ls
             open ./JNote.app
         - name: Clean
           run: |
@@ -68,7 +69,7 @@ jobs:
         - name: Test
           run: |
             source buildenv/bin/activate
-            python -m PyInstaller --name JNote --icon icons/favicon.ico --add-data main.qml:. --add-data icons:icons --add-data settings.toml:. --clean --console --no-upx main.py
+            python -m PyInstaller --name JNote --icon icons/favicon.ico --add-data main.qml:. --add-data icons:icons --add-data settings.toml:. --clean --console --noupx main.py
             cd /home/runner/work/JNote/JNote/dist/JNote
             ./JNote
         - name: Clean
@@ -78,7 +79,7 @@ jobs:
         - name: Build
           run: |
             source buildenv/bin/activate
-            python -m PyInstaller --name JNote --icon icons/favicon.ico --add-data main.qml:. --add-data icons:icons --add-data settings.toml:. --clean --windowed --no-upx main.py
+            python -m PyInstaller --name JNote --icon icons/favicon.ico --add-data main.qml:. --add-data icons:icons --add-data settings.toml:. --clean --windowed --noupx main.py
         - name: Upload Artifact
           uses: actions/upload-artifact@v1
           with:
