@@ -10,3 +10,4 @@ jobs:
 before_install: pip3 install --upgrade pip
 install: pip3 install --upgrade pyinstaller
 script: pyi-makespec main.py
+after_script: cat main.spec
