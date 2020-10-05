@@ -1,13 +1,57 @@
 language: python
+
 jobs:
+
   include:
-    - name: "PyInstaller SPEC - Linux"
+
+    - name: "PyInstaller Build - Linux"
       python: 3.7
-    - name: "PyInstaller SPEC - Mac"
+      install: 
+        - pip install --upgrade pyinstaller
+        - pip install --upgrade -r requirements.txt
+      before_script: python3 -m pyinstaller JNote-Test.spec
+      script: 
+        - ls dist
+        - ls dist/JNote
+
+    - name: "PyInstaller Build - Mac"
       os: osx
       osx_image: xcode11
       language: shell
-before_install: pip3 install --upgrade pip
-install: pip3 install --upgrade pyinstaller
-script: pyi-makespec main.py
-after_script: cat main.spec
+      install: 
+        - pip install --upgrade pyinstaller
+        - pip install --upgrade -r requirements.txt
+      before_script: python3 -m pyinstaller JNote-Test.spec
+      script: 
+        - ls dist
+        - ls dist/JNote
+
+    - name: "PyInstaller Build - Windows 32bit"
+      os: windows
+      language: shell
+      before_install:
+        - choco install python --forcex86
+        - choco install upx
+      env: PATH=/c/Python37:/c/Python37/Scripts:$PATH
+      install: 
+        - pip install --upgrade pyinstaller
+        - pip install --upgrade -r requirements.txt
+      before_script: 
+        - python -m pyinstaller JNote-Test.spec
+        - python compres.py dist/JNote --level 9 --verbose
+      script: dist/JNote/JNote.exe
+
+    - name: "PyInstaller Build - Windows 64bit"
+      os: windows
+      language: shell
+      before_install:
+        - choco install python
+        - choco install upx
+      env: PATH=/c/Python37:/c/Python37/Scripts:$PATH
+      install: 
+        - pip install --upgrade pyinstaller
+        - pip install --upgrade -r requirements.txt
+      before_script: 
+        - python -m pyinstaller JNote-Test.spec
+        - python compres.py dist/JNote --level 9 --verbose
+      script: dist/JNote/JNote.exe

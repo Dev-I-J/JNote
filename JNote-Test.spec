@@ -31,7 +31,6 @@ a = Analysis(['main.py'],
              win_private_assemblies=False,
              cipher=block_cipher,
              noarchive=False)
-a.binaries = [x for x in a.binaries if not x[0].startswith("api-ms-win")]
 pyz = PYZ(a.pure, a.zipped_data,
              cipher=block_cipher)
 exe = EXE(pyz,
@@ -39,11 +38,11 @@ exe = EXE(pyz,
           [],
           exclude_binaries=True,
           name='JNote',
-          debug=False,
+          debug=True,
           bootloader_ignore_signals=False,
           strip=False,
           upx=False,
-          console=False, icon="icons\\favicon.ico")
+          console=True, icon="icons/favicon.ico")
 coll = COLLECT(exe,
                a.binaries,
                a.zipfiles,
