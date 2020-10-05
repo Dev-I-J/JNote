@@ -26,7 +26,7 @@ jobs:
         - ls dist
         - ls dist/JNote
 
-    - name: "PyInstaller Build - Windows 32bit"
+    - name: "PyInstaller Build - Windows 32 bit"
       os: windows
       language: shell
       before_install:
@@ -41,7 +41,7 @@ jobs:
         - python compres.py dist/JNote --level 9 --verbose
       script: dist/JNote/JNote.exe
 
-    - name: "PyInstaller Build - Windows 64bit"
+    - name: "PyInstaller Build - Windows 64 bit"
       os: windows
       language: shell
       before_install:
