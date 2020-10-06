@@ -11,8 +11,8 @@ jobs:
         - pip3 install --upgrade -r requirements.txt
       before_script: python3 -m PyInstaller JNote-Test.spec
       script: 
-        - ls dist
-        - ls dist/JNote
+        - ls dist -la
+        - ls dist/JNote -la
 
     - name: "PyInstaller Build - Mac"
       os: osx
@@ -23,31 +23,31 @@ jobs:
         - pip3 install --upgrade --user -r requirements.txt
       before_script: python3 -m PyInstaller JNote-Test.spec
       script: 
-        - ls dist
-        - ls dist/JNote
+        - ls dist -la
+        - ls dist/JNote -la
 
     - name: "PyInstaller Build - Windows 32 bit"
       os: windows
       language: shell
+      env: PATH=/c/Python38:/c/Python38/Scripts:$PATH
       before_install:
         - choco install python --version 3.8.0 --forcex86
         - choco install upx
-      env: PATH=/c/Python37:/c/Python37/Scripts:$PATH
       install: 
         - pip3 install --upgrade PyInstaller
         - pip3 install --upgrade -r requirements.txt
       before_script: 
         - python -m PyInstaller JNote-Test.spec
-        - python compres.py dist/JNote --level 9 --verbose
+        - python compres.py dist/JNote --level 9 --verbose --upx-path upx
       script: dist/JNote/JNote.exe
 
     - name: "PyInstaller Build - Windows 64 bit"
       os: windows
       language: shell
+      env: PATH=/c/Python38:/c/Python38/Scripts:$PATH
       before_install:
         - choco install python --version 3.8.0
         - choco install upx
-      env: PATH=/c/Python37:/c/Python37/Scripts:$PATH
       install: 
         - pip3 install --upgrade PyInstaller
         - pip3 install --upgrade -r requirements.txt
