@@ -1,17 +1,7 @@
 from PyQt5.QtCore import pyqtSlot
 from settings import Settings
 from charamel import Detector
-import sys
-import os
-
-try:
-    import magic
-except ImportError as e:
-    if "failed to find libmagic" in str(e).lower():
-        os.system("sudo apt-get install libmagic-dev")
-        sys.exit()
-    else:
-        sys.exit()
+import magic
 
 
 class FileIO(Settings):
