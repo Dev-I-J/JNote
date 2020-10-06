@@ -5,11 +5,11 @@ jobs:
   include:
 
     - name: "PyInstaller Build - Linux"
-      python: 3.7
+      python: 3.8
       install: 
-        - pip3 install --upgrade pyinstaller
+        - pip3 install --upgrade PyInstaller
         - pip3 install --upgrade -r requirements.txt
-      before_script: python3 -m pyinstaller JNote-Test.spec
+      before_script: python3 -m PyInstaller JNote-Test.spec
       script: 
         - ls dist
         - ls dist/JNote
@@ -19,9 +19,9 @@ jobs:
       osx_image: xcode11
       language: shell
       install: 
-        - pip3 install --upgrade pyinstaller
-        - pip3 install --upgrade -r requirements.txt
-      before_script: python3 -m pyinstaller JNote-Test.spec
+        - pip3 install --upgrade --user PyInstaller
+        - pip3 install --upgrade --user -r requirements.txt
+      before_script: python3 -m PyInstaller JNote-Test.spec
       script: 
         - ls dist
         - ls dist/JNote
@@ -30,14 +30,14 @@ jobs:
       os: windows
       language: shell
       before_install:
-        - choco install python --forcex86
+        - choco install python --version 3.8.0 --forcex86
         - choco install upx
       env: PATH=/c/Python37:/c/Python37/Scripts:$PATH
       install: 
-        - pip3 install --upgrade pyinstaller
+        - pip3 install --upgrade PyInstaller
         - pip3 install --upgrade -r requirements.txt
       before_script: 
-        - python -m pyinstaller JNote-Test.spec
+        - python -m PyInstaller JNote-Test.spec
         - python compres.py dist/JNote --level 9 --verbose
       script: dist/JNote/JNote.exe
 
@@ -45,13 +45,13 @@ jobs:
       os: windows
       language: shell
       before_install:
-        - choco install python
+        - choco install python --version 3.8.0
         - choco install upx
       env: PATH=/c/Python37:/c/Python37/Scripts:$PATH
       install: 
-        - pip3 install --upgrade pyinstaller
+        - pip3 install --upgrade PyInstaller
         - pip3 install --upgrade -r requirements.txt
       before_script: 
-        - python -m pyinstaller JNote-Test.spec
-        - python compres.py dist/JNote --level 9 --verbose
+        - python -m PyInstaller JNote-Test.spec
+        - python compres.py dist/JNote --level 9 --verbose --upx-path upx
       script: dist/JNote/JNote.exe

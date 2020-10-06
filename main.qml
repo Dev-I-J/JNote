@@ -708,7 +708,7 @@ ApplicationWindow{
     MessageDialog{
         id: handleError
         title: "An Unknown Error Occured"
-        text: "An Unknown Error Occured While Handeling The Document."
+        text: "An Unknown Error Occured While Handeling The Document"
         icon: StandardIcon.Warning
         visible: false
     }
@@ -743,7 +743,15 @@ ApplicationWindow{
     MessageDialog{
         id: apiConnectError
         title: "Failed To Connect to API"
-        text: "JNote was unable to conect to the GitHub API to check for new updates."
+        text: "JNote was unable to conect to the GitHub API to check for new updates"
+        icon: StandardIcon.Warning
+        visible: false
+    }
+
+    MessageDialog{
+        id: apiError
+        title: "Error with GitHub API"
+        text: "JNote encountered an error while using the GitHub API"
         icon: StandardIcon.Warning
         visible: false
     }
@@ -751,7 +759,7 @@ ApplicationWindow{
     MessageDialog{
         id: settingsError
         title: "Failed To Save Settings"
-        text: "A Fatal Error Occured While JNote is Saving Your Preferenses."
+        text: "A Fatal Error Occured While JNote is Saving Your Preferenses"
         icon: StandardIcon.Critical
         onAccepted: Qt.quit()
         onRejected: Qt.quit()
@@ -882,6 +890,16 @@ ApplicationWindow{
             upToDate.open()
         }
 
+        function onApiConnectError() {
+            apiConnectError.open()
+            statusText.text = "Unable to connect to API"
+        }
+
+        function onApiError() {
+            apiError.open()
+            statusText.text = "An Error Occured with the GitHub API"
+        }
+
         function onFatalError() {
             statusText.text = "A Fatal Error Occured!"
             fatalError.open()
@@ -941,11 +959,6 @@ ApplicationWindow{
         function onFileNotFound() {
             statusText.text = "JNote was unable to find that File!"
             fileNotFoundError.open()
-        }
-
-        function onApiConnectError() {
-            apiConnectError.open()
-            statusText.text = "Unable to connect to API"
         }
     }
 

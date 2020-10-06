@@ -26,6 +26,7 @@ class JNote(QObject):
     fatalError = pyqtSignal()
     fileSaved = pyqtSignal()
     upToDate = pyqtSignal()
+    apiError = pyqtSignal()
 
     def __init__(self, parent=None):
         super().__init__(parent)
@@ -59,6 +60,8 @@ class JNote(QObject):
                         self.upToDate.emit()
         except RequestException:
             self.apiConnectError.emit()
+        except KeyError:
+            self.apiError.emit()
         except BaseException:
             self.fatalError.emit()
 
