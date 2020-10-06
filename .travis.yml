@@ -23,8 +23,8 @@ jobs:
         - pip3 install --upgrade --user -r requirements.txt
       before_script: python3 -m PyInstaller JNote-Test.spec
       script: 
-        - ls dist -la
-        - ls dist/JNote -la
+        - ls -l -a dist
+        - ls -l -a dist/JNote
 
     - name: "PyInstaller Build - Windows 32 bit"
       os: windows

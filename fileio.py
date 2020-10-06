@@ -1,7 +1,7 @@
 from PyQt5.QtCore import pyqtSlot
 from settings import Settings
 from charamel import Detector
-import magic
+from binaryornot import check
 
 
 class FileIO(Settings):
@@ -25,8 +25,7 @@ class FileIO(Settings):
         """Open File"""
         fileText = ""
         try:
-            mime = magic.from_file(fPath, mime=True)
-            if mime.startswith("text/"):
+            if not check.is_binary(fPath):
                 with open(fPath, "rb") as binaryFile:
                     binary = binaryFile.read()
                     coding = Detector().detect(binary).value

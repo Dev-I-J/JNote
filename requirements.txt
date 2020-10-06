@@ -4,5 +4,5 @@ py-gfm
 charamel
 requests
 markdown
+binaryornot
 version-parser
-https://github.com/julian-r/python-magic/archive/0.4.13.tar.gz
