@@ -32,7 +32,7 @@
 # 🄻🄸🄲🄴🄽🅂🄴
 #    https://www.gnu.org/licenses/gpl-3.0-standalone.html
 
-from os.path import join, exists, abspath, dirname, relpath, normpath
+from os.path import join, abspath, dirname, relpath, normpath
 from argparse import ArgumentParser, Namespace
 from os import chdir, walk, system
 from typing import List
@@ -109,14 +109,11 @@ extensions: List[str] = [
 
 if getattr(sys, 'frozen', False):
     chdir(dirname(sys.executable))
-    upx_path = resource_path('upx.exe')
+    upx_path = resource_path('upx')
 elif __file__:
     if dirname(__file__):
         chdir(dirname(__file__))
-    upx_path = abspath('upx.exe')
-    if not exists("upx.exe"):
-        print("Unable to find UPX, put upx in this folder!")
-        sys.exit()
+    upx_path = abspath('upx')
 else:
     sys.exit()
 
