@@ -32,7 +32,7 @@
 # 🄻🄸🄲🄴🄽🅂🄴
 #    https://www.gnu.org/licenses/gpl-3.0-standalone.html
 
-from os.path import join, abspath, dirname, relpath, normpath
+from os.path import join, abspath, dirname, relpath, normpath, exists
 from argparse import ArgumentParser, Namespace
 from subprocess import getoutput as system
 from os import chdir, walk
@@ -70,6 +70,14 @@ def run(
     """Main Function to Run"""
     getFile: List[str] = getFiles(path)
     v_opt: str = "-q"
+
+    if not exists(path):
+        print("Directory Not Found", file=sys.stderr)
+        return
+
+    if not exists(upath):
+        print("UPX Not Found", file=sys.stderr)
+        return
 
     if verbose:
         v_opt = "-v"
