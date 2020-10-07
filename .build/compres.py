@@ -104,7 +104,8 @@ extensions: List[str] = [
     "exe",
     "pyd",
     "so",
-    "lib"
+    "lib",
+    "dylib"
 ]
 
 if getattr(sys, 'frozen', False):

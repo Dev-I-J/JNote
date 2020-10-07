@@ -6,11 +6,13 @@ jobs:
 
     - name: "PyInstaller Build - Linux"
       python: 3.8
+      before_install: sudo apt install upx
 
     - name: "PyInstaller Build - Mac"
       os: osx
       osx_image: xcode11
       language: shell
+      before_install: brew install upx
       
     - name: "PyInstaller Build - Windows 32 bit"
       os: windows
@@ -19,7 +21,6 @@ jobs:
       before_install:
         - choco install python --version 3.8.0 --forcex86
         - choco install upx
-        - alias python3=python
 
     - name: "PyInstaller Build - Windows 64 bit"
       os: windows
@@ -30,8 +31,8 @@ jobs:
         - choco install upx
 
 install:
-  - pip3 install --upgrade PyInstaller
-  - pip3 install --upgrade -r requirements.txt
+  - pip3 install --upgrade --user PyInstaller
+  - pip3 install --upgrade --user -r requirements.txt
 
 before_script: 
   - cp main.py .test/main.py
@@ -40,6 +41,7 @@ before_script:
   - cp main.qml .test/main.qml
   - cp settings.toml .test/settings.toml
   - cp -r icons .test/icons
-  - python3 -m PyInstaller .test/JNote.spec
+  - python3 -m PyInstaller .test/JNote.spec || python -m PyInstaller .test/JNote.spec
+  - python3 .test/compres.py dist/JNote --level 9 --verbose --upx-path upx || python .test/compres.py dist/JNote --level 9 --verbose --upx-path upx
 
-script: dist/JNote/JNote
+script: QT_DEBUG_PLUGINS=1 dist/JNote/JNote
