@@ -34,7 +34,8 @@
 
 from os.path import join, abspath, dirname, relpath, normpath
 from argparse import ArgumentParser, Namespace
-from os import chdir, walk, system
+from subprocess import getoutput as system
+from os import chdir, walk
 from typing import List
 import sys
 
@@ -83,7 +84,7 @@ def run(
         else:
             chdir(path)
             command: str = "{} {} {} {}".format(upath, level, v_opt, theFile)
-            system(command)
+            print(system(command))
 
 
 upx_path: str = ""
