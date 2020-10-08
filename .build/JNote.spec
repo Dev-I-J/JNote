@@ -1,6 +1,7 @@
 # -*- mode: python ; coding: utf-8 -*-
 
 from os.path import abspath as path
+from sys import platform
 
 block_cipher = None
 
@@ -51,3 +52,11 @@ coll = COLLECT(exe,
                upx=False,
                upx_exclude=[],
                name='JNote')
+
+app = 0
+
+if platform == "darwin":
+    app = BUNDLE(exe,
+         name='JNote.app',
+         icon="icons/favicon.ico",
+         bundle_identifier=None)
