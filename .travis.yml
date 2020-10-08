@@ -1,29 +1,21 @@
 language: python
+if: commit_message =~ /\[build\]/
 
 jobs:
 
   include:
 
     - name: PyInstaller Build - Linux
-      if: 
-        - commit_message=~ /Final Commit - v.*\.*\..*/ 
-        - commit_message =~ /\[build\]/
       python: 3.8
       before_install: sudo apt install upx
 
     - name: PyInstaller Build - Mac
-      if: 
-        - commit_message=~ /Final Commit - v.*\.*\..*/ 
-        - commit_message =~ /\[build\]/
       os: osx
       osx_image: xcode11
       language: shell
       before_install: brew install upx
       
     - name: PyInstaller Build - Windows 32 bit
-      if: 
-        - commit_message=~ /Final Commit - v.*\.*\..*/ 
-        - commit_message =~ /\[build\]/
       os: windows
       language: shell
       env: PATH=/c/Python38:/c/Python38/Scripts:$PATH
@@ -32,9 +24,6 @@ jobs:
         - choco install upx
 
     - name: PyInstaller Build - Windows 64 bit
-      if: 
-        - commit_message=~ /Final Commit - v.*\.*\..*/ 
-        - commit_message =~ /\[build\]/
       os: windows
       language: shell
       env: PATH=/c/Python38:/c/Python38/Scripts:$PATH
