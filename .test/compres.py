@@ -32,7 +32,7 @@
 # 🄻🄸🄲🄴🄽🅂🄴
 #    https://www.gnu.org/licenses/gpl-3.0-standalone.html
 
-from os.path import join, abspath, dirname, relpath, normpath, exists
+from os.path import join, abspath, dirname, relpath, normpath, exists, isdir
 from argparse import ArgumentParser, Namespace
 from subprocess import getoutput as system
 from os import chdir, walk
@@ -71,7 +71,7 @@ def run(
     getFile: List[str] = getFiles(path)
     v_opt: str = "-q"
 
-    if not exists(path):
+    if (not exists(path)) or (not isdir(path)):
         print("Directory Not Found", file=sys.stderr)
         return
 
