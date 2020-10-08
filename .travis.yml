@@ -10,17 +10,17 @@ jobs:
       osx_image: xcode11
       language: shell
       before_install: 
-        - pip3 --upgrade --user virtualenv
-        - virtualenv buildenv
+        - pip3 install --upgrade --user virtualenv
+        - python3 -m virtualenv buildenv
       
     - name: PyInstaller Build - Windows 32 bit
       os: windows
       language: shell
-      env: PATH=/c/Python38:/c/Python38/Scripts:$PATH
+      env: PATH=/c/Python39:/c/Python39/Scripts:$PATH
       before_install: 
         - choco install python --version 3.9.0 --forcex86
         - pip3 install --upgrade --user virtualenv
-        - virtualenv buildenv
+        - python -m virtualenv buildenv
 
     - name: PyInstaller Build - Windows 64 bit
       os: windows
@@ -29,7 +29,7 @@ jobs:
       before_install: 
         - choco install python --version 3.9.0 --forcex86
         - pip3 install --upgrade --user virtualenv
-        - virtualenv buildenv
+        - python -m virtualenv buildenv
 
 install:
   - source buildenv/bin/activate || source buildenv/Scripts/activate
