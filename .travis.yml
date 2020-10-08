@@ -26,8 +26,8 @@ jobs:
       before_install: choco install python --version 3.8.0
 
 install:
-  - pip3 install --upgrade --user PyInstaller
-  - pip3 install --upgrade --user -r requirements.txt
+  - pip3 install --upgrade --user PyInstaller || pip3 install --upgrade PyInstaller
+  - pip3 install --upgrade --user -r requirements.txt || pip3 install --upgrade -r requirements.txt
 
 before_script: 
   - cp main.py .test/main.py
@@ -38,7 +38,7 @@ before_script:
   - cp -r icons .test/icons
   - python3 -m PyInstaller .test/JNote.spec || python -m PyInstaller .test/JNote.spec
 
-script: QT_DEBUG_PLUGINS=1 dist/JNote/JNote
+script: QT_DEBUG_PLUGINS=1 dist/JNote/JNote || dist/JNote/JNote
 
 after_success:
-  - rm -rd dist/JNote
+  - rm -rdv dist/JNote
