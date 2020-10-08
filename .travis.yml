@@ -27,7 +27,7 @@ jobs:
       language: shell
       env: PATH=/c/Python39:/c/Python39/Scripts:$PATH
       before_install: 
-        - choco install python --version 3.9.0 --forcex86
+        - choco install python --version 3.9.0
         - pip3 install --upgrade --user virtualenv
         - python -m virtualenv buildenv
 
