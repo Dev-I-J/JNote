@@ -1,9 +1,7 @@
 # JNote - A Free NotePad
 
-![PyInstaller Build](https://github.com/Dev-I-J/JNote/workflows/PyInstaller%20Build/badge.svg)
-
+[![Build Status](https://travis-ci.org/Dev-I-J/JNote.svg?branch=master)](https://travis-ci.org/Dev-I-J/JNote)
 [![Documentation Status](https://readthedocs.org/projects/jnote-notepad/badge/?version=latest)](https://jnote-notepad.readthedocs.io/en/latest/?badge=latest)
-
 [![Run on Repl.it](https://repl.it/badge/github/Dev-I-J/JNote)](https://repl.it/github/Dev-I-J/JNote)
 
 __JNote is a free NotePad__ application written in _Python and QML (PyQt5)._ Binaries are available for Windows and Mac, but you can _build from source_ for Linux (See Below).
