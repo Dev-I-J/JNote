@@ -6,7 +6,7 @@
 
 [![Run on Repl.it](https://repl.it/badge/github/Dev-I-J/JNote)](https://repl.it/github/Dev-I-J/JNote)
 
-__JNote is a free NotePad__ application written in _Python and QML. (PyQt5)_
+__JNote is a free NotePad__ application written in _Python and QML (PyQt5)._ Binaries are available for Windows and Mac, but you can _build from source_ for Linux (See Below).
 
 ## Features
 
@@ -76,8 +76,7 @@ Additional Information about JNote
 * [`py-gfm`](https://pypi.org/project/py-gfm/) GitHub Flavored Markdown Extension for `markdown` module.
 * [`markdown`](https://pypi.org/project/markdown/) for Converting markdown from GitHub to HTML.
 * [`toml`](https://pypi.org/project/toml/) for parsing the settings file.
-* [`python-magic`](https://pypi.org/project/python-magic/) for getting the `MIME` type of files on Linux.
-* [`python-magic-bin`](https://pypi.org/project/python-magic-bin/) for getting the `MIME` type of files on Non-Linux Platforms.
+* [`binaryornot`](https://pypi.org/project/binaryornot/) for _guessing_ if files are binary or not.
 
 ## Coming Soon
 
