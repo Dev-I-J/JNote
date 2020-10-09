@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "JNote"
+version = "1.4.1"
+description = "A Free Note Pad"
+license = "GPL-3.0-only"
+authers = "Dev-I-J <induwara16@yandex.com>"
+
+[tool.poetry.dependencies]
+toml = "^0.10.1"
+PyQt5 = "^5.15.1"
+py-gfm = "^1.0.0"
+charamel = "^1.0.0"
+markdown = "^3.3"
+binaryornot = "^0.4.4"
+version-parser = "^1.0.0"
+requests = "^2.24.0"
