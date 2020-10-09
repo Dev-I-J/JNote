@@ -29,6 +29,8 @@ Follow the below steps to install JNote according to your OS.
 
 ### Linux
 
+#### Steps
+
 1. Clone JNote:
     ```bash
     sudo apt-get update
@@ -73,3 +75,25 @@ Follow the below steps to install JNote according to your OS.
     ```bash
     dist/JNote/JNote
     ```
+
+#### Full Script
+
+```bash
+sudo apt-get update
+sudo apt-get install git
+git clone https://github.com/Dev-I-J/JNote.git
+cd JNote
+sudo apt-get install software-properties-common
+sudo add-apt-repository ppa:deadsnakes/ppa
+sudo apt-get update
+sudo apt-get install python3.9
+curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
+python3 get-pip.py
+python3 -m pip install virtualenv
+python3 -m virtualenv buildenv
+source buildenv/bin/activate
+python3 -m pip install PyInstaller
+python3 -m pip install -r requirements.txt
+python3 -m PyInstaller JNote.spec
+dist/JNote/JNote
+```
