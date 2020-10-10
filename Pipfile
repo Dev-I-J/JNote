@@ -4,17 +4,17 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
-PyInstaller = "==4.0"
+PyInstaller = "4.0"
 
 [packages]
-toml = "==0.10.1"
-py-gfm = "==1.0.0"
-charamel = "==1.0.0"
-requests = "==2.14.0"
-binaryornot = "==0.4.4"
-version-parser = "==1.0.0"
-PyQt5 = "==5.15.1"
-Markdown = "==3.3"
+toml = "0.10.1"
+py-gfm = "1.0.0"
+charamel = "1.0.0"
+requests = "2.14.0"
+binaryornot = "0.4.4"
+version-parser = "1.0.0"
+PyQt5 = "5.15.1"
+Markdown = "3.3"
 
 [requires]
-python_version = "==3.9.0"
+python_version = "3.9.0"
