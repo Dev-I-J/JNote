@@ -1,5 +1,10 @@
-language: python
+language: shell
 if: commit_message =~ /\[build\]/
+
+addons:
+  homebrew:
+    packages:
+    - python@3.9
 
 jobs:
 
@@ -8,19 +13,15 @@ jobs:
     - name: PyInstaller Build - Mac
       os: osx
       osx_image: xcode11
-      language: shell
       before_install: 
-        - pip3 install --upgrade virtualenv
-        - python3 -m virtualenv buildenv
+        - pip3 install --upgrade pipenv
       
     - name: PyInstaller Build - Windows 32 bit
       os: windows
-      language: shell
       env: PATH=/c/Python39:/c/Python39/Scripts:$PATH
       before_install: 
         - choco install python --version 3.9.0 --forcex86
-        - pip3 install --upgrade virtualenv
-        - python -m virtualenv buildenv
+        - pip3 install --upgrade pipenv
 
     - name: PyInstaller Build - Windows 64 bit
       os: windows
@@ -28,23 +29,19 @@ jobs:
       env: PATH=/c/Python39:/c/Python39/Scripts:$PATH
       before_install: 
         - choco install python --version 3.9.0
-        - pip3 install --upgrade virtualenv
-        - python -m virtualenv buildenv
+        - pip3 install --upgrade pipenv
 
 install:
-  - source buildenv/bin/activate || source buildenv/Scripts/activate
-  - pip3 install --upgrade PyInstaller
-  - pip3 install --upgrade -r requirements.txt
+  - pipenv install --dev
 
 before_script:
-  - source buildenv/bin/activate || source buildenv/Scripts/activate
   - cp main.py .test/main.py
   - cp fileio.py .test/fileio.py
   - cp settings.py .test/settings.py
   - cp main.qml .test/main.qml
   - cp settings.toml .test/settings.toml
   - cp -r icons .test/icons
-  - PyInstaller .test/JNote.spec
+  - pipenv run PyInstaller .test/JNote.spec
 
 script: dist/JNote/JNote
 
