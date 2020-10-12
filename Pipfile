@@ -5,6 +5,12 @@ verify_ssl = true
 
 [dev-packages]
 PyInstaller = "4.0"
+flake8 = "3.8.4"
+recommonmark = "0.6.0"
+sphinx = "3.2.1"
+sphinx-rtd-theme = "0.5.0"
+sphinx-markdown-tables = "0.0.15"
+sphinx-sitemap = "2.2.0"
 
 [packages]
 toml = "0.10.1"

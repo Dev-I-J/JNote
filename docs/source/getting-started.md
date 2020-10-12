@@ -1,14 +1,14 @@
 # Getting Started
 
-In this guide, you will learn how to install and use JNote.
+In this guide, you will learn how to install and run JNote.
 
 ## Requirements
 
 In order to work properly, JNote requires at least the following specifications:
 
 * Windows(32 or 64 bit), Mac or Linux operating system(OS).
-* 4 GB RAM.
-* 50 ~ 240 MB storage (Depends on the operationg system).
+* 2 GB RAM.
+* 120 ~ 240 MB storage (Depends on the operationg system).
 
 ## Installation
 
@@ -97,3 +97,7 @@ python3 -m pip install -r requirements.txt
 python3 -m PyInstaller JNote.spec
 dist/JNote/JNote
 ```
+
+## Using JNote
+
+To see how to use JNote, please refer to [The First Steps With JNote Page](first-steps-with-jnote.md).

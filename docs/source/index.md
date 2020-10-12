@@ -18,6 +18,7 @@ To Get Started, See the [Getting Started](getting-started.md) Guide.
 
    getting-started
    first-steps-with-jnote
+   keyboard-shortcuts
 
 ```
 

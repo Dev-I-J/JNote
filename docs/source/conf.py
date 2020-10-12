@@ -34,7 +34,9 @@ release = '1.4.1'
 # ones.
 extensions = [
     "sphinx_rtd_theme",
-    "recommonmark"
+    "recommonmark",
+    "sphinx_markdown_tables",
+    "sphinx_sitemap"
 ]
 
 # Add any paths that contain templates here, relative to this directory.
@@ -59,6 +61,8 @@ html_favicon = '../../icons/favicon.ico'
 # relative to this directory. They are copied after the builtin static files,
 # so a file named "default.css" will overwrite the builtin "default.css".
 html_static_path = ['_static']
+html_extra_path = ['robots.txt']
+html_baseurl = 'https://jnote-notepad.readthedocs.io/en/latest'
 
 github_doc_root = 'https://github.com/Dev-I-J/JNote/tree/master/docs/'
 
