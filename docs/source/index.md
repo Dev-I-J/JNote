@@ -1,6 +1,6 @@
 <!---
    JNote documentation master file, created by
-   sphinx-quickstart on Thu Sep 24 16:35:44 2020.
+   sphinx- on Thu Sep 24 16:35:44 2020.
    You can adapt this file completely to your liking, but it should at least
    contain the root `toctree` directive.
 -->
@@ -18,13 +18,15 @@ To Get Started, See the [Getting Started](getting-started.md) Guide.
 
    getting-started
    first-steps-with-jnote
+   all-features
    keyboard-shortcuts
+   troubleshooting
 
 ```
 
 ## Features
 
-The current version is v1.4.1 and additional for basic functions of a note pad, it can
+The current version is v1.5.0 and additional for basic functions of a note pad, it can
 
 * Automatically Check For Updates,
 * Open the last opened file automatically when started,
@@ -76,3 +78,4 @@ These functionalities are scheduled to be shipped with the future major releases
 * Auto Updating,
 * Settings dialog to control your preferences,
 * Dark Mode!!
+quickstart

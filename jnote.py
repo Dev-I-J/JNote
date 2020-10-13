@@ -33,7 +33,7 @@ class JNote(QObject):
         self._updateInfo = {}
 
     @pyqtSlot(bool)
-    def checkUpdates(self, isSatrtup):
+    def checkUpdates(self, isStartup):
         """Check For Updates"""
 
         try:
@@ -55,7 +55,7 @@ class JNote(QObject):
                     self.updateInfo["date"] = date
                     self.updateAvailable.emit()
                 else:
-                    if not isSatrtup:
+                    if not isStartup:
                         self.updateInfo["currentVersion"] = currentVersionStr
                         self.upToDate.emit()
         except RequestException:

@@ -7,11 +7,11 @@
 # Doing so will do nothing but only ruin your experience!!!
 
 [last-used-formatting]
-font = "Arial"
-fontIndex = 2
-size = 8
-sizeIndex = 0
-color = "#000000"
+font = "Courier New"
+fontIndex = 64
+size = 14
+sizeIndex = 6
+color = "#505050"
 wrap = true
 underline = false
 strikeout = false
@@ -19,7 +19,7 @@ bold = false
 italic = false
 
 [last-used-file]
-untitled = true
-path = ""
+untitled = false
+path = "C:/Users/mjayaweera/Documents/Zoom/2020-10-12 09.09.14 Sanida Vidanagama's Personal Meeting Room 2298765493/meeting_saved_chat.txt"
 text = ""
-encoding = "utf-8"
+encoding = "iso2022_jp_2004"

@@ -4,5 +4,45 @@
 			"path": "."
 		}
 	],
-	"settings": {}
+	"settings": {
+		"cSpell.words": [
+			"Structify",
+			"VCSs",
+			"Virtualenv",
+			"abspath",
+			"binaryornot",
+			"bootloader",
+			"buildenv",
+			"charamel",
+			"choco",
+			"datas",
+			"deadsnakes",
+			"dtobject",
+			"dynload",
+			"eval",
+			"favicon",
+			"fileio",
+			"finditer",
+			"forcex",
+			"hiddenimports",
+			"hookspath",
+			"jnote",
+			"maxdepth",
+			"myfile",
+			"noarchive",
+			"noconsole",
+			"noqa",
+			"objectdb",
+			"pathex",
+			"pipenv",
+			"prefs",
+			"pyqt",
+			"quickstart",
+			"recommonmark",
+			"tkinter",
+			"toctree",
+			"undos",
+			"zipfiles"
+		]
+	}
 }

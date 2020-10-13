@@ -8,7 +8,7 @@ In order to work properly, JNote requires at least the following specifications:
 
 * Windows(32 or 64 bit), Mac or Linux operating system(OS).
 * 2 GB RAM.
-* 120 ~ 240 MB storage (Depends on the operationg system).
+* 120 ~ 240 MB storage (Depends on the operating system).
 
 ## Installation
 
