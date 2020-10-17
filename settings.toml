@@ -15,7 +15,7 @@ color = "#505050"
 wrap = true
 underline = false
 strikeout = false
-bold = false
+bold = true
 italic = false
 
 [last-used-file]

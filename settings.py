@@ -1,11 +1,11 @@
 from PyQt5.QtCore import pyqtSlot
-from jnote import JNote
+from signals import Signals
 import toml
 
 
-class Settings(JNote):
+class Settings(Signals):
 
-    """All the Settings releted stuff for JNote goes Here"""
+    """All the Settings related stuff for JNote goes Here"""
 
     def __init__(self, parent=None):
         super().__init__(parent)

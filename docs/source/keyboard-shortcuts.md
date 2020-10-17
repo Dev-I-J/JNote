@@ -6,11 +6,10 @@ This page has all the keyboard shortcuts of JNote.
 
 | Sequence | Action |
 |:---:|:---:|
-| <kbd>Ctrl</kbd> + <kbd>N</kbd> | Create New Document |
+| <kbd>Ctrl</kbd> + <kbd>N</kbd> | [Create New Document](all-features.md#Create-New-Document) |
 | <kbd>Ctrl</kbd> + <kbd>O</kbd> | Open Existing File |
 | <kbd>Ctrl</kbd> + <kbd>S</kbd> | Save Changes |
 | <kbd>Ctrl</kbd> + <kbd>Sift</kbd> + <kbd>S</kbd> | Save File As |
-
 
 ## Editing Shortcuts
 
@@ -23,4 +22,4 @@ This page has all the keyboard shortcuts of JNote.
 | <kbd>Ctrl</kbd> + <kbd>Y</kbd> | Redo |
 | <kbd>Ctrl</kbd> + <kbd>A</kbd> | Select All |
 | <kbd>Ctrl</kbd> + <kbd>F</kbd> | Find Text |
-| <kbd>F5</kbd> | Insert Current Date and Time |
+| <kbd>F5</kbd> | Insert Current Date and Time

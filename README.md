@@ -28,20 +28,20 @@ __Assuming you already have _Python along with 'pip'_ and _Git_ installed on you
 
 ### Linux / Mac OS
 
-1. Clone This Repo in Terminal: `git clone https://github.com/Dev-I-J/JNote`
-2. Install Dependencies: `python install.py`
-3. Install PyInstaller: `pip install PyInstaller`
+1. Clone This Repo in CMD: `git clone https://github.com/Dev-I-J/JNote`
+2. Install `pipenv`: `pip install pipenv`
+3. Install Dependencies: `pipenv install --dev`
 4. `cd` to JNote: `cd JNote`
 5. Build the Python File: `python -m PyInstaller --name JNote --icon icons/favicon.ico --add-data main.qml:. --add-data icons:icons --add-data settings.toml:. --clean --windowed main.py`
-6. Go to the directory where you cloned the repo in the file manager, and you will find a folder called dist, and in there, another one called JNote. The Executable will be inside it.
+6. Execute with `dist/JNote/JNote` on Linux, Double click `dist/JNote.app` on Mac.
 
 ### Windows
 
 1. Clone This Repo in CMD: `git clone https://github.com/Dev-I-J/JNote`
-2. Install Dependencies: `python install.py`
-3. Install PyInstaller: `pip install PyInstaller`
+2. Install `pipenv`: `pip install pipenv`
+3. Install Dependencies: `pipenv install --dev`
 4. `cd` to JNote: `cd JNote`
-5. Build the Python File: `PyInstaller --name "JNote" --icon "icons\favicon.ico" --add-data "main.qml;." --add-data "icons;icons" --add-data "settings.toml;." --clean --noconsole main.py`
+5. Build the Python File: `pipenv run PyInstaller --name "JNote" --icon "icons\favicon.ico" --add-data "main.qml;." --add-data "icons;icons" --add-data "settings.toml;." --clean --noconsole main.py`
 6. Go to the directory where you cloned the repo in the file explorer, and you will find a folder called dist, and in there, another one called JNote. The Executable will be inside it.
 
 ## Price
@@ -64,7 +64,7 @@ Additional Information about JNote
 
 * All The Icons are provided by [Icons8](https://icons8.com).
 * The app is build with [PyInstaller](https://pypi.org/project/PyInstaller)
-* Special Thanks to [Atom](https://atom.io) for providing the awesome Editor.
+* Special Thanks to [VSCode](https://vscode.com) for providing the awesome Editor.
 
 ### Python Modules Used in Development
 

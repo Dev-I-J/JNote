@@ -12,7 +12,76 @@ ApplicationWindow{
     height: 600
     title: winTitle + " - Untitled"
 
-    Component.onCompleted: JNote.checkUpdates(true)
+    Component.onCompleted: {
+        JNote.checkUpdates(true)
+        JNote.updateProperty()
+
+        var tempSizeModel = new Array()
+        for (var i=8; i<=100; i++) {
+            tempSizeModel.push(i)
+        }
+
+        sizeSelector.model = tempSizeModel
+        fontSelector.currentIndex = JNote.getSettings("last-used-formatting")["fontIndex"]
+        sizeSelector.currentIndex = JNote.getSettings("last-used-formatting")["sizeIndex"]
+        colorSelector.color = JNote.getSettings("last-used-formatting")["color"]
+        underlineText.checked = JNote.getSettings("last-used-formatting")["underline"]
+        strikeoutText.checked = JNote.getSettings("last-used-formatting")["strikeout"]
+        boldText.checked = JNote.getSettings("last-used-formatting")["bold"]
+        italicText.checked = JNote.getSettings("last-used-formatting")["italic"]
+        fontDialog.fontColor = JNote.getSettings("last-used-formatting")["color"]
+        fontDialog.fontIndex = JNote.getSettings("last-used-formatting")["fontIndex"]
+        fontDialog.fontSizeIndex = JNote.getSettings("last-used-formatting")["sizeIndex"]
+        fontDialog.fontFamily = JNote.getSettings("last-used-formatting")["font"]
+        fontDialog.fontSize = JNote.getSettings("last-used-formatting")["size"]
+        fontDialog.underline = JNote.getSettings("last-used-formatting")["underline"]
+        fontDialog.strikeout = JNote.getSettings("last-used-formatting")["strikeout"]
+        fontDialog.bold = JNote.getSettings("last-used-formatting")["bold"]
+        fontDialog.italic = JNote.getSettings("last-used-formatting")["italic"]
+        previewText.font = JNote.getSettings("last-used-formatting")["font"]
+        previewText.font.pointSize = JNote.getSettings("last-used-formatting")["size"]
+        previewText.color = JNote.getSettings("last-used-formatting")["color"]
+        previewText.font.underline = JNote.getSettings("last-used-formatting")["underline"]
+        previewText.font.strikeout = JNote.getSettings("last-used-formatting")["strikeout"]
+        previewText.font.bold = JNote.getSettings("last-used-formatting")["bold"]
+        previewText.font.italic = JNote.getSettings("last-used-formatting")["italic"]
+        mainTextArea.lastUsedFont = JNote.getSettings("last-used-formatting")["font"]
+        mainTextArea.lastUsedFontIndex = JNote.getSettings("last-used-formatting")["fontIndex"]
+        mainTextArea.lastUsedSize = JNote.getSettings("last-used-formatting")["size"]
+        mainTextArea.lastUsedSizeIndex = JNote.getSettings("last-used-formatting")["sizeIndex"]
+        mainTextArea.lastUsedColor = JNote.getSettings("last-used-formatting")["color"]
+        mainTextArea.lastUsedUnderline = JNote.getSettings("last-used-formatting")["underline"]
+        mainTextArea.lastUsedStrikeout = JNote.getSettings("last-used-formatting")["strikeout"]
+        mainTextArea.lastUsedBold = JNote.getSettings("last-used-formatting")["bold"]
+        mainTextArea.lastUsedItalic = JNote.getSettings("last-used-formatting")["italic"]
+        mainTextArea.font = JNote.getSettings("last-used-formatting")["font"]
+        mainTextArea.font.pointSize = JNote.getSettings("last-used-formatting")["size"]
+        mainTextArea.color = JNote.getSettings("last-used-formatting")["color"]
+        mainTextArea.font.underline = JNote.getSettings("last-used-formatting")["underline"]
+        mainTextArea.font.strikeout = JNote.getSettings("last-used-formatting")["strikeout"]
+        mainTextArea.font.bold = JNote.getSettings("last-used-formatting")["bold"]
+        mainTextArea.font.italic = JNote.getSettings("last-used-formatting")["italic"]
+        if (JNote.getSettings("last-used-file")["untitled"]) {
+            mainTextArea.text = JNote.getSettings("last-used-file")["text"]
+        }
+        else {
+            mainTextArea.text = JNote.openLastOpenFile()
+            statusText.text = "Document " + JNote.getSettings("last-used-file")["path"] + " Opened Successfuly"
+            windowM.title = windowM.winTitle + " - " + JNote.getSettings("last-used-file")["path"]
+        }
+        if (JNote.getSettings("last-used-formatting")["wrap"]) {
+            wrapText.checked = true
+            mainTextArea.wrapMode = TextArea.Wrap
+            mainTextArea.tmpText = mainTextArea.text
+            mainTextArea.text = ""
+            mainTextArea.text = mainTextArea.tmpText
+            mainTextArea.tmpText = ""
+        }
+        else {
+            doNotWrapText.checked = true
+            mainTextArea.wrapMode = TextArea.NoWrap
+        }
+    }
 
     menuBar: MenuBar{
 
@@ -23,7 +92,7 @@ ApplicationWindow{
                 text: "New"
                 id: newDoc
                 icon.source: "icons/new.png"
-                onTriggered: FileIO.fileNew()
+                onTriggered: JNote.fileNew()
             }
 
             MenuItem{
@@ -35,7 +104,7 @@ ApplicationWindow{
             MenuItem{
                 text: "Save"
                 icon.source: "icons/save.png"
-                onTriggered: FileIO.fileSave(mainTextArea.text)
+                onTriggered: JNote.fileSave(mainTextArea.text)
             }
 
             MenuItem{
@@ -162,7 +231,7 @@ ApplicationWindow{
             ToolButton{
                 text: "New"
                 icon.source: "icons/new.png"
-                onClicked: FileIO.fileNew()
+                onClicked: JNote.fileNew()
             }
 
             ToolButton{
@@ -174,7 +243,7 @@ ApplicationWindow{
             ToolButton{
                 text: "Save"
                 icon.source: "icons/save.png"
-                onClicked: FileIO.fileSave(mainTextArea.text)
+                onClicked: JNote.fileSave(mainTextArea.text)
             }
 
             ToolButton{
@@ -275,23 +344,6 @@ ApplicationWindow{
                 selectByKeyboard: true
                 persistentSelection: true
                 onPressed: statusText.text = "Ready"
-                Component.onCompleted: {
-                    mainTextArea.font = Settings.getSettings("last-used-formatting")["font"]
-                    mainTextArea.font.pointSize = Settings.getSettings("last-used-formatting")["size"]
-                    mainTextArea.color = Settings.getSettings("last-used-formatting")["color"]
-                    mainTextArea.font.underline = Settings.getSettings("last-used-formatting")["underline"]
-                    mainTextArea.font.strikeout = Settings.getSettings("last-used-formatting")["strikeout"]
-                    mainTextArea.font.bold = Settings.getSettings("last-used-formatting")["bold"]
-                    mainTextArea.font.italic = Settings.getSettings("last-used-formatting")["italic"]
-                    if (Settings.getSettings("last-used-file")["untitled"]) {
-                        mainTextArea.text = Settings.getSettings("last-used-file")["text"]
-                    }
-                    else {
-                        mainTextArea.text = FileIO.openLastOpenFile()
-                        statusText.text = "Document " + Settings.getSettings("last-used-file")["path"] + " Opened Successfuly"
-                        windowM.title = windowM.winTitle + " - " + Settings.getSettings("last-used-file")["path"]
-                    }
-                }
             }
 
             ScrollBar.vertical: ScrollBar {}
@@ -306,21 +358,16 @@ ApplicationWindow{
         title: "About - JNote"
         visible: false
 
-        ColumnLayout{
+        Flickable{
             anchors.fill: parent
-
-            Image{
-                source: "icons/logo.png"
-                Layout.alignment: Qt.AlignHCenter
-            }
-
-            TextArea{
-                text: 'JNote is a Free and Open Source Plain Text Editor licensed\nunder the GNU GPL v3 Open Source License Tou can use this application for free for\nPersonal use, Educational Use, and even Commercial Use for free! The code is availableon GiHub for free at this url - https://www.github.com/Dev-I-J/JNote.\n\nAll the icons used in this application is provided by Icons8 for FREE.\n\nDeveloper info - This application is written in Python and QML.\nThe modules PyQt5, requests, version_parser and sys are used.\nThe GitHub API Service is used to detect new versions.'
-                Layout.alignment: Qt.AlignHCenter
+            TextArea.flickable: TextArea{
+                text: JNote.about
                 readOnly: true
                 selectByMouse: true
                 selectByKeyboard: true
+                Layout.alignment: Qt.AlignHCenter
             }
+            ScrollBar.vertical: ScrollBar { }
         }
     }
 
@@ -330,22 +377,17 @@ ApplicationWindow{
         title: 'License - JNote'
         width: 400
         height: 400
-
-        ColumnLayout{
+            
+        Flickable{
             anchors.fill: parent
-
-            Image{
-                source: "icons/logo.png"
-                Layout.alignment: Qt.AlignHCenter
-            }
-
-            TextArea{
-                text: 'JNote is licensed under The GNU General Public License v3\n(https://www.gnu.org/licenses/gpl-3.0.txt)'
+            TextArea.flickable: TextArea{
+                text: JNote.license
                 readOnly: true
                 selectByMouse: true
                 selectByKeyboard: true
                 Layout.alignment: Qt.AlignHCenter
             }
+            ScrollBar.vertical: ScrollBar { }
         }
     }
 
@@ -430,13 +472,6 @@ ApplicationWindow{
                         previewText.font.pointSize = sizeSelector.currentText
                         fontDialog.fontSize = sizeSelector.currentText
                         fontDialog.fontSizeIndex = sizeSelector.currentIndex
-                    }
-                    Component.onCompleted: {
-                        var tempSizeModel = new Array()
-                        for (var i=8; i<=100; i++) {
-                            tempSizeModel.push(i)
-                        }
-                        sizeSelector.model = tempSizeModel
                     }
                 }
 
@@ -559,40 +594,6 @@ ApplicationWindow{
             previewText.font.bold = mainTextArea.lastUsedBold
             previewText.font.italic = mainTextArea.lastUsedItalic
         }
-        Component.onCompleted: {
-            fontSelector.currentIndex = Settings.getSettings("last-used-formatting")["fontIndex"]
-            sizeSelector.currentIndex = Settings.getSettings("last-used-formatting")["sizeIndex"]
-            colorSelector.color = Settings.getSettings("last-used-formatting")["color"]
-            underlineText.checked = Settings.getSettings("last-used-formatting")["underline"]
-            strikeoutText.checked = Settings.getSettings("last-used-formatting")["strikeout"]
-            boldText.checked = Settings.getSettings("last-used-formatting")["bold"]
-            italicText.checked = Settings.getSettings("last-used-formatting")["italic"]
-            fontDialog.fontColor = Settings.getSettings("last-used-formatting")["color"]
-            fontDialog.fontIndex = Settings.getSettings("last-used-formatting")["fontIndex"]
-            fontDialog.fontSizeIndex = Settings.getSettings("last-used-formatting")["sizeIndex"]
-            fontDialog.fontFamily = Settings.getSettings("last-used-formatting")["font"]
-            fontDialog.fontSize = Settings.getSettings("last-used-formatting")["size"]
-            fontDialog.underline = Settings.getSettings("last-used-formatting")["underline"]
-            fontDialog.strikeout = Settings.getSettings("last-used-formatting")["strikeout"]
-            fontDialog.bold = Settings.getSettings("last-used-formatting")["bold"]
-            fontDialog.italic = Settings.getSettings("last-used-formatting")["italic"]
-            previewText.font = Settings.getSettings("last-used-formatting")["font"]
-            previewText.font.pointSize = Settings.getSettings("last-used-formatting")["size"]
-            previewText.color = Settings.getSettings("last-used-formatting")["color"]
-            previewText.font.underline = Settings.getSettings("last-used-formatting")["underline"]
-            previewText.font.strikeout = Settings.getSettings("last-used-formatting")["strikeout"]
-            previewText.font.bold = Settings.getSettings("last-used-formatting")["bold"]
-            previewText.font.italic = Settings.getSettings("last-used-formatting")["italic"]
-            mainTextArea.lastUsedFont = Settings.getSettings("last-used-formatting")["font"]
-            mainTextArea.lastUsedFontIndex = Settings.getSettings("last-used-formatting")["fontIndex"]
-            mainTextArea.lastUsedSize = Settings.getSettings("last-used-formatting")["size"]
-            mainTextArea.lastUsedSizeIndex = Settings.getSettings("last-used-formatting")["sizeIndex"]
-            mainTextArea.lastUsedColor = Settings.getSettings("last-used-formatting")["color"]
-            mainTextArea.lastUsedUnderline = Settings.getSettings("last-used-formatting")["underline"]
-            mainTextArea.lastUsedStrikeout = Settings.getSettings("last-used-formatting")["strikeout"]
-            mainTextArea.lastUsedBold = Settings.getSettings("last-used-formatting")["bold"]
-            mainTextArea.lastUsedItalic = Settings.getSettings("last-used-formatting")["italic"]
-        }
     }
 
     Dialog{
@@ -620,20 +621,6 @@ ApplicationWindow{
                 id: doNotWrapText
                 text: "Don't Wrap"
                 onClicked: mainTextArea.wrapMode = TextArea.NoWrap
-            }
-        }
-        Component.onCompleted: {
-            if (Settings.getSettings("last-used-formatting")["wrap"]) {
-                wrapText.checked = true
-                mainTextArea.wrapMode = TextArea.Wrap
-                mainTextArea.tmpText = mainTextArea.text
-                mainTextArea.text = ""
-                mainTextArea.text = mainTextArea.tmpText
-                mainTextArea.tmpText = ""
-            }
-            else {
-                doNotWrapText.checked = true
-                mainTextArea.wrapMode = TextArea.NoWrap
             }
         }
     }
@@ -793,23 +780,23 @@ ApplicationWindow{
         standardButtons: Dialog.No | Dialog.Yes
         visible: false
         onAccepted: {
-            if (Settings.getSettings("last-used-file")["untitled"]) {
-                Settings.setSettingsStr("last-used-file", "text", mainTextArea.text)
+            if (JNote.getSettings("last-used-file")["untitled"]) {
+                JNote.setSettingsStr("last-used-file", "text", mainTextArea.text)
             }
             else {
-                Settings.setSettingsStr("last-used-file", "text", "")
+                JNote.setSettingsStr("last-used-file", "text", "")
             }
-            Settings.setSettingsStr("last-used-formatting", "font", fontDialog.fontFamily)
-            Settings.setSettingsStr("last-used-formatting", "color", fontDialog.fontColor)
-            Settings.setSettingsInt("last-used-formatting", "fontIndex", fontDialog.fontIndex)
-            Settings.setSettingsInt("last-used-formatting", "size", fontDialog.fontSize)
-            Settings.setSettingsInt("last-used-formatting", "sizeIndex", fontDialog.fontSizeIndex)
-            Settings.setSettingsBool("last-used-formatting", "wrap", wrapText.checked)
-            Settings.setSettingsBool("last-used-formatting", "underline", fontDialog.underline)
-            Settings.setSettingsBool("last-used-formatting", "strikeout", fontDialog.strikeout)
-            Settings.setSettingsBool("last-used-formatting", "bold", fontDialog.bold)
-            Settings.setSettingsBool("last-used-formatting", "italic",fontDialog.italic)
-            Settings.addComments()
+            JNote.setSettingsStr("last-used-formatting", "font", fontDialog.fontFamily)
+            JNote.setSettingsStr("last-used-formatting", "color", fontDialog.fontColor)
+            JNote.setSettingsInt("last-used-formatting", "fontIndex", fontDialog.fontIndex)
+            JNote.setSettingsInt("last-used-formatting", "size", fontDialog.fontSize)
+            JNote.setSettingsInt("last-used-formatting", "sizeIndex", fontDialog.fontSizeIndex)
+            JNote.setSettingsBool("last-used-formatting", "wrap", wrapText.checked)
+            JNote.setSettingsBool("last-used-formatting", "underline", fontDialog.underline)
+            JNote.setSettingsBool("last-used-formatting", "strikeout", fontDialog.strikeout)
+            JNote.setSettingsBool("last-used-formatting", "bold", fontDialog.bold)
+            JNote.setSettingsBool("last-used-formatting", "italic",fontDialog.italic)
+            JNote.addComments()
             windowM.closing = true
             windowM.close()
       }
@@ -824,7 +811,7 @@ ApplicationWindow{
         onAccepted: {
             fileOpenDialog.path = fileUrl.toString()
             fileOpenDialog.path = fileOpenDialog.path.replace(/^(file:\/{3})/,"")
-            mainTextArea.text = FileIO.fileOpen(fileOpenDialog.path)
+            mainTextArea.text = JNote.fileOpen(fileOpenDialog.path)
         }
     }
 
@@ -838,13 +825,13 @@ ApplicationWindow{
         onAccepted: {
             fileSaveDialog.path = fileUrl.toString()
             fileSaveDialog.path = fileSaveDialog.path.replace(/^(file:\/{3})/,"")
-            FileIO.fileSaveAs(fileSaveDialog.path, mainTextArea.text)
+            JNote.fileSaveAs(fileSaveDialog.path, mainTextArea.text)
         }
     }
 
     Shortcut{
         sequence: "Ctrl+N"
-        onActivated: FileIO.fileNew()
+        onActivated: JNote.fileNew()
     }
 
     Shortcut{
@@ -854,7 +841,7 @@ ApplicationWindow{
 
     Shortcut{
         sequence: "Ctrl+S"
-        onActivated: FileIO.fileSave(mainTextArea.text)
+        onActivated: JNote.fileSave(mainTextArea.text)
     }
 
     Shortcut{
@@ -907,10 +894,7 @@ ApplicationWindow{
 
         function onDateTimeInserted() {
             statusText.text = "Date and Time Inserted"
-        }
-    }
-    Connections{
-        target: FileIO
+        } 
 
         function onNewDocumentCreated() {
             windowM.title = windowM.winTitle + " - Untitled"
@@ -951,32 +935,19 @@ ApplicationWindow{
             windowM.title = windowM.winTitle + " - " + fileSaveDialog.path
         }
 
-        function onFatalError() {
-            statusText.text = "A Fatal Error Occured!"
-            fatalError.open()
-        }
-
         function onFileNotFound() {
             statusText.text = "JNote was unable to find that File!"
             fileNotFoundError.open()
         }
-    }
-
-    Connections {
-        target: Settings
 
         function onSettingsFileNotFound() {
             settingsNotFoundError.open()
             statusText.text = "Unable to Find Settings File"
         }
+
         function onSettingsError() {
             settingsError.open()
             statusText.text = "Fatal Error While Saving Settings"
-        }
-
-        function onFatalError() {
-            statusText.text = "A Fatal Error Occured!"
-            fatalError.open()
         }
     }
 

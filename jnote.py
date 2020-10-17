@@ -1,36 +1,31 @@
-from PyQt5.QtCore import QObject, pyqtSlot, pyqtSignal, pyqtProperty
 from mdx_gfm import GithubFlavoredMarkdownExtension
+from PyQt5.QtCore import pyqtSlot, pyqtProperty
 from version_parser.version import Version
 from requests import get, RequestException
 from markdown import markdown
+from fileio import FileIO
 import datetime
 import re
 
 
-class JNote(QObject):
+class JNote(FileIO):
 
-    """Base Class For JNote"""
-
-    settingsFileNotFound = pyqtSignal()
-    fileOpenSuccessful = pyqtSignal()
-    newDocumentCreated = pyqtSignal()
-    dateTimeInserted = pyqtSignal()
-    fileHandleError = pyqtSignal()
-    updateAvailable = pyqtSignal()
-    apiConnectError = pyqtSignal()
-    fileOpenError = pyqtSignal()
-    settingsError = pyqtSignal()
-    fileNotFound = pyqtSignal()
-    fileUntitled = pyqtSignal()
-    fileSavedAs = pyqtSignal()
-    fatalError = pyqtSignal()
-    fileSaved = pyqtSignal()
-    upToDate = pyqtSignal()
-    apiError = pyqtSignal()
+    """Class Exposed to QML"""
 
     def __init__(self, parent=None):
         super().__init__(parent)
+        self._about = ""
+        self._license = ""
         self._updateInfo = {}
+
+    @pyqtSlot()
+    def updateProperty(self):
+        with open("README.md", "r", encoding="utf-8") as aboutfile:
+            abouthtml = markdown(aboutfile.read())
+            self.about = abouthtml
+        with open("LICENSE.md", "r", encoding="utf-8") as licensefile:
+            licensehtml = markdown(licensefile.read())
+            self.license = licensehtml
 
     @pyqtSlot(bool)
     def checkUpdates(self, isStartup):
@@ -78,7 +73,7 @@ class JNote(QObject):
             self.fatalerror.emit()
         return datetimestr
 
-    @pyqtSlot(str, str, bool, bool, result=list)
+    @pyqtSlot(str, bool, bool, result=list)
     def findText(self, pattern, text, casesensitive, regex):
         """Find Given Text"""
         result = []
@@ -99,9 +94,29 @@ class JNote(QObject):
                     result.append([match.span()[0], match.span()[1]])
         return result
 
+    @pyqtProperty(str, constant=True)
+    def about(self):
+        return self._about
+
+    @pyqtProperty(str, constant=True)
+    def license(self):
+        return self._license
+
     @pyqtProperty("QVariant", constant=True)
     def updateInfo(self):
         return self._updateInfo
+
+    @about.setter
+    def about(self, arg):
+        if arg == self._about:
+            return
+        self._about = arg
+
+    @license.setter
+    def license(self, arg):
+        if arg == self._license:
+            return
+        self._license = arg
 
     @updateInfo.setter
     def updateInfo(self, arg):
