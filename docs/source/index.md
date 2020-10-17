@@ -22,6 +22,7 @@ To Get Started, See the [Getting Started](getting-started.md) Guide.
    components
    keyboard-shortcuts
    troubleshooting
+   api-reference/index
 
 ```
 
