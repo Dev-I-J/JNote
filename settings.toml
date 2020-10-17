@@ -19,7 +19,7 @@ bold = true
 italic = false
 
 [last-used-file]
-untitled = false
-path = "C:/Users/mjayaweera/Documents/Zoom/2020-10-12 09.09.14 Sanida Vidanagama's Personal Meeting Room 2298765493/meeting_saved_chat.txt"
+untitled = true
+path = ""
 text = ""
-encoding = "iso2022_jp_2004"
+encoding = "utf-8"

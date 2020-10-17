@@ -4,6 +4,8 @@
 [![Documentation Status](https://readthedocs.org/projects/jnote-notepad/badge/?version=latest)](https://jnote-notepad.readthedocs.io/en/latest/?badge=latest)
 [![Run on Repl.it](https://repl.it/badge/github/Dev-I-J/JNote)](https://repl.it/github/Dev-I-J/JNote)
 
+![JNote Logo](icons/logo.png)
+
 __JNote is a free NotePad__ application written in _Python and QML (PyQt5)._ Binaries are available for Windows and Mac, but you can _build from source_ for Linux (See Below).
 
 ## Features

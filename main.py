@@ -2,11 +2,7 @@ from PyQt5.QtQml import QQmlApplicationEngine
 from PyQt5.QtWidgets import QApplication
 from PyQt5.QtCore import QUrl
 from PyQt5.QtGui import QIcon
-
-from settings import Settings
-from fileio import FileIO
 from jnote import JNote
-
 import sys
 
 
@@ -19,8 +15,6 @@ def run():
     """
 
     jnote = JNote()
-    fileio = FileIO()
-    settings = Settings()
 
     app = QApplication(sys.argv)
     app.setWindowIcon(QIcon('icons/favicon.png'))
@@ -29,8 +23,6 @@ def run():
 
     engine = QQmlApplicationEngine()
     engine.rootContext().setContextProperty("JNote", jnote)
-    engine.rootContext().setContextProperty("FileIO", fileio)
-    engine.rootContext().setContextProperty("Settings", settings)
     engine.load(QUrl('main.qml'))
 
     if not engine.rootObjects():

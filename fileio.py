@@ -1,7 +1,8 @@
 from PyQt5.QtCore import pyqtSlot
 from settings import Settings
-from charamel import Detector
 from binaryornot import check
+import cchardet
+import chardet
 
 
 class FileIO(Settings):
@@ -15,7 +16,7 @@ class FileIO(Settings):
     def fileNew(self):
         """Update settings when a new document is created"""
         self.setSettingsBool("last-used-file", "untitled", True)
-        self.setSettingsStr("last-used-file", "encoding" "utf-8")
+        self.setSettingsStr("last-used-file", "encoding", "utf-8")
         self.setSettingsStr("last-used-file", "path", "")
         self.setSettingsStr("last-used-file", "text", "")
         self.newDocumentCreated.emit()
@@ -28,7 +29,7 @@ class FileIO(Settings):
             if not check.is_binary(fPath):
                 with open(fPath, "rb") as binaryFile:
                     binary = binaryFile.read()
-                    coding = Detector().detect(binary).value
+                    coding = cchardet.detect(binary)["encoding"]
                     fileText = binary.decode(coding)
                     self.setSettingsBool("last-used-file", "untitled", False)
                     self.setSettingsStr("last-used-file", "path", fPath)
@@ -36,8 +37,22 @@ class FileIO(Settings):
                     self.fileOpenSuccessful.emit()
             else:
                 self.fileOpenError.emit()
-        except UnicodeDecodeError:
-            self.fileOpenError.emit()
+        except (UnicodeDecodeError, LookupError):
+            try:
+                with open(fPath, "rb") as binaryFile:
+                    binary = binaryFile.read()
+                    coding = chardet.detect(binary)["encoding"]
+                    fileText = binary.decode(coding)
+                    self.setSettingsBool("last-used-file", "untitled", False)
+                    self.setSettingsStr("last-used-file", "path", fPath)
+                    self.setSettingsStr("last-used-file", "encoding", coding)
+                    self.fileOpenSuccessful.emit()
+            except (UnicodeDecodeError, LookupError):
+                self.fileOpenError.emit()
+            except IOError:
+                self.fileHandleError.emit()
+            except BaseException:
+                self.fatalError.emit()
         except FileNotFoundError:
             self.fileNotFound.emit()
         except IOError:

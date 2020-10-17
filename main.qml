@@ -365,7 +365,17 @@ ApplicationWindow{
                 readOnly: true
                 selectByMouse: true
                 selectByKeyboard: true
-                Layout.alignment: Qt.AlignHCenter
+                textFormat: TextEdit.RichText
+                wrapMode: TextArea.Wrap
+
+                Component.onCompleted: text = JNote.about
+                onLinkActivated: Qt.openUrlExternally(link)
+
+                MouseArea {
+                    anchors.fill: parent
+                    acceptedButtons: Qt.NoButton
+                    cursorShape: parent.hoveredLink ? Qt.PointingHandCursor : Qt.ArrowCursor
+                }
             }
             ScrollBar.vertical: ScrollBar { }
         }
@@ -385,7 +395,17 @@ ApplicationWindow{
                 readOnly: true
                 selectByMouse: true
                 selectByKeyboard: true
-                Layout.alignment: Qt.AlignHCenter
+                textFormat: TextEdit.RichText
+                wrapMode: TextArea.Wrap
+
+                Component.onCompleted: text = JNote.license
+                onLinkActivated: Qt.openUrlExternally(link)
+
+                MouseArea {
+                    anchors.fill: parent
+                    acceptedButtons: Qt.NoButton
+                    cursorShape: parent.hoveredLink ? Qt.PointingHandCursor : Qt.ArrowCursor
+                }
             }
             ScrollBar.vertical: ScrollBar { }
         }
@@ -400,23 +420,28 @@ ApplicationWindow{
         height: 600
         onYes: Qt.openUrlExternally("https://github.com/Dev-I-J/JNote/releases/latest")
 
-        ColumnLayout{
+        Flickable{
             anchors.fill: parent
-
-            Image{
-                source: "icons/logo.png"
-                Layout.alignment: Qt.AlignHCenter
-            }
-
-            Text{
+            TextArea.flickable: TextArea {
                 id: updateText
                 property string newVersion: ""
                 property string currentVersion: ""
                 property string info: ""
                 property string date: ""
                 text: '<p>An Update is available for JNote.<br><br>Updates may contain bugfixes, security patches or new features.<br><br>You can see the details of the update below.<br><br>Current Version = ' + updateText.currentVersion + '<br>New Version = ' + updateText.newVersion + '<br>Published At = ' + updateText.date +'<br>' + updateText.info + '<br><br>Do You Want To Update?'
-                Layout.alignment: Qt.AlignHCenter
+                textFormat: TextEdit.RichText
+                wrapMode: TextArea.Wrap
+
+                onLinkActivated: Qt.openUrlExternally(link)
+
+                MouseArea {
+                    anchors.fill: parent
+                    acceptedButtons: Qt.NoButton // we don't want to eat clicks on the Text
+                    cursorShape: parent.hoveredLink ? Qt.PointingHandCursor : Qt.ArrowCursor
+                }
             }
+
+            ScrollBar.vertical: ScrollBar { }
         }
     }
 
@@ -894,7 +919,7 @@ ApplicationWindow{
 
         function onDateTimeInserted() {
             statusText.text = "Date and Time Inserted"
-        } 
+        }
 
         function onNewDocumentCreated() {
             windowM.title = windowM.winTitle + " - Untitled"
