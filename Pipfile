@@ -23,4 +23,4 @@ PyQt5 = "5.15.1"
 Markdown = "3.3"
 
 [requires]
-python_version = "3.9.0"
+python_version = "3.8.6"

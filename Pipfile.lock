@@ -1,11 +1,11 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "50a51a20cc85be0b5ae9a19fb4022f43a5515fb0648f8407a3bb5b57b412c9bd"
+            "sha256": "f6aa1fc1fc7edf51269101df40581a452c017954f1d4c0b9c2c8d98b0b4339eb"
         },
         "pipfile-spec": 6,
         "requires": {
-            "python_version": "3.9.0"
+            "python_version": "3.8.6"
         },
         "sources": [
             {
@@ -56,11 +56,11 @@
         },
         "markdown": {
             "hashes": [
-                "sha256:4f4172a4e989b97f96860fa434b89895069c576e2b537c4b4eed265266a7affc",
-                "sha256:fbb1ba54ca41e8991dc5a561d9c6f752f5e4546f8750e56413ea50f2385761d3"
+                "sha256:10db1204a6c4aff7c7cf3cf25cc02761703baea54b6fb5e2b9ce2c186d81116f",
+                "sha256:c3ce9ebb035c078cac0f2036068d054e7dc34354eeecc49c173c33c96b124af6"
             ],
             "index": "pypi",
-            "version": "==3.3"
+            "version": "==3.3.1"
         },
         "py-gfm": {
             "hashes": [
@@ -179,11 +179,11 @@
         },
         "colorama": {
             "hashes": [
-                "sha256:7d73d2a99753107a36ac6b455ee49046802e59d9d076ef8e47b61499fa29afff",
-                "sha256:e96da0d330793e2cb9485e9ddfd918d456036c7149416295932478192f4436a1"
+                "sha256:5941b2b48a20143d2267e95b1c2a7603ce057ee39fd88e7329b0c292aa16869b",
+                "sha256:9f47eda37229f68eee03b24b9748937c7dc3868f906e8ba69fbcbdd3bc5dc3e2"
             ],
             "markers": "sys_platform == 'win32'",
-            "version": "==0.4.3"
+            "version": "==0.4.4"
         },
         "commonmark": {
             "hashes": [
@@ -241,11 +241,11 @@
         },
         "markdown": {
             "hashes": [
-                "sha256:4f4172a4e989b97f96860fa434b89895069c576e2b537c4b4eed265266a7affc",
-                "sha256:fbb1ba54ca41e8991dc5a561d9c6f752f5e4546f8750e56413ea50f2385761d3"
+                "sha256:10db1204a6c4aff7c7cf3cf25cc02761703baea54b6fb5e2b9ce2c186d81116f",
+                "sha256:c3ce9ebb035c078cac0f2036068d054e7dc34354eeecc49c173c33c96b124af6"
             ],
             "index": "pypi",
-            "version": "==3.3"
+            "version": "==3.3.1"
         },
         "markupsafe": {
             "hashes": [
