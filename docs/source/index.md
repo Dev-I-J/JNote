@@ -1,10 +1,3 @@
-<!---
-   JNote documentation master file, created by
-   sphinx- on Thu Sep 24 16:35:44 2020.
-   You can adapt this file completely to your liking, but it should at least
-   contain the root `toctree` directive.
--->
-
 # Welcome to JNote's documentation
 
 JNote is a Free and Open-Source Note Pad Application.
