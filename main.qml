@@ -66,7 +66,7 @@ ApplicationWindow{
         }
         else {
             mainTextArea.text = JNote.openLastOpenFile()
-            statusText.text = "Document " + JNote.getSettings("last-used-file")["path"] + " Opened Successfuly"
+            statusText.text = "Document " + JNote.getSettings("last-used-file")["path"] + " Opened Successfully"
             windowM.title = windowM.winTitle + " - " + JNote.getSettings("last-used-file")["path"]
         }
         if (JNote.getSettings("last-used-formatting")["wrap"]) {
@@ -200,6 +200,12 @@ ApplicationWindow{
                 text: "License"
                 icon.source: "icons/software-license.png"
                 onTriggered: licenseDialog.open()
+            }
+
+            MenuItem{
+                text: "Documentation"
+                icon.source: "icons/documentation.png"
+                onTriggered: Qt.openUrlExternally("https://jnote-notepad.readthedocs.io")
             }
 
             MenuItem{
@@ -712,15 +718,15 @@ ApplicationWindow{
     MessageDialog{
         id: openError
         title: "Cannot Open File"
-        text: "An Error Occured While Opening the File Because The File Type Is not Supported. Try a different File"
+        text: "An Error Occurred While Opening the File Because The File Type Is not Supported. Try a different File"
         icon: StandardIcon.Warning
         visible: false
     }
 
     MessageDialog{
         id: handleError
-        title: "An Unknown Error Occured"
-        text: "An Unknown Error Occured While Handeling The Document"
+        title: "An Unknown Error Occurred"
+        text: "An Unknown Error Occurred While Handling The Document"
         icon: StandardIcon.Warning
         visible: false
     }
@@ -737,7 +743,7 @@ ApplicationWindow{
     MessageDialog{
         id: fatalError
         title: "Fatal Error"
-        text: "A Fatal Error Occured!"
+        text: "A Fatal Error Occurred!"
         icon: StandardIcon.Critical
         onAccepted: Qt.quit()
         onRejected: Qt.quit()
@@ -755,7 +761,7 @@ ApplicationWindow{
     MessageDialog{
         id: apiConnectError
         title: "Failed To Connect to API"
-        text: "JNote was unable to conect to the GitHub API to check for new updates"
+        text: "JNote was unable to connect to the GitHub API to check for new updates"
         icon: StandardIcon.Warning
         visible: false
     }
@@ -771,7 +777,7 @@ ApplicationWindow{
     MessageDialog{
         id: settingsError
         title: "Failed To Save Settings"
-        text: "A Fatal Error Occured While JNote is Saving Your Preferenses"
+        text: "A Fatal Error Occurred While JNote is Saving Your Preferences"
         icon: StandardIcon.Critical
         onAccepted: Qt.quit()
         onRejected: Qt.quit()
@@ -909,11 +915,11 @@ ApplicationWindow{
 
         function onApiError() {
             apiError.open()
-            statusText.text = "An Error Occured with the GitHub API"
+            statusText.text = "An Error Occurred with the GitHub API"
         }
 
         function onFatalError() {
-            statusText.text = "A Fatal Error Occured!"
+            statusText.text = "A Fatal Error Occurred!"
             fatalError.open()
         }
 
@@ -928,12 +934,12 @@ ApplicationWindow{
         }
 
         function onFileOpenSuccessful() {
-            statusText.text = "Document " + fileOpenDialog.path + " Opened Successfuly"
+            statusText.text = "Document " + fileOpenDialog.path + " Opened Successfully"
             windowM.title = windowM.winTitle + " - " + fileOpenDialog.path
         }
 
         function onFileHandleError() {
-            statusText.text = "An Unknown Error Occured While Handeling The Document"
+            statusText.text = "An Unknown Error Occurred While Handling The Document"
             windowM.title = windowM.winTitle + " - Untitled"
             mainTextArea.text = ""
             handleError.open()
