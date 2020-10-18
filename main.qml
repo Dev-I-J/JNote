@@ -717,7 +717,7 @@ ApplicationWindow{
 
     MessageDialog{
         id: openError
-        title: "Cannot Open File"
+        title: "Unsupported File Type"
         text: "An Error Occurred While Opening the File Because The File Type Is not Supported. Try a different File"
         icon: StandardIcon.Warning
         visible: false
@@ -725,7 +725,7 @@ ApplicationWindow{
 
     MessageDialog{
         id: handleError
-        title: "An Unknown Error Occurred"
+        title: "Unknown Error While Opening File"
         text: "An Unknown Error Occurred While Handling The Document"
         icon: StandardIcon.Warning
         visible: false

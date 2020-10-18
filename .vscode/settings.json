@@ -1,3 +1,15 @@
 {
-    "restructuredtext.confPath": "${workspaceFolder}\\docs"
+    "markdownlint.config": {
+
+        "default": true,
+        "MD033": {
+            "allowed_elements": ["kbd", "span"]
+        }
+    },
+    "cSpell.userWords": [
+        "enablement"
+    ],
+    "cSpell.enableFiletypes": [
+        "qml"
+    ]
 }

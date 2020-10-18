@@ -15,11 +15,14 @@ class FileIO(Settings):
     @pyqtSlot()
     def fileNew(self):
         """Update settings when a new document is created"""
-        self.setSettingsBool("last-used-file", "untitled", True)
-        self.setSettingsStr("last-used-file", "encoding", "utf-8")
-        self.setSettingsStr("last-used-file", "path", "")
-        self.setSettingsStr("last-used-file", "text", "")
-        self.newDocumentCreated.emit()
+        try:
+            self.setSettingsBool("last-used-file", "untitled", True)
+            self.setSettingsStr("last-used-file", "encoding", "utf-8")
+            self.setSettingsStr("last-used-file", "path", "")
+            self.setSettingsStr("last-used-file", "text", "")
+            self.newDocumentCreated.emit()
+        except BaseException:
+            self.fatalError.emit()
 
     @pyqtSlot(str, result=str)
     def fileOpen(self, fPath):

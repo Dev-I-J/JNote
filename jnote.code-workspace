@@ -48,6 +48,8 @@
 			"toctree",
 			"undos",
 			"zipfiles"
-		]
+		],
+		"travis.username": "Dev-I-J",
+		"travis.repository": "JNote"
 	}
 }

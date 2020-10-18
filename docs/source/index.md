@@ -1,5 +1,7 @@
 # Welcome to JNote's documentation
 
+<span style="font-size:larger;">ATTENTION: THESE DOCS AREN'T COMPLETE!!</span>
+
 JNote is a Free and Open-Source Note Pad Application.
 To Get Started, See the [Getting Started](getting-started.md) Guide.
 
