@@ -30,4 +30,6 @@ Also displays a [Status Bar](components.md#Status-Bar) message.
 | Dialog Title | Meaning |
 | :---: | :---: |
 | Unsupported File Type| Selected a binary file or a file that uses an unsupported encoding |
-| Unknown Error While Opening File | An unknown Error that had occurred while handling the file |
+| Unknown Error While Opening File | An unknown error that had occurred while handling the file |
+| File Not Found | The file was not found |
+| Fatal Error | Fatal internal error |
