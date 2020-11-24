@@ -24,7 +24,7 @@ jobs:
         - choco install python --version 3.7.6
         - pip3 install --upgrade shovel
 
-install: shovel app.installDeps
+install: shovel app.installDeps pip3
 
 before_script: shovel app.buildAppDebug
 

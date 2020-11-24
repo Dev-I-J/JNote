@@ -6,9 +6,9 @@ from shutil import rmtree, copyfile, copytree
 
 
 @task
-def installDeps():
+def installDeps(pipPath="pip"):
     """Install Dependencies"""
-    shell("pip install --upgrade pipenv")
+    shell("%s install --upgrade pipenv" % pipPath)
     shell("pipenv install --dev")
 
 
@@ -81,23 +81,23 @@ def buildAppDebug():
 
 
 @task
-def assembleConsoleRun():
+def assembleConsoleRun(pip="pip"):
     """Install Dependencies and Run In Console"""
-    installDeps()
+    installDeps(pip)
     runConsole()
 
 
 @task
-def assembleWindowRun():
+def assembleWindowRun(pip="pip"):
     """Install Dependencies and Run Without Console"""
-    installDeps()
+    installDeps(pip)
     runWindow()
 
 
 @task
-def assembleAppRun():
+def assembleAppRun(pip="pip"):
     """Install Dependencies, Clean, Build and Run Executable"""
-    installDeps()
+    installDeps(pip)
     cleanApp()
     buildApp()
     runApp()

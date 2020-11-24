@@ -8,9 +8,9 @@ from webbrowser import open_new_tab
 
 
 @task
-def installDevDeps():
+def installDevDeps(pipPath="pip"):
     """Install Dependencies For Building Docs"""
-    shell("pip install pipenv")
+    shell("%s install pipenv" % pipPath)
     shell("pipenv install --dev")
 
 
@@ -37,9 +37,9 @@ def buildDoc():
 
 
 @task
-def assembleDocRun():
+def assembleDocRun(pip="pip"):
     """Install Dependencies, Clean, Build And Open Docs"""
-    installDevDeps()
+    installDevDeps(pip)
     cleanDoc()
     buildDoc()
     runDoc()
