@@ -25,7 +25,7 @@ class JNote(FileIO):
             self.about = abouthtml
         with open("LICENSE.md", "r", encoding="utf-8") as licensefile:
             licensehtml = markdown(licensefile.read())
-            self.license = licensehtml
+            self.gplLicense = licensehtml
 
     @pyqtSlot(bool)
     def checkUpdates(self, isStartup):
@@ -99,7 +99,7 @@ class JNote(FileIO):
         return self._about
 
     @pyqtProperty(str, constant=True)
-    def license(self):
+    def gplLicense(self):
         return self._license
 
     @pyqtProperty("QVariant", constant=True)
@@ -112,8 +112,8 @@ class JNote(FileIO):
             return
         self._about = arg
 
-    @license.setter
-    def license(self, arg):
+    @gplLicense.setter
+    def gplLicense(self, arg):
         if arg == self._license:
             return
         self._license = arg

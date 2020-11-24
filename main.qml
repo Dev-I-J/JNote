@@ -397,14 +397,14 @@ ApplicationWindow{
         Flickable{
             anchors.fill: parent
             TextArea.flickable: TextArea{
-                text: JNote.license
+                text: JNote.gplLicense
                 readOnly: true
                 selectByMouse: true
                 selectByKeyboard: true
                 textFormat: TextEdit.RichText
                 wrapMode: TextArea.Wrap
 
-                Component.onCompleted: text = JNote.license
+                Component.onCompleted: text = JNote.gplLicense
                 onLinkActivated: Qt.openUrlExternally(link)
 
                 MouseArea {
