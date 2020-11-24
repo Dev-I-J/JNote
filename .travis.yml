@@ -7,7 +7,7 @@ jobs:
       os: osx
       osx_image: xcode11
       before_install: 
-        - pip3 install --upgrade pipenv
+        - pip3 install --upgrade shovel
       
     - name: PyInstaller Build - Windows 32 bit
       os: windows
