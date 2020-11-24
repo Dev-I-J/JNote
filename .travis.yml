@@ -1,15 +1,8 @@
 language: shell
 if: commit_message =~ /\[build\]/
 
-addons:
-  homebrew:
-    packages:
-    - python@3.9
-
 jobs:
-
   include:
-
     - name: PyInstaller Build - Mac
       os: osx
       osx_image: xcode11
@@ -18,34 +11,25 @@ jobs:
       
     - name: PyInstaller Build - Windows 32 bit
       os: windows
-      env: PATH=/c/Python39:/c/Python39/Scripts:$PATH
+      env: PATH=/c/Python37:/c/Python37/Scripts:$PATH
       before_install: 
-        - choco install python --version 3.9.0 --forcex86
-        - pip3 install --upgrade pipenv
+        - choco install python --version 3.7.6 --forcex86
+        - pip3 install --upgrade shovel
 
     - name: PyInstaller Build - Windows 64 bit
       os: windows
       language: shell
-      env: PATH=/c/Python39:/c/Python39/Scripts:$PATH
+      env: PATH=/c/Python37:/c/Python37/Scripts:$PATH
       before_install: 
-        - choco install python --version 3.9.0
-        - pip3 install --upgrade pipenv
+        - choco install python --version 3.7.6
+        - pip3 install --upgrade shovel
 
-install:
-  - pipenv install --dev
+install: shovel app.installDeps
 
-before_script:
-  - cp main.py .test/main.py
-  - cp fileio.py .test/fileio.py
-  - cp settings.py .test/settings.py
-  - cp main.qml .test/main.qml
-  - cp settings.toml .test/settings.toml
-  - cp -r icons .test/icons
-  - pipenv run PyInstaller .test/JNote.spec
+before_script: shovel app.buildAppDebug
 
-script: dist/JNote/JNote
+script: shovel app.runAppDebug
 
 after_failure: travis_terminate 1
 
-after_success:
-  - rm -rdv dist/JNote
+after_success: shovel app.cleanAppDebug
