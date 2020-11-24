@@ -53,6 +53,9 @@
 			"zipfiles"
 		],
 		"travis.username": "Dev-I-J",
-		"travis.repository": "JNote"
+		"travis.repository": "JNote",
+		"yaml.schemas": {
+        	"https://raw.githubusercontent.com/travis-ci/travis-yml/master/schema.json": [".travis.yml"]
+		}
 	}
 }
