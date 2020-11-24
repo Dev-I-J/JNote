@@ -11,6 +11,8 @@ sphinx = "3.2.1"
 sphinx-rtd-theme = "0.5.0"
 sphinx-markdown-tables = "0.0.15"
 sphinx-sitemap = "2.2.0"
+shovel = "0.4.0"
+rope = "0.18.0"
 
 [packages]
 toml = "0.10.1"
@@ -24,4 +26,4 @@ PyQt5 = "5.15.1"
 Markdown = "3.3"
 
 [requires]
-python_version = "3.8.6"
+python_version = "3.7.6"

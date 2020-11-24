@@ -8,6 +8,7 @@
 		"cSpell.words": [
 			"Arial",
 			"Casesensitive",
+			"Deps",
 			"Flickable",
 			"Structify",
 			"VCSs",
@@ -19,6 +20,7 @@
 			"cchardet",
 			"charamel",
 			"chardet",
+			"chdir",
 			"choco",
 			"datas",
 			"deadsnakes",
@@ -42,6 +44,7 @@
 			"pipenv",
 			"prefs",
 			"pyqt",
+			"pythonw",
 			"quickstart",
 			"recommonmark",
 			"tkinter",

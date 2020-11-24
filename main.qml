@@ -661,6 +661,7 @@ ApplicationWindow{
         title: "Find"
         width: 200
         height: 100
+        modality: Qt.NonModal
         standardButtons: StandardButton.NoButton
         visible: false
 
