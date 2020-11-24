@@ -46,7 +46,7 @@ Follow the below steps to install JNote according to your OS.
     sudo apt-get install software-properties-common
     sudo add-apt-repository ppa:deadsnakes/ppa
     sudo apt-get update
-    sudo apt-get install python3.9
+    sudo apt-get install python3.7.6
     ```
 
 3. Install `pip`:
@@ -56,31 +56,22 @@ Follow the below steps to install JNote according to your OS.
     python3 get-pip.py
     ```
 
-4. Setup Virtualenv:
+4. Install `shovel`:
 
     ```bash
-    python3 -m pip install virtualenv
-    python3 -m virtualenv buildenv
-    source buildenv/bin/activate
+    python3 -m pip install shovel
     ```
 
-5. Install Dependencies:
+5. Build and Run JNote:
 
     ```bash
-    python3 -m pip install PyInstaller
-    python3 -m pip install -r requirements.txt
+    python3 -m shovel app.assembleAppRun
     ```
 
-6. Build JNote:
+6. Run JNote After Building:
 
     ```bash
-    python3 -m PyInstaller JNote.spec
-    ```
-
-7. Run JNote:
-
-    ```bash
-    dist/JNote/JNote
+    ./dist/JNote/JNote
     ```
 
 #### Full Script
@@ -93,16 +84,11 @@ cd JNote
 sudo apt-get install software-properties-common
 sudo add-apt-repository ppa:deadsnakes/ppa
 sudo apt-get update
-sudo apt-get install python3.9
+sudo apt-get install python3.7.6
 curl https://bootstrap.pypa.io/get-pip.py -o get-pip.py
 python3 get-pip.py
-python3 -m pip install virtualenv
-python3 -m virtualenv buildenv
-source buildenv/bin/activate
-python3 -m pip install PyInstaller
-python3 -m pip install -r requirements.txt
-python3 -m PyInstaller JNote.spec
-dist/JNote/JNote
+python3 -m pip install shovel
+python3 -m shovel app.assembleAppRun
 ```
 
 ## Using JNote
