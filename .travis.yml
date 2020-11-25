@@ -1,5 +1,10 @@
 language: shell
 
+addons:
+  homebrew:
+    packages:
+    - python@3.7.6
+
 jobs:
   include:
     - name: PyInstaller Build - Mac
