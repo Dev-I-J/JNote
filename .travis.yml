@@ -6,8 +6,8 @@ jobs:
       if: commit_message =~ /\[build\]/ || commit_message =~ /\[mac\]/
       os: osx
       osx_image: xcode11
-      before_install: 
-        - pip3 install --upgrade shovel
+      before_install: pip3 install --upgrade shovel
+      before_deploy: shovel app.publishApp
       
     - name: PyInstaller Build - Windows 32 bit
       if: commit_message =~ /\[build\]/ || commit_message =~ /\[win32\]/
@@ -16,6 +16,7 @@ jobs:
       before_install: 
         - choco install python --version 3.7.6 --forcex86
         - pip3 install --upgrade shovel
+      before_deploy: shovel app.publishApp
 
     - name: PyInstaller Build - Windows 64 bit
       if: commit_message =~ /\[build\]/ || commit_message =~ /\[win64\]/
@@ -24,6 +25,7 @@ jobs:
       before_install: 
         - choco install python --version 3.7.6
         - pip3 install --upgrade shovel
+      before_deploy: shovel app.publishApp
 
 install: shovel app.installDeps pip3
 
@@ -36,3 +38,15 @@ after_failure: travis_terminate 1
 after_success:
   - shovel app.cleanAppDebug
   - shovel app.buildApp
+
+deploy:
+  provider: releases
+  api_key: $RELEASE_TOKEN
+  file_glob: true
+  file: dist/JNote_*.zip
+  skip_cleanup: true
+  draft: true
+  on:
+    tags: true
+
+after_deploy: shovel app.cleanApp

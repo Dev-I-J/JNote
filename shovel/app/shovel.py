@@ -2,7 +2,7 @@ from shovel import task
 
 from os import chdir, remove
 from subprocess import run as shell
-from shutil import rmtree, copyfile, copytree
+from shutil import rmtree, copyfile, copytree, make_archive
 
 
 @task
@@ -78,6 +78,17 @@ def buildAppDebug():
     chdir(".test")
     shell(["pipenv", "run", "PyInstaller", "JNote.spec"])
     chdir("../")
+
+
+@task
+def publishApp(platform):
+    if platform == "darwin":
+        make_archive("./dist/JNote_Mac", "zip", "./dist/", "JNote.app")
+    else:
+        make_archive(
+            "./dist/JNote_{}".format(platform),
+            "zip", "./dist/", "JNote"
+        )
 
 
 @task
