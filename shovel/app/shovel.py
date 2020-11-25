@@ -8,32 +8,32 @@ from shutil import rmtree, copyfile, copytree
 @task
 def installDeps(pipPath="pip"):
     """Install Dependencies"""
-    shell("{} install --upgrade pipenv".format(pipPath))
-    shell("pipenv install --dev")
+    shell([pipPath, "install", "--upgrade", "shovel"])
+    shell(["pipenv", "install", "--dev"])
 
 
 @task
 def runConsole():
     """Run App In Console (python)"""
-    shell("pipenv run python main.py")
+    shell(["pipenv", "run", "python", "main.py"])
 
 
 @task
 def runWindow():
     """Run Application Without Console (pythonw)"""
-    shell("pipenv run pythonw main.py")
+    shell(["pipenv", "run", "pythonw", "main.py"])
 
 
 @task
 def runApp():
     """Run Executable Built By PyInstaller"""
-    shell("dist/JNote/JNote")
+    shell(["./dist/JNote/JNote"])
 
 
 @task
 def runAppDebug():
     """Run Debug Executable Built By PyInstaller"""
-    shell(".test/dist/JNote/JNote")
+    shell(["./.test/dist/JNote/JNote"])
 
 
 @task
@@ -61,7 +61,7 @@ def cleanAppDebug():
 @task
 def buildApp():
     """Build With PyInstaller"""
-    shell("pipenv run PyInstaller JNote.spec")
+    shell(["pipenv", "run", "PyInstaller", "JNote.spec"])
 
 
 @task
@@ -76,7 +76,7 @@ def buildAppDebug():
     copyfile("LICENSE.md", ".test/LICENSE.md")
     copytree("icons", ".test/icons")
     chdir(".test")
-    shell("pipenv run PyInstaller JNote.spec")
+    shell(["pipenv", "run", "PyInstaller", "JNote.spec"])
     chdir("../")
 
 
