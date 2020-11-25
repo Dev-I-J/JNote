@@ -38,4 +38,6 @@ script: shovel app.runAppDebug
 
 after_failure: travis_terminate 1
 
-after_success: shovel app.cleanAppDebug
+after_success:
+  - shovel app.cleanAppDebug
+  - shovel app.buildApp
