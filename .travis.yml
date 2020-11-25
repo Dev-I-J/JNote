@@ -1,16 +1,15 @@
 language: shell
+if: commit_message =~ /\[build\]/
 
 jobs:
   include:
     - name: PyInstaller Build - Mac
-      if: commit_message =~ /\[build\]/ || commit_message =~ /\[mac\]/
       os: osx
       osx_image: xcode11
       before_install: 
         - pip3 install --upgrade shovel
       
     - name: PyInstaller Build - Windows 32 bit
-      if: commit_message =~ /\[build\]/ || commit_message =~ /\[win32\]/
       os: windows
       env: PATH=/c/Python37:/c/Python37/Scripts:$PATH
       before_install: 
@@ -18,8 +17,8 @@ jobs:
         - pip3 install --upgrade shovel
 
     - name: PyInstaller Build - Windows 64 bit
-      if: commit_message =~ /\[build\]/ || commit_message =~ /\[win64\]/
       os: windows
+      language: shell
       env: PATH=/c/Python37:/c/Python37/Scripts:$PATH
       before_install: 
         - choco install python --version 3.7.6
