@@ -8,7 +8,7 @@ from shutil import rmtree, copyfile, copytree
 @task
 def installDeps(pipPath="pip"):
     """Install Dependencies"""
-    shell([pipPath, "install", "--upgrade", "shovel"])
+    shell([pipPath, "install", "--upgrade", "pipenv"])
     shell(["pipenv", "install", "--dev"])
 
 
