@@ -82,6 +82,7 @@ def buildAppDebug():
 
 @task
 def publishApp(platform):
+    """Put Builded Application In A Zip File Matching The Platform"""
     if platform == "darwin":
         make_archive("./dist/JNote_Mac", "zip", "./dist/", "JNote.app")
     else:
