@@ -44,16 +44,6 @@ def cleanApp():
 
 
 @task
-def cleanAppFolder(platform):
-    """Clean PyInstaller Build Output"""
-    if platform == "Mac":
-        rmtree('./dist/JNote.app', ignore_errors=True)
-    else:
-        rmtree('./dist/JNote', ignore_errors=True)
-    rmtree('./build', ignore_errors=True)
-
-
-@task
 def cleanAppDebug():
     """Clean PyInstaller Debug Build Output"""
     rmtree('./.test/build', ignore_errors=True)
@@ -126,4 +116,4 @@ def assembleAppPublish(platform, pip="pip"):
     cleanApp()
     buildApp()
     publishApp(platform)
-    cleanAppFolder(platform)
+    cleanApp()
