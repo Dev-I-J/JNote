@@ -27,13 +27,13 @@ def runWindow():
 @task
 def runApp():
     """Run Executable Built By PyInstaller"""
-    shell(["./dist/JNote/JNote"])
+    shell("dist/JNote/JNote")
 
 
 @task
 def runAppDebug():
     """Run Debug Executable Built By PyInstaller"""
-    shell(["./.test/dist/JNote/JNote"])
+    shell(".test/dist/JNote/JNote")
 
 
 @task
@@ -93,7 +93,7 @@ def buildAppDebug():
 @task
 def publishApp(platform):
     """Put Builded Application In A Zip File Matching The Platform"""
-    shell("7z a JNote_{}.zip ./dist/*".format(platform))
+    shell(["7z", "a", "JNote_{}.zip".format(platform), "./dist/*"])
 
 
 @task
