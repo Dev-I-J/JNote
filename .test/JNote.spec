@@ -15,6 +15,8 @@ excluded_libs = [
 data = [
     ("main.qml", "."),
     ("settings.toml", "."),
+    ("LICENSE.md", "."),
+    ("README.md", "."),
     ("icons", "icons")
 ]
 

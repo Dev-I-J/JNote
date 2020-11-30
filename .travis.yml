@@ -1,0 +1,59 @@
+language: shell
+
+addons:
+  homebrew:
+    packages:
+      - p7zip
+
+jobs:
+  include:
+    - name: PyInstaller Build - Mac
+      if: commit_message =~ /\[build\]/ || commit_message =~ /\[mac\]/
+      os: osx
+      osx_image: xcode11
+      before_install: pip3 install --upgrade shovel
+      before_deploy: shovel app.publishApp Mac
+      
+    - name: PyInstaller Build - Windows 32 bit
+      if: commit_message =~ /\[build\]/ || commit_message =~ /\[win32\]/
+      os: windows
+      env: PATH=/c/Python37:/c/Python37/Scripts:$PATH
+      before_install: 
+        - choco install python --version 3.7.6 --forcex86
+        - choco install 7zip --forcex86
+        - pip3 install --upgrade shovel
+      before_deploy: shovel app.publishApp Windows_32bit
+
+    - name: PyInstaller Build - Windows 64 bit
+      if: commit_message =~ /\[build\]/ || commit_message =~ /\[win64\]/
+      os: windows
+      env: PATH=/c/Python37:/c/Python37/Scripts:$PATH
+      before_install: 
+        - choco install python --version 3.7.6
+        - choco install 7zip
+        - pip3 install --upgrade shovel
+      before_deploy: shovel app.publishApp Windows_64bit
+
+install: shovel app.installDeps pip3
+
+before_script: shovel app.buildAppDebug
+
+script: shovel app.runAppDebug
+
+after_failure: travis_terminate 1
+
+after_success:
+  - shovel app.cleanAppDebug
+  - shovel app.buildApp
+
+deploy:
+  provider: releases
+  api_key: $RELEASE_TOKEN
+  file_glob: true
+  file: JNote_*.zip
+  skip_cleanup: true
+  draft: true
+  on:
+    tags: true
+
+after_deploy: shovel app.cleanApp
