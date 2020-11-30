@@ -93,7 +93,7 @@ def buildAppDebug():
 @task
 def publishApp(platform):
     """Put Builded Application In A Zip File Matching The Platform"""
-    shell("7z a JNote_{}.zip ./dist/*")
+    shell("7z a JNote_{}.zip ./dist/*".format(platform))
 
 
 @task
