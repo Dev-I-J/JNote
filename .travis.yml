@@ -1,5 +1,10 @@
 language: shell
 
+addons:
+  homebrew:
+    packages:
+      - p7zip
+
 jobs:
   include:
     - name: PyInstaller Build - Mac
@@ -15,6 +20,7 @@ jobs:
       env: PATH=/c/Python37:/c/Python37/Scripts:$PATH
       before_install: 
         - choco install python --version 3.7.6 --forcex86
+        - choco install 7zip --forcex86
         - pip3 install --upgrade shovel
       before_deploy: shovel app.publishApp Windows32bit
 
@@ -24,6 +30,7 @@ jobs:
       env: PATH=/c/Python37:/c/Python37/Scripts:$PATH
       before_install: 
         - choco install python --version 3.7.6
+        - choco install 7zip
         - pip3 install --upgrade shovel
       before_deploy: shovel app.publishApp Windows64bit
 
@@ -39,11 +46,13 @@ after_success:
   - shovel app.cleanAppDebug
   - shovel app.buildApp
 
+before_deploy: shovel app.publishApp
+
 deploy:
   provider: releases
   api_key: $RELEASE_TOKEN
   file_glob: true
-  file: dist/JNote_*.zip
+  file: JNote_*.zip
   skip_cleanup: true
   draft: true
   on:
