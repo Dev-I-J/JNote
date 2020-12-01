@@ -23,19 +23,18 @@ class JNote(FileIO):
         try:
             url = "https://api.github.com/repos/Dev-I-J/JNote/releases/latest"
             with get(url) as r:
-                currentVersionStr = "v1.5.0"
+                currentVersionStr = "v1.5.1"
                 currentVersion = Version(currentVersionStr)
                 newVersionStr = r.json()['tag_name']
                 newVersion = Version(newVersionStr)
                 if currentVersion < newVersion:
-                    raw_info = markdown(r.json()['body'], extensions=[
+                    info = markdown(r.json()['body'], extensions=[
                         GithubFlavoredMarkdownExtension()
                     ])
-                    details, sep, exclude = raw_info.partition("Package Table")
                     date = r.json()['published_at'][0:10]
                     self.updateInfo["newVersion"] = newVersionStr
                     self.updateInfo["currentVersion"] = currentVersionStr
-                    self.updateInfo["details"] = details
+                    self.updateInfo["details"] = info
                     self.updateInfo["date"] = date
                     self.updateAvailable.emit()
                 else:
