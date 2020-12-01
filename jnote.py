@@ -14,18 +14,7 @@ class JNote(FileIO):
 
     def __init__(self, parent=None):
         super().__init__(parent)
-        self._about = ""
-        self._license = ""
         self._updateInfo = {}
-
-    @pyqtSlot()
-    def updateProperty(self):
-        with open("README.md", "r", encoding="utf-8") as aboutfile:
-            abouthtml = markdown(aboutfile.read())
-            self.about = abouthtml
-        with open("LICENSE.md", "r", encoding="utf-8") as licensefile:
-            licensehtml = markdown(licensefile.read())
-            self.gplLicense = licensehtml
 
     @pyqtSlot(bool)
     def checkUpdates(self, isStartup):
@@ -60,19 +49,6 @@ class JNote(FileIO):
         except BaseException:
             self.fatalError.emit()
 
-    @pyqtSlot(result=str)
-    def insertDateTime(self):
-        """Get Current Date and Time"""
-
-        datetimestr = ""
-        try:
-            dtobject = datetime.datetime.now()
-            datetimestr = dtobject.strftime("%I:%M %p %d/%m/%Y")
-            self.dateTimeInserted.emit()
-        except BaseException:
-            self.fatalerror.emit()
-        return datetimestr
-
     @pyqtSlot(str, str, bool, bool, result=list)
     def findText(self, pattern, text, casesensitive, regex):
         """Find Given Text"""
@@ -96,30 +72,48 @@ class JNote(FileIO):
 
     @pyqtProperty(str, constant=True)
     def about(self):
-        return self._about
+        """About JNote"""
+        try:
+            with open("README.md", "r", encoding="utf-8") as aboutfile:
+                abouthtml = markdown(aboutfile.read())
+                return abouthtml
+        except FileNotFoundError:
+            self.readmeFileNotFound.emit()
+            return "README.md Not Found."
+        except BaseException:
+            self.fatalError.emit()
+            return ""
 
     @pyqtProperty(str, constant=True)
     def gplLicense(self):
-        return self._license
+        """GNU GPL License"""
+        try:
+            with open("LICENSE.md", "r", encoding="utf-8") as licensefile:
+                licensehtml = markdown(licensefile.read())
+                return licensehtml
+        except FileNotFoundError:
+            self.licenseFileNotFound.emit()
+            return "LICENSE.md Not Found."
+        except BaseException:
+            self.fatalError.emit()
+            return ""
 
     @pyqtProperty("QVariant", constant=True)
     def updateInfo(self):
+        """Update Information"""
         return self._updateInfo
 
-    @about.setter
-    def about(self, arg):
-        if arg == self._about:
-            return
-        self._about = arg
-
-    @gplLicense.setter
-    def gplLicense(self, arg):
-        if arg == self._license:
-            return
-        self._license = arg
+    @pyqtProperty(str)
+    def dateTime(self):
+        try:
+            dtobject = datetime.datetime.now()
+            datetimestr = dtobject.strftime("%I:%M %p %d/%m/%Y")
+            self.dateTimeInserted.emit()
+            return datetimestr
+        except BaseException:
+            self.fatalerror.emit()
+            return ""
 
     @updateInfo.setter
     def updateInfo(self, arg):
-        if arg == self._updateInfo:
-            return
         self._updateInfo = arg

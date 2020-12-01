@@ -9,6 +9,8 @@ class Signals(QObject):
         super().__init__(parent)
 
     settingsFileNotFound = pyqtSignal()
+    licenseFileNotFound = pyqtSignal()
+    readmeFileNotFound = pyqtSignal()
     fileOpenSuccessful = pyqtSignal()
     newDocumentCreated = pyqtSignal()
     dateTimeInserted = pyqtSignal()

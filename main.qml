@@ -14,13 +14,10 @@ ApplicationWindow{
 
     Component.onCompleted: {
         JNote.checkUpdates(true)
-        JNote.updateProperty()
-
         var tempSizeModel = new Array()
         for (var i=8; i<=100; i++) {
             tempSizeModel.push(i)
         }
-
         sizeSelector.model = tempSizeModel
         fontSelector.currentIndex = JNote.getSettings("last-used-formatting")["fontIndex"]
         sizeSelector.currentIndex = JNote.getSettings("last-used-formatting")["sizeIndex"]
@@ -161,7 +158,7 @@ ApplicationWindow{
             MenuItem{
                 text: "Insert Date and Time"
                 icon.source: "icons/date-time.png"
-                onTriggered: mainTextArea.text += JNote.insertDateTime()
+                onTriggered: mainTextArea.text += JNote.dateTime
             }
 
             MenuItem{
@@ -788,10 +785,26 @@ ApplicationWindow{
     MessageDialog{
         id: settingsNotFoundError
         title: "Failed To Find Settings File"
-        text: "JNote Was Not Able To Find settings.json. JNote will not work correctly without it!"
+        text: "JNote Was Not Able To Find settings.toml - JNote will not work correctly without it!"
         icon: StandardIcon.Critical
         onAccepted: Qt.quit()
         onRejected: Qt.quit()
+        visible: false
+    }
+
+    MessageDialog{
+        id: readmeNotFoundError
+        title: "Failed To Find Readme File"
+        text: "JNote Was Not Able To Find README.md - JNote will not work correctly without it!"
+        icon: StandardIcon.Warning
+        visible: false
+    }
+    
+    MessageDialog{
+        id: licenseNotFoundError
+        title: "Failed To Find License File"
+        text: "JNote Was Not Able To Find LICENSE.md - JNote will not work correctly without it!"
+        icon: StandardIcon.Warning
         visible: false
     }
 
@@ -888,7 +901,7 @@ ApplicationWindow{
 
     Shortcut{
         sequence: "F5"
-        onActivated: mainTextArea.text += JNote.insertDateTime()
+        onActivated: mainTextArea.text += JNote.dateTime
     }
 
     Connections {
@@ -980,6 +993,16 @@ ApplicationWindow{
         function onSettingsError() {
             settingsError.open()
             statusText.text = "Fatal Error While Saving Settings"
+        }
+
+        function onReadmeFileNotFound() {
+            readmeNotFoundError.open()
+            statusText.text = "Unable to Find Readme File"
+        }
+
+        function onLicenseFileNotFound() {
+            licenseNotFoundError.open()
+            statusText.text = "Unable to Find License File"
         }
     }
 
