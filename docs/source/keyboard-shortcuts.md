@@ -7,7 +7,7 @@ This page has all the keyboard shortcuts of JNote.
 | Sequence | Action |
 |:---:|:---:|
 | <kbd>Ctrl</kbd> + <kbd>N</kbd> | [Create New Document](all-features.md#Create-New-Document) |
-| <kbd>Ctrl</kbd> + <kbd>O</kbd> | Open Existing File |
+| <kbd>Ctrl</kbd> + <kbd>O</kbd> | [Open File](all-features.md#Open-File) |
 | <kbd>Ctrl</kbd> + <kbd>S</kbd> | Save Changes |
 | <kbd>Ctrl</kbd> + <kbd>Sift</kbd> + <kbd>S</kbd> | Save File As |
 

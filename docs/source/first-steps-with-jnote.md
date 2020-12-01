@@ -15,10 +15,10 @@ After successfully starting JNote, you will see the JNote GUI (see below).
 
 ### Step 1: Create a New Document
 
-To use JNote properly, you should create a new document. You can do so by clicking 'File' and then 'New` in the [Menu Bar](components.md#Menu-Bar), or clicking 'New' in the [Tool Bar](components.md#Tool-Bar), or simply pressing <kbd>Ctrl</kbd> + <kbd>N</kbd>!
+To use JNote properly, you should create a new document. You can do so by clicking 'File' and then 'New` in the Menu Bar, or clicking 'New' in the Tool Bar, or simply pressing <kbd>Ctrl</kbd> + <kbd>N</kbd>!
 For more about keyboard shortcuts, see [Keyboard Shortcuts](keyboard-shortcuts.md).
 
-After successfully creating a new document, the Editing Area empties (if there were any text inside) and the message "New Document Created" appears in the [Status Bar](components.md#Status-Bar).
+After successfully creating a new document, the Editing Area empties (if there were any text inside) and the message "New Document Created" appears in the Status Bar.
 Now you can type any text you want! Let's type "Hello!!".
 
 [See the Docs](all-features.md#Create-New-Document) for this feature.
@@ -28,7 +28,7 @@ Now you can type any text you want! Let's type "Hello!!".
 For this example we will create a new folder called `JNote-Example` in your `Documents` folder.
 You can find the `Documents` folder in `~/Documents` for Mac and Linux, and `C:\Users\username\Documents` for Windows.
 
-After editing the new document you just created, you can save it in a new file by clicking 'File' and then 'Save as', or just click 'Save as' in the [Tool Bar](components.md#Tool-Bar).
+After editing the new document you just created, you can save it in a new file by clicking 'File' and then 'Save as', or just click 'Save as' in the Tool Bar.
 You can also press <kbd>Ctrl</kbd> + <kbd>Shift</kbd> + <kbd>S</kbd>.
 
 Then a File Dialog appears asking you to choose a location and a filename for your file.
@@ -42,11 +42,7 @@ A file with the name `myfile.txt` should appear in the `JNote-Examples` folder.
 ### Step 3: Closing JNote
 
 Now that we have done enough with JNote, we have to close it.
-You can do so by clicking the '&times;' button in the [Title Bar](components.md#Title-Bar), or click 'File' and then 'Exit' in the [Menu Bar](components.md#Menu-Bar).
-
-## Troubleshooting JNote
-
-For troubleshooting JNote, refer to the [Troubleshooting Guide](troubleshooting.md).
+You can do so by clicking the '&times;' button in the Title Bar, or click 'File' and then 'Exit' in the Menu Bar.
 
 ## All Features
 

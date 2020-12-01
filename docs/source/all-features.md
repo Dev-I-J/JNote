@@ -9,7 +9,7 @@ All the general features of JNote. Eg:- Create New Document, Open File, etc.
 ### Create New Document
 
 Creates a new document, ie:- Clears the Editing Area.
-Also displays the message "New Document Created" in The [Status Bar](components.md#Status-Bar).
+Also displays the message "New Document Created" in The Status Bar.
 
 #### Errors That Can Occur While Creating a New Document
 
@@ -23,7 +23,7 @@ If failed, a "Fatal Error" dialog will appear.
 
 Opens an Existing file.
 The opened file path is appended to the title like `JNote: A Free NotePad - /path/to/file.txt`.
-Also displays a [Status Bar](components.md#Status-Bar) message.
+Also displays a Status Bar message.
 
 #### Errors That Can Occur While Opening a File
 

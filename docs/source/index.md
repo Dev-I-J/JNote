@@ -1,6 +1,6 @@
 # Welcome to JNote's documentation
 
-<span style="font-size:larger;">ATTENTION: THESE DOCS AREN'T COMPLETE!!</span>
+**<span style="font-size:larger;">ATTENTION: THESE DOCS AREN'T COMPLETE!!</span>**
 
 JNote is a Free and Open-Source Note Pad Application.
 To Get Started, See the [Getting Started](getting-started.md) Guide.
@@ -65,6 +65,8 @@ Available [Here](https://github.com/Dev-I-J/JNote)
 * [`py-gfm`](https://pypi.org/project/py-gfm/) - GitHub Flavored Markdown Extension for `markdown` module.
 * [`markdown`](https://pypi.org/project/markdown/) - For Converting markdown from GitHub to HTML.
 * [`toml`](https://pypi.org/project/toml/) - For parsing the settings file.
+* [`cchardet`](https://pypi.org/project/cchardet/) - For Guessing File Encodings.
+* [`chardet`](https://pypi.org/project/chardet/) - For Guessing File Encodings If `cchardet` Fails.
 
 ### Coming Soon
 
@@ -74,4 +76,3 @@ These functionalities are scheduled to be shipped with the future major releases
 * Auto Updating,
 * Settings dialog to control your preferences,
 * Dark Mode!!
-quickstart
