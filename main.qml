@@ -821,7 +821,7 @@ ApplicationWindow{
         id: confirmExit
         title: "Confirm Exit"
         text: "Do You Really Want To Quit?"
-        icon: StandardIcon.Warning
+        icon: StandardIcon.Question
         standardButtons: Dialog.No | Dialog.Yes
         visible: false
         onAccepted: {
