@@ -46,7 +46,14 @@ exe = EXE(pyz,
           strip=False,
           upx=False,
           console=False, icon="icons/favicon.ico")
-coll = COLLECT(exe,
+
+if platform == "darwin":
+    app = BUNDLE(exe,
+         name='JNote.app',
+         icon="icons/favicon.icns",
+         bundle_identifier=None)
+else:
+    coll = COLLECT(exe,
                a.binaries,
                a.zipfiles,
                a.datas,
@@ -54,11 +61,3 @@ coll = COLLECT(exe,
                upx=False,
                upx_exclude=[],
                name='JNote')
-
-app = 0
-
-if platform == "darwin":
-    app = BUNDLE(exe,
-         name='JNote.app',
-         icon="icons/favicon.ico",
-         bundle_identifier=None)
