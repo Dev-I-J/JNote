@@ -40,15 +40,13 @@ before_script: shovel app.buildAppDebug
 
 script: shovel app.runAppDebug
 
-after_failure: travis_terminate 1
-
 after_success:
   - shovel app.cleanAppDebug
   - shovel app.buildApp
 
 deploy:
   provider: releases
-  api_key: $RELEASE_TOKEN
+  token: $RELEASE_TOKEN
   file_glob: true
   file: JNote_*.zip
   skip_cleanup: true

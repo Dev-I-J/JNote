@@ -5,6 +5,7 @@ verify_ssl = true
 
 [dev-packages]
 PyInstaller = "4.0"
+macholib = {version = "1.14", sys_platform = "==darwin"}
 flake8 = "3.8.4"
 recommonmark = "0.6.0"
 sphinx = "3.2.1"
