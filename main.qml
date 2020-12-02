@@ -212,16 +212,9 @@ ApplicationWindow{
             }
 
             MenuItem{
-                text: "Icons By: Icons8"
+                text: "Material Sharp Icons By Icons8"
                 icon.source: "icons/icons8.png"
-                background: Rectangle{
-                    color: "#00cc00"
-                    MouseArea{
-                        anchors.fill: parent
-                        cursorShape: Qt.PointingHandCursor
-                    }
-                }
-                onTriggered: Qt.openUrlExternally("https://icons8.com")
+                onTriggered: Qt.openUrlExternally("https://icons8.com/icons/material-sharp")
             }
         }
     }
@@ -421,7 +414,7 @@ ApplicationWindow{
         standardButtons: Dialog.No | Dialog.Yes
         width: 400
         height: 600
-        onYes: Qt.openUrlExternally("https://github.com/Dev-I-J/JNote/releases/latest")
+        onYes: Qt.openUrlExternally("https://github.com/Dev-I-J/JNote/releases/tag/"+updateText.newVersion)
 
         Flickable{
             anchors.fill: parent
@@ -434,6 +427,9 @@ ApplicationWindow{
                 text: '<p>An Update is available for JNote.<br><br>Updates may contain bugfixes, security patches or new features.<br><br>You can see the details of the update below.<br><br>Current Version = ' + updateText.currentVersion + '<br>New Version = ' + updateText.newVersion + '<br>Published At = ' + updateText.date +'<br>' + updateText.info + '<br><br>Do You Want To Update?'
                 textFormat: TextEdit.RichText
                 wrapMode: TextArea.Wrap
+                readOnly: true
+                selectByMouse: true
+                selectByKeyboard: true
 
                 onLinkActivated: Qt.openUrlExternally(link)
 
