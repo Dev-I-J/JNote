@@ -49,6 +49,7 @@ def cleanAppDebug():
     rmtree('./.debug/build', ignore_errors=True)
     rmtree('./.debug/dist', ignore_errors=True)
     rmtree('./.debug/icons', ignore_errors=True)
+    remove("./.debug/signals.py")
     remove("./.debug/fileio.py")
     remove("./.debug/settings.py")
     remove("./.debug/main.py")
@@ -67,6 +68,7 @@ def buildApp():
 @task
 def buildAppDebug():
     """Build With PyInstaller With 'debug' and 'console' Flags On"""
+    copyfile("./signals.py", ".debug/signals.py")
     copyfile("./fileio.py", ".debug/fileio.py")
     copyfile("./settings.py", ".debug/settings.py")
     copyfile("./main.py", ".debug/main.py")
