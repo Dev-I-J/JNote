@@ -1,62 +1,45 @@
-from PyQt5.QtCore import QObject, pyqtSlot, pyqtSignal, pyqtProperty
 from mdx_gfm import GithubFlavoredMarkdownExtension
+from PyQt5.QtCore import pyqtSlot, pyqtProperty
 from version_parser.version import Version
 from requests import get, RequestException
 from markdown import markdown
+from fileio import FileIO
 import datetime
 import sys
 import re
 
 
-class JNote(QObject):
+class JNote(FileIO):
 
-    """Base Class For JNote"""
-
-    settingsFileNotFound = pyqtSignal()
-    fileOpenSuccessful = pyqtSignal()
-    newDocumentCreated = pyqtSignal()
-    dateTimeInserted = pyqtSignal()
-    fileHandleError = pyqtSignal()
-    updateAvailable = pyqtSignal()
-    apiConnectError = pyqtSignal()
-    fileOpenError = pyqtSignal()
-    settingsError = pyqtSignal()
-    fileNotFound = pyqtSignal()
-    fileUntitled = pyqtSignal()
-    fileSavedAs = pyqtSignal()
-    fatalError = pyqtSignal()
-    fileSaved = pyqtSignal()
-    upToDate = pyqtSignal()
-    apiError = pyqtSignal()
+    """Class Exposed to QML"""
 
     def __init__(self, parent=None):
         super().__init__(parent)
         self._updateInfo = {}
 
     @pyqtSlot(bool)
-    def checkUpdates(self, isSatrtup):
+    def checkUpdates(self, isStartup):
         """Check For Updates"""
 
         try:
             url = "https://api.github.com/repos/Dev-I-J/JNote/releases/latest"
             with get(url) as r:
-                currentVersionStr = "v1.5.0"
+                currentVersionStr = "v1.5.3"
                 currentVersion = Version(currentVersionStr)
                 newVersionStr = r.json()['tag_name']
                 newVersion = Version(newVersionStr)
                 if currentVersion < newVersion:
-                    raw_info = markdown(r.json()['body'], extensions=[
+                    info = markdown(r.json()['body'], extensions=[
                         GithubFlavoredMarkdownExtension()
                     ])
-                    details, sep, exclude = raw_info.partition("Package Table")
                     date = r.json()['published_at'][0:10]
                     self.updateInfo["newVersion"] = newVersionStr
                     self.updateInfo["currentVersion"] = currentVersionStr
-                    self.updateInfo["details"] = details
+                    self.updateInfo["details"] = info
                     self.updateInfo["date"] = date
                     self.updateAvailable.emit()
                 else:
-                    if not isSatrtup:
+                    if not isStartup:
                         self.updateInfo["currentVersion"] = currentVersionStr
                         self.upToDate.emit()
         except RequestException:
@@ -67,19 +50,6 @@ class JNote(QObject):
             self.fatalError.emit()
         finally:
             sys.exit()
-
-    @pyqtSlot(result=str)
-    def insertDateTime(self):
-        """Get Current Date and Time"""
-
-        datetimestr = ""
-        try:
-            dtobject = datetime.datetime.now()
-            datetimestr = dtobject.strftime("%I:%M %p %d/%m/%Y")
-            self.dateTimeInserted.emit()
-        except BaseException:
-            self.fatalerror.emit()
-        return datetimestr
 
     @pyqtSlot(str, str, bool, bool, result=list)
     def findText(self, pattern, text, casesensitive, regex):
@@ -102,12 +72,50 @@ class JNote(QObject):
                     result.append([match.span()[0], match.span()[1]])
         return result
 
+    @pyqtProperty(str, constant=True)
+    def about(self):
+        """About JNote"""
+        try:
+            with open("README.md", "r", encoding="utf-8") as aboutfile:
+                abouthtml = markdown(aboutfile.read())
+                return abouthtml
+        except FileNotFoundError:
+            self.readmeFileNotFound.emit()
+            return "README.md Not Found."
+        except BaseException:
+            self.fatalError.emit()
+            return ""
+
+    @pyqtProperty(str, constant=True)
+    def gplLicense(self):
+        """GNU GPL License"""
+        try:
+            with open("LICENSE.md", "r", encoding="utf-8") as licensefile:
+                licensehtml = markdown(licensefile.read())
+                return licensehtml
+        except FileNotFoundError:
+            self.licenseFileNotFound.emit()
+            return "LICENSE.md Not Found."
+        except BaseException:
+            self.fatalError.emit()
+            return ""
+
     @pyqtProperty("QVariant", constant=True)
     def updateInfo(self):
+        """Update Information"""
         return self._updateInfo
+
+    @pyqtProperty(str)
+    def dateTime(self):
+        try:
+            dtobject = datetime.datetime.now()
+            datetimestr = dtobject.strftime("%I:%M %p %d/%m/%Y")
+            self.dateTimeInserted.emit()
+            return datetimestr
+        except BaseException:
+            self.fatalerror.emit()
+            return ""
 
     @updateInfo.setter
     def updateInfo(self, arg):
-        if arg == self._updateInfo:
-            return
         self._updateInfo = arg

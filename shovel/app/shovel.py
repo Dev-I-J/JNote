@@ -33,7 +33,7 @@ def runApp():
 @task
 def runAppDebug():
     """Run Debug Executable Built By PyInstaller"""
-    shell(".test/dist/JNote/JNote")
+    shell(".debug/dist/JNote/JNote")
 
 
 @task
@@ -46,16 +46,16 @@ def cleanApp():
 @task
 def cleanAppDebug():
     """Clean PyInstaller Debug Build Output"""
-    rmtree('./.test/build', ignore_errors=True)
-    rmtree('./.test/dist', ignore_errors=True)
-    rmtree('./.test/icons', ignore_errors=True)
-    remove("./.test/fileio.py")
-    remove("./.test/settings.py")
-    remove("./.test/main.py")
-    remove("./.test/main.qml")
-    remove("./.test/settings.toml")
-    remove("./.test/README.md")
-    remove("./.test/LICENSE.md")
+    rmtree('./.debug/build', ignore_errors=True)
+    rmtree('./.debug/dist', ignore_errors=True)
+    rmtree('./.debug/icons', ignore_errors=True)
+    remove("./.debug/fileio.py")
+    remove("./.debug/settings.py")
+    remove("./.debug/main.py")
+    remove("./.debug/main.qml")
+    remove("./.debug/settings.toml")
+    remove("./.debug/README.md")
+    remove("./.debug/LICENSE.md")
 
 
 @task
@@ -67,15 +67,15 @@ def buildApp():
 @task
 def buildAppDebug():
     """Build With PyInstaller With 'debug' and 'console' Flags On"""
-    copyfile("./fileio.py", ".test/fileio.py")
-    copyfile("./settings.py", ".test/settings.py")
-    copyfile("./main.py", ".test/main.py")
-    copyfile("./main.qml", ".test/main.qml")
-    copyfile("./settings.toml", ".test/settings.toml")
-    copyfile("./README.md", ".test/README.md")
-    copyfile("./LICENSE.md", ".test/LICENSE.md")
-    copytree("./icons", ".test/icons")
-    chdir("./.test")
+    copyfile("./fileio.py", ".debug/fileio.py")
+    copyfile("./settings.py", ".debug/settings.py")
+    copyfile("./main.py", ".debug/main.py")
+    copyfile("./main.qml", ".debug/main.qml")
+    copyfile("./settings.toml", ".debug/settings.toml")
+    copyfile("./README.md", ".debug/README.md")
+    copyfile("./LICENSE.md", ".debug/LICENSE.md")
+    copytree("./icons", ".debug/icons")
+    chdir("./.debug")
     shell(["pipenv", "run", "PyInstaller", "JNote.spec"])
     chdir("../")
 
