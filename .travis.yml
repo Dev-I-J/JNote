@@ -14,7 +14,7 @@ jobs:
       os: osx
       osx_image: xcode11
       before_install: pip3 install --upgrade shovel
-      before_deploy: shovel app.publishApp Mac_$TRAVIS_TAG
+      before_deploy: shovel app.publishApp Mac $TRAVIS_TAG
       
     - name: PyInstaller Build - Windows 32 bit
       if: commit_message =~ /\[build\]/ || commit_message =~ /\[win32\]/
@@ -24,7 +24,7 @@ jobs:
         - choco install python --version 3.7.6 --forcex86
         - choco install 7zip --forcex86
         - pip3 install --upgrade shovel
-      before_deploy: shovel app.publishApp Windows_32bit_$TRAVIS_TAG
+      before_deploy: shovel app.publishApp Windows_32bit $TRAVIS_TAG
 
     - name: PyInstaller Build - Windows 64 bit
       if: commit_message =~ /\[build\]/ || commit_message =~ /\[win64\]/
@@ -34,7 +34,7 @@ jobs:
         - choco install python --version 3.7.6
         - choco install 7zip
         - pip3 install --upgrade shovel
-      before_deploy: shovel app.publishApp Windows_64bit_$TRAVIS_TAG
+      before_deploy: shovel app.publishApp Windows_64bit $TRAVIS_TAG
 
 install: shovel app.installDeps pip3
 

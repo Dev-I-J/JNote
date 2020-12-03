@@ -50,6 +50,7 @@ class FileIO(Settings):
                     self.setSettingsStr("last-used-file", "path", fPath)
                     self.setSettingsStr("last-used-file", "encoding", coding)
                     self.fileOpenSuccessful.emit()
+                    return fileText
             except (UnicodeDecodeError, LookupError):
                 self.fileOpenError.emit()
             except IOError:
@@ -57,12 +58,11 @@ class FileIO(Settings):
             except BaseException:
                 self.fatalError.emit()
         except FileNotFoundError:
-            self.fileNotFound.emit()
+            self.fileNotFound.emit(fPath)
         except IOError:
             self.fileHandleError.emit()
         except BaseException:
             self.fatalError.emit()
-        return fileText
 
     @pyqtSlot(str)
     def fileSave(self, fText):
@@ -78,7 +78,7 @@ class FileIO(Settings):
             else:
                 self.fileUntitled.emit()
         except FileNotFoundError:
-            self.fileNotFound.emit()
+            self.fileNotFound.emit(fPath)
         except IOError:
             self.fileHandleError.emit()
         except BaseException:
@@ -93,7 +93,7 @@ class FileIO(Settings):
                 outFile.write(fText)
                 self.fileSavedAs.emit()
         except FileNotFoundError:
-            self.fileNotFound.emit()
+            self.fileNotFound.emit(fPath)
         except IOError:
             self.fileHandleError.emit()
         except BaseException:
@@ -105,18 +105,16 @@ class FileIO(Settings):
     @pyqtSlot(result=str)
     def openLastOpenFile(self):
         """(re)Open last opened file"""
-        fileText = ""
         try:
             fPath = self.getSettings("last-used-file")["path"]
             fCoding = self.getSettings("last-used-file")["encoding"]
             with open(fPath, "r", encoding=fCoding) as text:
-                fileText = text.read()
+                return text.read()
         except FileNotFoundError:
-            self.fileNotFound.emit()
+            self.fileNotFound.emit(fPath)
         except UnicodeDecodeError:
             self.fileOpenError.emit()
         except IOError:
             self.fileHandleError.emit()
         except BaseException:
             self.fatalError.emit()
-        return fileText

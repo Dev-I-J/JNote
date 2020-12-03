@@ -23,7 +23,7 @@ class JNote(FileIO):
         try:
             url = "https://api.github.com/repos/Dev-I-J/JNote/releases/latest"
             with get(url) as r:
-                currentVersionStr = "v1.5.3"
+                currentVersionStr = "v1.5.4"
                 currentVersion = Version(currentVersionStr)
                 newVersionStr = r.json()['tag_name']
                 newVersion = Version(newVersionStr)
@@ -51,23 +51,26 @@ class JNote(FileIO):
     @pyqtSlot(str, str, bool, bool, result=list)
     def findText(self, pattern, text, casesensitive, regex):
         """Find Given Text"""
-        result = []
-        if regex:
-            if not casesensitive:
-                for match in re.finditer(pattern, text, re.IGNORECASE):
-                    result.append([match.span()[0], match.span()[1]])
+        try:
+            result = []
+            if regex:
+                if not casesensitive:
+                    for match in re.finditer(pattern, text, re.IGNORECASE):
+                        result.append([match.span()[0], match.span()[1]])
+                else:
+                    for match in re.finditer(pattern, text):
+                        result.append([match.span()[0], match.span()[1]])
             else:
-                for match in re.finditer(pattern, text):
-                    result.append([match.span()[0], match.span()[1]])
-        else:
-            pattern = re.escape(pattern)
-            if not casesensitive:
-                for match in re.finditer(pattern, text, re.IGNORECASE):
-                    result.append([match.span()[0], match.span()[1]])
-            else:
-                for match in re.finditer(pattern, text):
-                    result.append([match.span()[0], match.span()[1]])
-        return result
+                pattern = re.escape(pattern)
+                if not casesensitive:
+                    for match in re.finditer(pattern, text, re.IGNORECASE):
+                        result.append([match.span()[0], match.span()[1]])
+                else:
+                    for match in re.finditer(pattern, text):
+                        result.append([match.span()[0], match.span()[1]])
+            return result
+        except BaseException:
+            self.fatalError.emit()
 
     @pyqtProperty(str, constant=True)
     def about(self):

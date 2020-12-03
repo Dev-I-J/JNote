@@ -83,9 +83,18 @@ def buildAppDebug():
 
 
 @task
-def publishApp(platform):
+def publishApp(platform, version):
     """Put Builded Application In A Zip File Matching The Platform"""
-    shell(["7z", "a", "JNote_{}.zip".format(platform), "./dist/*"])
+    if platform.startswith("Mac"):
+        shell([
+            "7z", "a", "JNote_{}_{}.zip".format(platform, version),
+            "./dist/JNote.app"
+        ])
+    else:
+        shell([
+            "7z", "a", "JNote_{}_{}.zip".format(platform, version),
+            "./dist/JNote"
+        ])
 
 
 @task
@@ -112,10 +121,10 @@ def assembleAppRun(pip="pip"):
 
 
 @task
-def assembleAppPublish(platform, pip="pip"):
+def assembleAppPublish(platform, version, pip="pip"):
     """Install Dependencies, Clean, Build and Run Executable"""
     installDeps(pip)
     cleanApp()
     buildApp()
-    publishApp(platform)
+    publishApp(platform, version)
     cleanApp()

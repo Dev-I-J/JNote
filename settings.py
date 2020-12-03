@@ -61,7 +61,6 @@ class Settings(Signals):
     @pyqtSlot(str, result='QVariant')
     def getSettings(self, category):
         """Get any setting"""
-        toml_object = {}
         try:
             with open("settings.toml", "r") as settings:
                 toml_object = toml.load(settings)

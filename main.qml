@@ -746,10 +746,24 @@ ApplicationWindow{
 
     MessageDialog{
         id: fileNotFoundError
+        property string fPath: ""
         title: "File Not Found"
-        text: "Unable to Find That File!"
+        text: "Unable to Find " + fPath + "!"
         icon: StandardIcon.Warning
         visible: false
+        onAccepted: {
+            JNote.setSettingsBool("last-used-file", "untitled", true)
+            JNote.setSettingsStr("last-used-file", "path", "")
+            JNote.setSettingsStr("last-used-file", "encoding", "utf-8")
+            statusText.text = "JNote was unable to find " + fPath + "!"
+            windowM.title = windowM.winTitle + " - Untitled"
+            mainTextArea.text = ""
+        }
+        onRejected: {
+            statusText.text = "JNote was unable to find " + fPath + "!"
+            windowM.title = windowM.winTitle + " - Untitled"
+            mainTextArea.text = ""
+        }
     }
 
     MessageDialog{
@@ -976,8 +990,8 @@ ApplicationWindow{
             windowM.title = windowM.winTitle + " - " + fileSaveDialog.path
         }
 
-        function onFileNotFound() {
-            statusText.text = "JNote was unable to find that File!"
+        function onFileNotFound(fPath) {
+            fileNotFoundError.fPath = fPath
             fileNotFoundError.open()
         }
 
