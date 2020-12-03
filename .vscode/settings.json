@@ -11,5 +11,6 @@
     ],
     "cSpell.enableFiletypes": [
         "qml"
-    ]
+    ],
+    "python.formatting.provider": "autopep8"
 }

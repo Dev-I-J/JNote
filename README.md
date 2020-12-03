@@ -14,7 +14,7 @@ __JNote is a free NotePad__ application written in _Python and QML (PyQt5)._ Bin
 The current version is v1.5.3 and additional for basic functions of a note pad, it can
 
 * Automatically Check For Updates,
-* Determine A File Is Binaty Or Not And Show Message,
+* Determine A File Is Binary Or Not And Show Message,
 * Automatically Guess and Use A Files Encoding While Opening,
 * Open the last opened file automatically when started,
 * Save and use the last used fonts when started,
@@ -36,16 +36,16 @@ __Assuming you already have _Python along with 'pip'_ and _Git_ installed on you
 1. Clone This Repo in: `git clone https://github.com/Dev-I-J/JNote`
 2. Install `shovel`: `python3 -m pip install shovel`
 3. `cd` to JNote: `cd JNote`
-5. Build and Run App: `python3 -m shovel app.assembleAppRun`
-6. Run App Afterwards: `python3 -m shovel app.runApp`
+4. Build and Run App: `python3 -m shovel app.assembleAppRun`
+5. Run App Afterwards: `python3 -m shovel app.runApp`
 
 ### Windows
 
 1. Clone This Repo in: `git clone https://github.com/Dev-I-J/JNote`
 2. Install `shovel`: `python -m pip install shovel`
 3. `cd` to JNote: `cd JNote`
-5. Build and Run App: `python -m shovel app.assembleAppRun`
-6. Run App Afterwards: `python -m shovel app.runApp`
+4. Build and Run App: `python -m shovel app.assembleAppRun`
+5. Run App Afterwards: `python -m shovel app.runApp`
 
 ## Price
 
@@ -70,6 +70,7 @@ Additional Information about JNote
 * [`shovel`](https://pypi.org/project/shovel) Is Used To Make The Development Process Easier.
 * [`flake8`](https://pypi.org/project/flake8) Is Used For Linting Code.
 * [`rope`](https://pypi.org/project/rope) Is Used For Refactoring Code.
+* [`autopep8`](https://pypi.org/project/autopep8) Is Used For Formatting Code.
 * [`sphinx`](https://pypi.org/project/Sphinx/) Is Used To Generate Documentation.
 * Code Hosted By [GitHub](https://github.com).
 * Documentation Hosted By [ReadTheDocs](https://readthedocs.org).
