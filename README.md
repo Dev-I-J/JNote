@@ -2,6 +2,7 @@
 
 [![Build Status](https://travis-ci.org/Dev-I-J/JNote.svg?branch=master)](https://travis-ci.org/Dev-I-J/JNote)
 [![Documentation Status](https://readthedocs.org/projects/jnote-notepad/badge/?version=latest)](https://jnote-notepad.readthedocs.io/en/latest/?badge=latest)
+[![License](https://img.shields.io/badge/license-GPL%203.0-green.svg)](https://opensource.org/licenses/GPL-3.0)
 [![Run on Repl.it](https://repl.it/badge/github/Dev-I-J/JNote)](https://repl.it/github/Dev-I-J/JNote)
 
 ![JNote Logo](icons/logo.png)
@@ -10,9 +11,11 @@ __JNote is a free NotePad__ application written in _Python and QML (PyQt5)._ Bin
 
 ## Features
 
-The current version is v1.5.0 and additional for basic functions of a note pad, it can
+The current version is v1.5.3 and additional for basic functions of a note pad, it can
 
 * Automatically Check For Updates,
+* Determine A File Is Binaty Or Not And Show Message,
+* Automatically Guess and Use A Files Encoding While Opening,
 * Open the last opened file automatically when started,
 * Save and use the last used fonts when started,
 * Insert Date and Time,
@@ -30,21 +33,19 @@ __Assuming you already have _Python along with 'pip'_ and _Git_ installed on you
 
 ### Linux / Mac OS
 
-1. Clone This Repo in CMD: `git clone https://github.com/Dev-I-J/JNote`
-2. Install `pipenv`: `pip install pipenv`
-3. Install Dependencies: `pipenv install --dev`
-4. `cd` to JNote: `cd JNote`
-5. Build the Python File: `python -m PyInstaller --name JNote --icon icons/favicon.ico --add-data main.qml:. --add-data icons:icons --add-data settings.toml:. --clean --windowed main.py`
-6. Execute with `dist/JNote/JNote` on Linux, Double click `dist/JNote.app` on Mac.
+1. Clone This Repo in: `git clone https://github.com/Dev-I-J/JNote`
+2. Install `shovel`: `python3 -m pip install shovel`
+3. `cd` to JNote: `cd JNote`
+5. Build and Run App: `python3 -m shovel app.assembleAppRun`
+6. Run App Afterwards: `python3 -m shovel app.runApp`
 
 ### Windows
 
-1. Clone This Repo in CMD: `git clone https://github.com/Dev-I-J/JNote`
-2. Install `pipenv`: `pip install pipenv`
-3. Install Dependencies: `pipenv install --dev`
-4. `cd` to JNote: `cd JNote`
-5. Build the Python File: `pipenv run PyInstaller --name "JNote" --icon "icons\favicon.ico" --add-data "main.qml;." --add-data "icons;icons" --add-data "settings.toml;." --clean --noconsole main.py`
-6. Go to the directory where you cloned the repo in the file explorer, and you will find a folder called dist, and in there, another one called JNote. The Executable will be inside it.
+1. Clone This Repo in: `git clone https://github.com/Dev-I-J/JNote`
+2. Install `shovel`: `python -m pip install shovel`
+3. `cd` to JNote: `cd JNote`
+5. Build and Run App: `python -m shovel app.assembleAppRun`
+6. Run App Afterwards: `python -m shovel app.runApp`
 
 ## Price
 
@@ -64,9 +65,17 @@ Additional Information about JNote
 
 ### Credits
 
-* All The Icons are provided by [Icons8](https://icons8.com).
-* The app is build with [PyInstaller](https://pypi.org/project/PyInstaller)
-* Special Thanks to [VSCode](https://vscode.com) for providing the awesome Editor.
+* All The Icons are provided by [Icons8](https://icons8.com) For Free.
+* [`pipenv`](https://pypi.org/project/pipenv) Is Used For Dependency Management.
+* [`shovel`](https://pypi.org/project/shovel) Is Used To Make The Development Process Easier.
+* [`flake8`](https://pypi.org/project/flake8) Is Used For Linting Code.
+* [`rope`](https://pypi.org/project/rope) Is Used For Refactoring Code.
+* [`sphinx`](https://pypi.org/project/Sphinx/) Is Used To Generate Documentation.
+* Code Hosted By [GitHub](https://github.com).
+* Documentation Hosted By [ReadTheDocs](https://readthedocs.org).
+* Continuous Integration (`CI/CD`) Provided By [Travis CI](https://travis-ci.org).
+* The app is build with [`PyInstaller`](https://pypi.org/project/PyInstaller).
+* Special Thanks to [VS Code](https://vscode.com) For Providing the Awesome Code Editor.
 
 ### Python Modules Used in Development
 
@@ -77,6 +86,8 @@ Additional Information about JNote
 * [`markdown`](https://pypi.org/project/markdown/) for Converting markdown from GitHub to HTML.
 * [`toml`](https://pypi.org/project/toml/) for parsing the settings file.
 * [`binaryornot`](https://pypi.org/project/binaryornot/) for _guessing_ if files are binary or not.
+* [`cchardet`](https://pypi.org/project/cchardet/) for _guessing_ the file encoding.
+* [`chardet`](https://pypi.org/project/chardet/) for backup plan if `cchardet` fails to determine the correct encoding.
 
 ## Coming Soon
 
