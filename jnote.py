@@ -19,7 +19,6 @@ class JNote(FileIO):
     @pyqtSlot(bool)
     def checkUpdates(self, isStartup):
         """Check For Updates"""
-
         try:
             url = "https://api.github.com/repos/Dev-I-J/JNote/releases/latest"
             with get(url) as r:

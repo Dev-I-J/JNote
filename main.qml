@@ -3,7 +3,7 @@ import QtQuick.Controls 2.14
 import QtQuick.Layouts 1.14
 import QtQuick.Dialogs 1.3
 
-ApplicationWindow{
+ApplicationWindow {
     id: windowM
     property string winTitle: "JNote: A Free NotePad"
     property bool closing: false
@@ -80,138 +80,138 @@ ApplicationWindow{
         }
     }
 
-    menuBar: MenuBar{
+    menuBar: MenuBar {
 
-        Menu{
+        Menu {
             title: "File"
 
-            MenuItem{
+            MenuItem {
                 text: "New"
                 id: newDoc
                 icon.source: "icons/new.png"
                 onTriggered: JNote.fileNew()
             }
 
-            MenuItem{
+            MenuItem {
                 text: "Open"
                 icon.source: "icons/open.png"
                 onTriggered: fileOpenDialog.open()
             }
 
-            MenuItem{
+            MenuItem {
                 text: "Save"
                 icon.source: "icons/save.png"
                 onTriggered: JNote.fileSave(mainTextArea.text)
             }
 
-            MenuItem{
+            MenuItem {
                 text: "Save As"
                 icon.source: "icons/save-as.png"
                 onTriggered: fileSaveDialog.open()
             }
 
-            MenuItem{
+            MenuItem {
                 text: "Exit"
                 icon.source: "icons/exit.png"
                 onTriggered: confirmExit.open()
             }
         }
 
-        Menu{
+        Menu {
             title: "Edit"
 
-            MenuItem{
+            MenuItem {
                 text: "Copy"
                 icon.source: "icons/copy.png"
                 enabled: mainTextArea.selectedText
                 onTriggered: mainTextArea.copy()
             }
 
-            MenuItem{
+            MenuItem {
                 text: "Cut"
                 icon.source: "icons/cut.png"
                 enabled: mainTextArea.selectedText
                 onTriggered: mainTextArea.cut()
             }
 
-            MenuItem{
+            MenuItem {
                 text: "Paste"
                 icon.source: "icons/paste.png"
                 enabled: mainTextArea.canPaste
                 onTriggered: mainTextArea.paste()
             }
 
-            MenuItem{
+            MenuItem {
                 text: "Undo"
                 icon.source: "icons/undo.png"
                 enabled: mainTextArea.canUndo
                 onTriggered: mainTextArea.undo()
             }
 
-            MenuItem{
+            MenuItem {
                 text: "Redo"
                 icon.source: "icons/redo.png"
                 enabled: mainTextArea.canRedo
                 onTriggered: mainTextArea.redo()
             }
 
-            MenuItem{
+            MenuItem {
                 text: "Insert Date and Time"
                 icon.source: "icons/date-time.png"
                 onTriggered: mainTextArea.text += JNote.dateTime
             }
 
-            MenuItem{
+            MenuItem {
                 text: "Find"
                 icon.source: "icons/find.png"
                 onTriggered: findDialog.open()
             }
         }
 
-        Menu{
+        Menu {
             title: "Formatting"
 
-            MenuItem{
+            MenuItem {
                 text: "Font"
                 icon.source: "icons/font.png"
                 onTriggered: fontDialog.open()
             }
 
-            MenuItem{
+            MenuItem {
                 text: "Select Wrap Mode"
                 icon.source: "icons/word-wrap.png"
                 onTriggered: wrapDialog.open()
             }
         }
 
-        Menu{
+        Menu {
             title: "Help"
 
-            MenuItem{
+            MenuItem {
                 text: "About"
                 icon.source: "icons/about.png"
                 onTriggered: aboutDialog.open()
             }
 
-            MenuItem{
+            MenuItem {
                 text: "License"
                 icon.source: "icons/software-license.png"
                 onTriggered: licenseDialog.open()
             }
 
-            MenuItem{
+            MenuItem {
                 text: "Documentation"
                 icon.source: "icons/documentation.png"
                 onTriggered: Qt.openUrlExternally("https://jnote-notepad.readthedocs.io")
             }
 
-            MenuItem{
+            MenuItem {
                 text: "Check For Updates"
                 icon.source: "icons/check-update.png"
                 onTriggered: JNote.checkUpdates(false)
             }
 
-            MenuItem{
+            MenuItem {
                 text: "Material Sharp Icons By Icons8"
                 icon.source: "icons/icons8.png"
                 onTriggered: Qt.openUrlExternally("https://icons8.com/icons/material-sharp")
@@ -219,30 +219,30 @@ ApplicationWindow{
         }
     }
 
-    header: ToolBar{
+    header: ToolBar {
 
-        RowLayout{
+        RowLayout {
             anchors.fill: parent
 
-            ToolButton{
+            ToolButton {
                 text: "New"
                 icon.source: "icons/new.png"
                 onClicked: JNote.fileNew()
             }
 
-            ToolButton{
+            ToolButton {
                 text: "Open"
                 icon.source: "icons/open.png"
                 onClicked: fileOpenDialog.open()
             }
 
-            ToolButton{
+            ToolButton {
                 text: "Save"
                 icon.source: "icons/save.png"
                 onClicked: JNote.fileSave(mainTextArea.text)
             }
 
-            ToolButton{
+            ToolButton {
                 text: "Save As"
                 icon.source: "icons/save-as.png"
                 onClicked: fileSaveDialog.open()
@@ -250,35 +250,35 @@ ApplicationWindow{
 
             ToolSeparator {}
 
-            ToolButton{
+            ToolButton {
                 text: "Copy"
                 icon.source: "icons/copy.png"
                 enabled: mainTextArea.selectedText
                 onClicked: mainTextArea.copy()
             }
 
-            ToolButton{
+            ToolButton {
                 text: "Cut"
                 icon.source: "icons/cut.png"
                 enabled: mainTextArea.selectedText
                 onClicked: mainTextArea.cut()
             }
 
-            ToolButton{
+            ToolButton {
                 text: "Paste"
                 icon.source: "icons/paste.png"
                 enabled: mainTextArea.canPaste
                 onClicked: mainTextArea.paste()
             }
 
-            ToolButton{
+            ToolButton {
                 text: "Undo"
                 icon.source: "icons/undo.png"
                 enabled: mainTextArea.canUndo
                 onClicked: mainTextArea.undo()
             }
 
-            ToolButton{
+            ToolButton {
                 text: "Redo"
                 icon.source: "icons/redo.png"
                 enabled: mainTextArea.canRedo
@@ -287,7 +287,7 @@ ApplicationWindow{
 
             ToolSeparator {}
 
-            ToolButton{
+            ToolButton {
                 text: "Font"
                 icon.source: "icons/font.png"
                 onClicked: fontDialog.open()
@@ -295,16 +295,16 @@ ApplicationWindow{
         }
     }
 
-    footer: ToolBar{
+    footer: ToolBar {
 
-        palette{
+        palette {
             base: "grey"
         }
 
-        RowLayout{
+        RowLayout {
             anchors.fill: parent
 
-            Text{
+            Text {
                 id: statusText
                 text: "Ready"
                 Layout.alignment: Qt.AlignRight
@@ -314,7 +314,7 @@ ApplicationWindow{
         }
     }
 
-    FocusScope{
+    FocusScope {
         anchors.fill: parent
         focus: true
 
@@ -347,16 +347,16 @@ ApplicationWindow{
         }
     }
 
-    Dialog{
+    Dialog {
         id: aboutDialog
         width: 400
         height: 400
         title: "About - JNote"
         visible: false
 
-        Flickable{
+        Flickable {
             anchors.fill: parent
-            TextArea.flickable: TextArea{
+            TextArea.flickable: TextArea {
                 text: JNote.about
                 readOnly: true
                 selectByMouse: true
@@ -377,16 +377,16 @@ ApplicationWindow{
         }
     }
 
-    Dialog{
+    Dialog {
         id: licenseDialog
         visible: false
         title: 'License - JNote'
         width: 400
         height: 400
             
-        Flickable{
+        Flickable {
             anchors.fill: parent
-            TextArea.flickable: TextArea{
+            TextArea.flickable: TextArea {
                 text: JNote.gplLicense
                 readOnly: true
                 selectByMouse: true
@@ -407,7 +407,7 @@ ApplicationWindow{
         }
     }
 
-    Dialog{
+    Dialog {
         id: updateDialog
         visible: false
         title: 'Update - JNote'
@@ -416,7 +416,7 @@ ApplicationWindow{
         height: 600
         onYes: Qt.openUrlExternally("https://github.com/Dev-I-J/JNote/releases/tag/"+updateText.newVersion)
 
-        Flickable{
+        Flickable {
             anchors.fill: parent
             TextArea.flickable: TextArea {
                 id: updateText
@@ -444,7 +444,7 @@ ApplicationWindow{
         }
     }
 
-    Dialog{
+    Dialog {
         id: fontDialog
         property string fontFamily: "Arial"
         property int fontSize: 8
@@ -461,14 +461,14 @@ ApplicationWindow{
         standardButtons: Dialog.Cancel | Dialog.Ok
         visible: false
 
-        ColumnLayout{
+        ColumnLayout {
             anchors.fill: parent
 
-            RowLayout{
+            RowLayout {
                 Layout.fillWidth: true
                 Layout.alignment: Qt.AlignHCenter | Qt.AlignTop
 
-                ComboBox{
+                ComboBox {
                     id: fontSelector
                     model: Qt.fontFamilies()
                     currentIndex: fontDialog.fontIndex
@@ -482,7 +482,7 @@ ApplicationWindow{
                     }
                     onModelChanged: {
                         var _maxWidth = 0
-                        for(var i = 0; i < model.length; i++){
+                        for(var i = 0; i < model.length; i++) {
                             _maxWidth = Math.max((model[i].length+1)*Qt.application.font.pixelSize, _maxWidth)
                         }
                         Layout.minimumWidth = _maxWidth + implicitIndicatorWidth + leftPadding + rightPadding
@@ -499,7 +499,7 @@ ApplicationWindow{
                     }
                 }
 
-                Button{
+                Button {
                     text: "Select Color"
                     onClicked: colorSelector.open()
                 }
@@ -560,7 +560,7 @@ ApplicationWindow{
                     }
                 }
             }
-            TextArea{
+            TextArea {
                 id: previewText
                 text: "ABCD efg"
                 font.family: "Arial"
@@ -568,7 +568,7 @@ ApplicationWindow{
             }
         }
 
-        ColorDialog{
+        ColorDialog {
             id: colorSelector
             onAccepted: {
                 previewText.color = colorSelector.color
@@ -620,15 +620,15 @@ ApplicationWindow{
         }
     }
 
-    Dialog{
+    Dialog {
         id: wrapDialog
         width: 200
         height: 100
         title: "Select Wrap Mode"
         visible: false
 
-        ColumnLayout{
-            RadioButton{
+        ColumnLayout {
+            RadioButton {
                 id: wrapText
                 text: "Wrap"
                 checked: true
@@ -641,7 +641,7 @@ ApplicationWindow{
                 }
             }
 
-            RadioButton{
+            RadioButton {
                 id: doNotWrapText
                 text: "Don't Wrap"
                 onClicked: mainTextArea.wrapMode = TextArea.NoWrap
@@ -709,7 +709,7 @@ ApplicationWindow{
         }
     }
 
-    MessageDialog{
+    MessageDialog {
         id: openError
         title: "Unsupported File Type"
         text: "An Error Occurred While Opening the File Because The File Type Is not Supported. Try a different File"
@@ -717,7 +717,7 @@ ApplicationWindow{
         visible: false
     }
 
-    MessageDialog{
+    MessageDialog {
         id: handleError
         title: "Unknown Error While Opening File"
         text: "An Unknown Error Occurred While Handling The Document"
@@ -725,7 +725,7 @@ ApplicationWindow{
         visible: false
     }
 
-    MessageDialog{
+    MessageDialog {
         id: upToDate
         property string currentVersion: ""
         title: "JNote is Up-To-Date"
@@ -734,7 +734,7 @@ ApplicationWindow{
         visible: false
     }
 
-    MessageDialog{
+    MessageDialog {
         id: fatalError
         title: "Fatal Error"
         text: "A Fatal Error Occurred!"
@@ -744,7 +744,7 @@ ApplicationWindow{
         visible: false
     }
 
-    MessageDialog{
+    MessageDialog {
         id: fileNotFoundError
         property string fPath: ""
         title: "File Not Found"
@@ -766,7 +766,7 @@ ApplicationWindow{
         }
     }
 
-    MessageDialog{
+    MessageDialog {
         id: apiConnectError
         title: "Failed To Connect to API"
         text: "JNote was unable to connect to the GitHub API to check for new updates"
@@ -774,7 +774,7 @@ ApplicationWindow{
         visible: false
     }
 
-    MessageDialog{
+    MessageDialog {
         id: apiError
         title: "Error with GitHub API"
         text: "JNote encountered an error while using the GitHub API"
@@ -782,7 +782,7 @@ ApplicationWindow{
         visible: false
     }
 
-    MessageDialog{
+    MessageDialog {
         id: settingsError
         title: "Failed To Save Settings"
         text: "A Fatal Error Occurred While JNote is Saving Your Preferences"
@@ -792,7 +792,7 @@ ApplicationWindow{
         visible: false
     }
 
-    MessageDialog{
+    MessageDialog {
         id: settingsNotFoundError
         title: "Failed To Find Settings File"
         text: "JNote Was Not Able To Find settings.toml - JNote will not work correctly without it!"
@@ -802,7 +802,7 @@ ApplicationWindow{
         visible: false
     }
 
-    MessageDialog{
+    MessageDialog {
         id: readmeNotFoundError
         title: "Failed To Find Readme File"
         text: "JNote Was Not Able To Find README.md - JNote will not work correctly without it!"
@@ -810,7 +810,7 @@ ApplicationWindow{
         visible: false
     }
     
-    MessageDialog{
+    MessageDialog {
         id: licenseNotFoundError
         title: "Failed To Find License File"
         text: "JNote Was Not Able To Find LICENSE.md - JNote will not work correctly without it!"
@@ -827,7 +827,7 @@ ApplicationWindow{
         visible: false
     }
 
-    MessageDialog{
+    MessageDialog {
         id: confirmExit
         title: "Confirm Exit"
         text: "Do You Really Want To Quit?"
@@ -857,7 +857,7 @@ ApplicationWindow{
       }
     }
 
-    FileDialog{
+    FileDialog {
         id: fileOpenDialog
         property string path: ""
         visible: false
@@ -870,7 +870,7 @@ ApplicationWindow{
         }
     }
 
-    FileDialog{
+    FileDialog {
         id: fileSaveDialog
         property string path: ""
         visible: false
@@ -884,32 +884,32 @@ ApplicationWindow{
         }
     }
 
-    Shortcut{
+    Shortcut {
         sequence: "Ctrl+N"
         onActivated: JNote.fileNew()
     }
 
-    Shortcut{
+    Shortcut {
         sequence: "Ctrl+O"
         onActivated: fileOpenDialog.open()
     }
 
-    Shortcut{
+    Shortcut {
         sequence: "Ctrl+S"
         onActivated: JNote.fileSave(mainTextArea.text)
     }
 
-    Shortcut{
+    Shortcut {
         sequence: "Ctrl+Shift+S"
         onActivated: fileSaveDialog.open()
     }
 
-    Shortcut{
+    Shortcut {
         sequence: "Ctrl+F"
         onActivated: findDialog.open()
     }
 
-    Shortcut{
+    Shortcut {
         sequence: "F5"
         onActivated: mainTextArea.text += JNote.dateTime
     }

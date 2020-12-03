@@ -69,6 +69,6 @@ master_doc = 'index'
 
 def setup(app):
     app.add_config_value('recommonmark_config', {
-            'enable_eval_rst': True
-            }, True)
+        'enable_eval_rst': True
+    }, True)
     app.add_transform(AutoStructify)
