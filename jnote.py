@@ -7,30 +7,35 @@ from fileio import FileIO
 import datetime
 import re
 
+# Typing Imports
+from typing import Dict, List, Any
+
 
 class JNote(FileIO):
 
     """Class Exposed to QML"""
 
-    def __init__(self, parent=None):
+    def __init__(self, parent: None = None) -> None:
         super().__init__(parent)
-        self._updateInfo = {}
+        self._updateInfo: Dict[str] = {}
 
     @pyqtSlot(bool)
-    def checkUpdates(self, isStartup):
+    def checkUpdates(self, isStartup: bool) -> None:
         """Check For Updates"""
         try:
-            url = "https://api.github.com/repos/Dev-I-J/JNote/releases/latest"
+            url: str = (
+                "https://api.github.com/repos/Dev-I-J/JNote/releases/latest"
+            )
             with get(url) as r:
-                currentVersionStr = "v1.5.4"
-                currentVersion = Version(currentVersionStr)
-                newVersionStr = r.json()['tag_name']
-                newVersion = Version(newVersionStr)
+                currentVersionStr: str = "v1.5.4"
+                currentVersion: Version = Version(currentVersionStr)
+                newVersionStr: str = r.json()['tag_name']
+                newVersion: Version = Version(newVersionStr)
                 if currentVersion < newVersion:
-                    info = markdown(r.json()['body'], extensions=[
+                    info: str = markdown(r.json()['body'], extensions=[
                         GithubFlavoredMarkdownExtension()
                     ])
-                    date = r.json()['published_at'][0:10]
+                    date: str = r.json()['published_at'][0:10]
                     self.updateInfo["newVersion"] = newVersionStr
                     self.updateInfo["currentVersion"] = currentVersionStr
                     self.updateInfo["details"] = info
@@ -48,10 +53,12 @@ class JNote(FileIO):
             self.fatalError.emit()
 
     @pyqtSlot(str, str, bool, bool, result=list)
-    def findText(self, pattern, text, casesensitive, regex):
+    def findText(
+        self, pattern: str, text: str, casesensitive: bool, regex: bool
+    ) -> List[List[int]]:
         """Find Given Text"""
         try:
-            result = []
+            result: List[List[int]] = []
             if regex:
                 if not casesensitive:
                     for match in re.finditer(pattern, text, re.IGNORECASE):
@@ -72,12 +79,11 @@ class JNote(FileIO):
             self.fatalError.emit()
 
     @pyqtProperty(str, constant=True)
-    def about(self):
+    def about(self) -> str:
         """About JNote"""
         try:
             with open("README.md", "r", encoding="utf-8") as aboutfile:
-                abouthtml = markdown(aboutfile.read())
-                return abouthtml
+                return markdown(aboutfile.read())
         except FileNotFoundError:
             self.readmeFileNotFound.emit()
             return "README.md Not Found."
@@ -86,12 +92,11 @@ class JNote(FileIO):
             return ""
 
     @pyqtProperty(str, constant=True)
-    def gplLicense(self):
+    def gplLicense(self) -> str:
         """GNU GPL License"""
         try:
             with open("LICENSE.md", "r", encoding="utf-8") as licensefile:
-                licensehtml = markdown(licensefile.read())
-                return licensehtml
+                return markdown(licensefile.read())
         except FileNotFoundError:
             self.licenseFileNotFound.emit()
             return "LICENSE.md Not Found."
@@ -100,15 +105,15 @@ class JNote(FileIO):
             return ""
 
     @pyqtProperty("QVariant", constant=True)
-    def updateInfo(self):
+    def updateInfo(self) -> Dict[str]:
         """Update Information"""
         return self._updateInfo
 
     @pyqtProperty(str)
-    def dateTime(self):
+    def dateTime(self) -> str:
         try:
-            dtobject = datetime.datetime.now()
-            datetimestr = dtobject.strftime("%I:%M %p %d/%m/%Y")
+            dtobject: datetime = datetime.datetime.now()
+            datetimestr: str = dtobject.strftime("%I:%M %p %d/%m/%Y")
             self.dateTimeInserted.emit()
             return datetimestr
         except BaseException:
@@ -116,5 +121,5 @@ class JNote(FileIO):
             return ""
 
     @updateInfo.setter
-    def updateInfo(self, arg):
+    def updateInfo(self, arg: Any) -> None:
         self._updateInfo = arg

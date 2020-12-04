@@ -6,29 +6,29 @@ from jnote import JNote
 import sys
 
 
-def run():
+def run() -> int:
     """
     Function To Run The Script
 
     Returns:
-        app.exec_(): Executes The App
+        int: App Exit Code
     """
 
-    jnote = JNote()
+    jnote: JNote = JNote()
 
-    app = QApplication(sys.argv)
+    app: QApplication = QApplication(sys.argv)
     app.setWindowIcon(QIcon('icons/favicon.png'))
     app.setOrganizationName("JNote")
     app.setOrganizationDomain("jnote.ml")
 
-    engine = QQmlApplicationEngine()
+    engine: QQmlApplicationEngine = QQmlApplicationEngine()
     engine.rootContext().setContextProperty("JNote", jnote)
     engine.load(QUrl('main.qml'))
 
     if not engine.rootObjects():
         return -1
 
-    return app.exec_()
+    return app.exec()
 
 
 if __name__ == '__main__':

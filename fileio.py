@@ -9,11 +9,11 @@ class FileIO(Settings):
 
     """All the File I/O stuff of JNote goes Here"""
 
-    def __init__(self, parent=None):
+    def __init__(self, parent: None = None) -> None:
         super().__init__(parent)
 
-    @pyqtSlot()
-    def fileNew(self):
+    @ pyqtSlot()
+    def fileNew(self) -> None:
         """Update settings when a new document is created"""
         try:
             self.setSettingsBool("last-used-file", "untitled", True)
@@ -24,16 +24,16 @@ class FileIO(Settings):
         except BaseException:
             self.fatalError.emit()
 
-    @pyqtSlot(str, result=str)
-    def fileOpen(self, fPath):
+    @ pyqtSlot(str, result=str)
+    def fileOpen(self, fPath: str) -> str:
         """Open File"""
-        fileText = ""
+        fileText: str = ""
         try:
             if not check.is_binary(fPath):
                 with open(fPath, "rb") as binaryFile:
-                    binary = binaryFile.read()
-                    coding = cchardet.detect(binary)["encoding"]
-                    fileText = binary.decode(coding)
+                    binary: str = binaryFile.read()
+                    coding: str = cchardet.detect(binary)["encoding"]
+                    fileText: str = binary.decode(coding)
                     self.setSettingsBool("last-used-file", "untitled", False)
                     self.setSettingsStr("last-used-file", "path", fPath)
                     self.setSettingsStr("last-used-file", "encoding", coding)
@@ -43,9 +43,9 @@ class FileIO(Settings):
         except (UnicodeDecodeError, LookupError):
             try:
                 with open(fPath, "rb") as binaryFile:
-                    binary = binaryFile.read()
-                    coding = chardet.detect(binary)["encoding"]
-                    fileText = binary.decode(coding)
+                    binary: str = binaryFile.read()
+                    coding: str = chardet.detect(binary)["encoding"]
+                    fileText: str = binary.decode(coding)
                     self.setSettingsBool("last-used-file", "untitled", False)
                     self.setSettingsStr("last-used-file", "path", fPath)
                     self.setSettingsStr("last-used-file", "encoding", coding)
@@ -64,14 +64,14 @@ class FileIO(Settings):
         except BaseException:
             self.fatalError.emit()
 
-    @pyqtSlot(str)
-    def fileSave(self, fText):
+    @ pyqtSlot(str)
+    def fileSave(self, fText: str) -> None:
         """Save File"""
         try:
-            untitled = self.getSettings("last-used-file")["untitled"]
+            untitled: bool = self.getSettings("last-used-file")["untitled"]
             if not untitled:
-                fPath = self.getSettings("last-used-file")["path"]
-                fCoding = self.getSettings("last-used-file")["encoding"]
+                fPath: str = self.getSettings("last-used-file")["path"]
+                fCoding: str = self.getSettings("last-used-file")["encoding"]
                 with open(fPath, "w", encoding=fCoding) as outFile:
                     outFile.write(fText)
                 self.fileSaved.emit()
@@ -84,11 +84,11 @@ class FileIO(Settings):
         except BaseException:
             self.fatalError.emit()
 
-    @pyqtSlot(str, str)
-    def fileSaveAs(self, fPath, fText):
+    @ pyqtSlot(str, str)
+    def fileSaveAs(self, fPath: str, fText: str) -> None:
         """Save File As"""
         try:
-            fCoding = self.getSettings("last-used-file")["encoding"]
+            fCoding: str = self.getSettings("last-used-file")["encoding"]
             with open(fPath, "w+", encoding=fCoding) as outFile:
                 outFile.write(fText)
                 self.fileSavedAs.emit()
@@ -102,12 +102,12 @@ class FileIO(Settings):
             self.setSettingsBool("last-used-file", "untitled", False)
             self.setSettingsStr("last-used-file", "path", fPath)
 
-    @pyqtSlot(result=str)
-    def openLastOpenFile(self):
+    @ pyqtSlot(result=str)
+    def openLastOpenFile(self) -> str:
         """(re)Open last opened file"""
         try:
-            fPath = self.getSettings("last-used-file")["path"]
-            fCoding = self.getSettings("last-used-file")["encoding"]
+            fPath: str = self.getSettings("last-used-file")["path"]
+            fCoding: str = self.getSettings("last-used-file")["encoding"]
             with open(fPath, "r", encoding=fCoding) as text:
                 return text.read()
         except FileNotFoundError:
