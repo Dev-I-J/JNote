@@ -17,7 +17,7 @@ class JNote(FileIO):
 
     def __init__(self, parent: None = None) -> None:
         super().__init__(parent)
-        self._updateInfo: Dict[str] = {}
+        self._updateInfo: Dict[str, str] = {}
 
     @pyqtSlot(bool)
     def checkUpdates(self, isStartup: bool) -> None:
@@ -105,7 +105,7 @@ class JNote(FileIO):
             return ""
 
     @pyqtProperty("QVariant", constant=True)
-    def updateInfo(self) -> Dict[str]:
+    def updateInfo(self) -> Dict[str, str]:
         """Update Information"""
         return self._updateInfo
 

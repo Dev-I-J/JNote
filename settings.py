@@ -18,7 +18,7 @@ class Settings(Signals):
         """Set string settings"""
         try:
             with open("settings.toml", "r") as settings:
-                toml_object: Dict[Any] = toml.load(settings)
+                toml_object: Dict[str, Any] = toml.load(settings)
             toml_object[category][key] = value
             with open("settings.toml", "w") as settings:
                 toml.dump(toml_object, settings)
@@ -34,7 +34,7 @@ class Settings(Signals):
         """Set integer settings"""
         try:
             with open("settings.toml", "r") as settings:
-                toml_object: Dict[Any] = toml.load(settings)
+                toml_object: Dict[str, Any] = toml.load(settings)
             toml_object[category][key] = value
             with open("settings.toml", "w") as settings:
                 toml.dump(toml_object, settings)
@@ -50,7 +50,7 @@ class Settings(Signals):
         """Set Boolean Settings"""
         try:
             with open("settings.toml", "r") as settings:
-                toml_object: Dict[Any] = toml.load(settings)
+                toml_object: Dict[str, Any] = toml.load(settings)
             toml_object[category][key] = value
             with open("settings.toml", "w") as settings:
                 toml.dump(toml_object, settings)
@@ -62,11 +62,11 @@ class Settings(Signals):
             self.fatalError.emit()
 
     @pyqtSlot(str, result='QVariant')
-    def getSettings(self, category: str) -> Dict[Any]:
+    def getSettings(self, category: str) -> Dict[str, Any]:
         """Get any setting"""
         try:
             with open("settings.toml", "r") as settings:
-                toml_object: Dict[Any] = toml.load(settings)
+                toml_object: Dict[str, Any] = toml.load(settings)
         except FileNotFoundError:
             self.settingsFileNotFound.emit()
         except toml.TomlDecodeError:
