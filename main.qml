@@ -435,7 +435,7 @@ ApplicationWindow {
 
                 MouseArea {
                     anchors.fill: parent
-                    acceptedButtons: Qt.NoButton // we don't want to eat clicks on the Text
+                    acceptedButtons: Qt.NoButton
                     cursorShape: parent.hoveredLink ? Qt.PointingHandCursor : Qt.ArrowCursor
                 }
             }
@@ -560,10 +560,11 @@ ApplicationWindow {
                     }
                 }
             }
-            TextArea {
+            Label {
                 id: previewText
-                text: "ABCD efg"
+                text: "AaBbYyZz"
                 font.family: "Arial"
+                font.pointSize: 8
                 Layout.alignment: Qt.AlignHCenter
             }
         }
