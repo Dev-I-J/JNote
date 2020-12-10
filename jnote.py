@@ -98,7 +98,7 @@ class JNote(FileIO):
             self.fatalError.emit()
 
     @pyqtSlot(str)
-    def shellExec(self, command) -> None:
+    def shellExec(self, command: str) -> None:
         try:
             if sys.platform == "win32":
                 subprocess.call("start cmd /k {}".format(command), shell=True)
