@@ -169,6 +169,28 @@ ApplicationWindow {
         }
 
         Menu {
+            title: "Tools"
+
+            MenuItem {
+                text: "Render As Html"
+                icon.source: "icons/html.png"
+                onTriggered: JNote.render(false, mainTextArea.text)
+            }
+
+            MenuItem {
+                text: "Render As Markdown"
+                icon.source: "icons/markdown.png"
+                onTriggered: JNote.render(true, mainTextArea.text)
+            }
+
+            MenuItem {
+                text: "Execute In Terminal"
+                icon.source: "icons/terminal.png"
+                onTriggered: JNote.shellExec(mainTextArea.text)
+            }
+        }
+
+        Menu {
             title: "Formatting"
 
             MenuItem {
@@ -805,8 +827,8 @@ ApplicationWindow {
 
     MessageDialog {
         id: readmeNotFoundError
-        title: "Failed To Find Readme File"
-        text: "JNote Was Not Able To Find README.md - JNote will not work correctly without it!"
+        title: "Failed To Find About File"
+        text: "JNote Was Not Able To Find data/about.html - JNote will not work correctly without it!"
         icon: StandardIcon.Warning
         visible: false
     }
@@ -814,7 +836,7 @@ ApplicationWindow {
     MessageDialog {
         id: licenseNotFoundError
         title: "Failed To Find License File"
-        text: "JNote Was Not Able To Find LICENSE.md - JNote will not work correctly without it!"
+        text: "JNote Was Not Able To Find data/license.html - JNote will not work correctly without it!"
         icon: StandardIcon.Warning
         visible: false
     }
@@ -825,6 +847,15 @@ ApplicationWindow {
         title: "Match Not Found"
         text: 'Unable to Find Any Match for "' + findMatchNotFound.pattern + '"!'
         icon: StandardIcon.Information
+        visible: false
+    }
+
+    MessageDialog {
+        id: platformNotSupportedError
+        property string platform: ""
+        title: "Platform Not Supported"
+        text: "This Functions Isn't Supported On You Operating System " + platform + " Yet."
+        icon: StandardIcon.Warning
         visible: false
     }
 
@@ -853,6 +884,7 @@ ApplicationWindow {
             JNote.setSettingsBool("last-used-formatting", "bold", fontDialog.bold)
             JNote.setSettingsBool("last-used-formatting", "italic",fontDialog.italic)
             JNote.addComments()
+            JNote.clean()
             windowM.closing = true
             windowM.close()
       }
@@ -913,6 +945,21 @@ ApplicationWindow {
     Shortcut {
         sequence: "F5"
         onActivated: mainTextArea.text += JNote.dateTime
+    }
+
+    Shortcut {
+        sequence: "Ctrl+Shift+H"
+        onActivated: JNote.render(false, mainTextArea.text)
+    }
+
+    Shortcut {
+        sequence: "Ctrl+Shift+M"
+        onActivated: JNote.render(true, mainTextArea.text)
+    }
+
+    Shortcut {
+        sequence: "Ctrl+Shift+T"
+        onActivated: JNote.shellExec(mainTextArea.text)
     }
 
     Connections {
@@ -1014,6 +1061,11 @@ ApplicationWindow {
         function onLicenseFileNotFound() {
             licenseNotFoundError.open()
             statusText.text = "Unable to Find License File"
+        }
+
+        function onPlatformNotSupported(platform) {
+            platformNotSupportedError.platform = platform
+            platformNotSupportedError.open()
         }
     }
 

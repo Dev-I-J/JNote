@@ -26,7 +26,7 @@ class Settings(Signals):
             self.settingsFileNotFound.emit()
         except toml.TomlDecodeError:
             self.settingsError.emit()
-        except BaseException:
+        except Exception:
             self.fatalError.emit()
 
     @pyqtSlot(str, str, int)
@@ -42,7 +42,7 @@ class Settings(Signals):
             self.settingsFileNotFound.emit()
         except toml.TomlDecodeError:
             self.settingsError.emit()
-        except BaseException:
+        except Exception:
             self.fatalError.emit()
 
     @pyqtSlot(str, str, bool)
@@ -58,7 +58,7 @@ class Settings(Signals):
             self.settingsFileNotFound.emit()
         except toml.TomlDecodeError:
             self.settingsError.emit()
-        except BaseException:
+        except Exception:
             self.fatalError.emit()
 
     @pyqtSlot(str, result='QVariant')
@@ -71,7 +71,7 @@ class Settings(Signals):
             self.settingsFileNotFound.emit()
         except toml.TomlDecodeError:
             self.settingsError.emit()
-        except BaseException:
+        except Exception:
             self.fatalError.emit()
         return toml_object[category]
 

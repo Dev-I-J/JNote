@@ -21,7 +21,7 @@ class FileIO(Settings):
             self.setSettingsStr("last-used-file", "path", "")
             self.setSettingsStr("last-used-file", "text", "")
             self.newDocumentCreated.emit()
-        except BaseException:
+        except Exception:
             self.fatalError.emit()
 
     @ pyqtSlot(str, result=str)
@@ -55,13 +55,13 @@ class FileIO(Settings):
                 self.fileOpenError.emit()
             except IOError:
                 self.fileHandleError.emit()
-            except BaseException:
+            except Exception:
                 self.fatalError.emit()
         except FileNotFoundError:
             self.fileNotFound.emit(fPath)
         except IOError:
             self.fileHandleError.emit()
-        except BaseException:
+        except Exception:
             self.fatalError.emit()
 
     @ pyqtSlot(str)
@@ -81,7 +81,7 @@ class FileIO(Settings):
             self.fileNotFound.emit(fPath)
         except IOError:
             self.fileHandleError.emit()
-        except BaseException:
+        except Exception:
             self.fatalError.emit()
 
     @ pyqtSlot(str, str)
@@ -96,7 +96,7 @@ class FileIO(Settings):
             self.fileNotFound.emit(fPath)
         except IOError:
             self.fileHandleError.emit()
-        except BaseException:
+        except Exception:
             self.fatalError.emit()
         else:
             self.setSettingsBool("last-used-file", "untitled", False)
@@ -116,5 +116,5 @@ class FileIO(Settings):
             self.fileOpenError.emit()
         except IOError:
             self.fileHandleError.emit()
-        except BaseException:
+        except Exception:
             self.fatalError.emit()

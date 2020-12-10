@@ -8,6 +8,7 @@ class Signals(QObject):
     def __init__(self, parent: None = None) -> None:
         super().__init__(parent)
 
+    platformNotSupported: pyqtSignal = pyqtSignal(str)
     settingsFileNotFound: pyqtSignal = pyqtSignal()
     licenseFileNotFound: pyqtSignal = pyqtSignal()
     readmeFileNotFound: pyqtSignal = pyqtSignal()

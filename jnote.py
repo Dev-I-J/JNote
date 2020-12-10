@@ -3,12 +3,17 @@ from PyQt5.QtCore import pyqtSlot, pyqtProperty
 from version_parser.version import Version
 from requests import get, RequestException
 from markdown import markdown
+from tempfile import mkstemp
 from fileio import FileIO
+import webbrowser
+import subprocess
 import datetime
+import sys
+import os
 import re
 
 # Typing Imports
-from typing import Dict, List, Any
+from typing import Dict, List, Tuple, Any
 
 
 class JNote(FileIO):
@@ -18,6 +23,7 @@ class JNote(FileIO):
     def __init__(self, parent: None = None) -> None:
         super().__init__(parent)
         self._updateInfo: Dict[str, str] = {}
+        self.__cleanupFiles: List[Tuple[int, str]] = []
 
     @pyqtSlot(bool)
     def checkUpdates(self, isStartup: bool) -> None:
@@ -27,7 +33,7 @@ class JNote(FileIO):
                 "https://api.github.com/repos/Dev-I-J/JNote/releases/latest"
             )
             with get(url) as r:
-                currentVersionStr: str = "v1.5.6"
+                currentVersionStr: str = "v1.6.0"
                 currentVersion: Version = Version(currentVersionStr)
                 newVersionStr: str = r.json()['tag_name']
                 newVersion: Version = Version(newVersionStr)
@@ -51,7 +57,7 @@ class JNote(FileIO):
             self.apiConnectError.emit()
         except KeyError:
             self.apiError.emit()
-        except BaseException:
+        except Exception:
             self.fatalError.emit()
 
     @pyqtSlot(str, str, bool, bool, result=list)
@@ -77,19 +83,55 @@ class JNote(FileIO):
                     for match in re.finditer(pattern, text):
                         result.append([match.span()[0], match.span()[1]])
             return result
-        except BaseException:
+        except Exception:
+            self.fatalError.emit()
+
+    @pyqtSlot(bool, str)
+    def render(self, md: bool, source: str) -> None:
+        try:
+            file, name = mkstemp(suffix=".html", text=True)
+            with open(name, "w") as tmpFile:
+                tmpFile.write(source if not md else markdown(source))
+                webbrowser.open_new_tab(name)
+                self.__cleanupFiles.append((file, name))
+        except Exception:
+            self.fatalError.emit()
+
+    @pyqtSlot(str)
+    def shellExec(self, command) -> None:
+        try:
+            if sys.platform == "win32":
+                subprocess.call("start cmd /k {}".format(command), shell=True)
+            else:
+                self.platformNotSupported.emit(sys.platform)
+        except Exception as e:
+            print(e)
+            self.fatalError.emit()
+
+    @pyqtSlot()
+    def clean(self) -> None:
+        try:
+            for file in self.__cleanupFiles:
+                try:
+                    os.close(file[0])
+                    os.remove(file[1])
+                except OSError:
+                    pass
+                except Exception:
+                    self.fatalError.emit()
+        except Exception:
             self.fatalError.emit()
 
     @pyqtProperty(str, constant=True)
     def about(self) -> str:
         """About JNote"""
         try:
-            with open("README.md", "r", encoding="utf-8") as aboutfile:
-                return markdown(aboutfile.read())
+            with open("data/about.html", "r", encoding="utf-8") as aboutfile:
+                return aboutfile.read()
         except FileNotFoundError:
             self.readmeFileNotFound.emit()
-            return "README.md Not Found."
-        except BaseException:
+            return "data/about.html Not Found."
+        except Exception:
             self.fatalError.emit()
             return ""
 
@@ -97,12 +139,13 @@ class JNote(FileIO):
     def gplLicense(self) -> str:
         """GNU GPL License"""
         try:
-            with open("LICENSE.md", "r", encoding="utf-8") as licensefile:
-                return markdown(licensefile.read())
+            with open(
+                    "data/license.html", "r", encoding="utf-8") as licensefile:
+                return licensefile.read()
         except FileNotFoundError:
             self.licenseFileNotFound.emit()
-            return "LICENSE.md Not Found."
-        except BaseException:
+            return "data/license.html Not Found."
+        except Exception:
             self.fatalError.emit()
             return ""
 
@@ -118,7 +161,7 @@ class JNote(FileIO):
             datetimestr: str = dtobject.strftime("%I:%M %p %d/%m/%Y")
             self.dateTimeInserted.emit()
             return datetimestr
-        except BaseException:
+        except Exception:
             self.fatalerror.emit()
             return ""
 

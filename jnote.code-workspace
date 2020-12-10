@@ -50,6 +50,7 @@
 			"quickstart",
 			"recommonmark",
 			"tkinter",
+			"tmpdir",
 			"toctree",
 			"undos",
 			"zipfiles"
@@ -59,6 +60,8 @@
 		"yaml.schemas": {
         	"https://raw.githubusercontent.com/travis-ci/travis-yml/master/schema.json": [".travis.yml"]
 		},
-		"editor.formatOnSave": true
+		"editor.formatOnSave": true,
+		"files.autoSave": "afterDelay",
+		"files.autoSaveDelay": 1
 	}
 }

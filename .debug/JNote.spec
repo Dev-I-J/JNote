@@ -17,7 +17,8 @@ data = [
     ("settings.toml", "."),
     ("LICENSE.md", "."),
     ("README.md", "."),
-    ("icons", "icons")
+    ("icons", "icons"),
+    ("data", "data")
 ]
 
 

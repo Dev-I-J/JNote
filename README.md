@@ -19,6 +19,8 @@ The current version is v1.5.6 and additional for basic functions of a note pad, 
 * Open the last opened file automatically when started,
 * Save and use the last used fonts when started,
 * Insert Date and Time,
+* Render Text As `HTML` Or `Markdown` In A Browser,
+* Execute Text In `cmd.exe` (Windows Only),
 * Super Clean Code.
 
 And Many More Cool Features...

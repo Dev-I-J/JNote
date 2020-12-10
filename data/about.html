@@ -1,0 +1,83 @@
+<h1 id="jnote-a-free-notepad">JNote - A Free NotePad</h1>
+<p><a href="https://travis-ci.org/Dev-I-J/JNote"><img src="https://travis-ci.org/Dev-I-J/JNote.svg?branch=master" alt="Build Status"></a>
+<a href="https://jnote-notepad.readthedocs.io/en/latest/?badge=latest"><img src="https://readthedocs.org/projects/jnote-notepad/badge/?version=latest" alt="Documentation Status"></a>
+<a href="https://opensource.org/licenses/GPL-3.0"><img src="https://img.shields.io/badge/license-GPL%203.0-green.svg" alt="License"></a></p>
+<p><img src="icons/logo.png" alt="JNote Logo"></p>
+<p><strong>JNote is a free NotePad</strong> application written in <em>Python and QML (PyQt5).</em> Binaries are available for Windows and Mac, but you can <em>build from source</em> for Linux (See Below).</p>
+<h2 id="features">Features</h2>
+<p>The current version is v1.5.6 and additional for basic functions of a note pad, it can</p>
+<ul>
+<li>Automatically Check For Updates,</li>
+<li>Determine A File Is Binary Or Not And Show Message,</li>
+<li>Automatically Guess and Use A Files Encoding While Opening,</li>
+<li>Open the last opened file automatically when started,</li>
+<li>Save and use the last used fonts when started,</li>
+<li>Insert Date and Time,</li>
+<li>Render Text As <code>HTML</code> Or <code>Markdown</code> In A Browser,</li>
+<li>Execute Text In A <code>Terminal</code> (or <code>CMD</code>),</li>
+<li>Super Clean Code.</li>
+</ul>
+<p>And Many More Cool Features...</p>
+<h2 id="download">Download</h2>
+<p>Download <a href="https://github.com/Dev-I-J/JNote/releases/latest">Here</a></p>
+<h2 id="build-from-source">Build From Source</h2>
+<p><strong>Assuming you already have <em>Python along with &#39;pip&#39;</em> and <em>Git</em> installed on your computer</strong>,</p>
+<h3 id="linux-mac-os">Linux / Mac OS</h3>
+<ol>
+<li>Clone This Repo in: <code>git clone https://github.com/Dev-I-J/JNote</code></li>
+<li>Install <code>shovel</code>: <code>python3 -m pip install shovel</code></li>
+<li><code>cd</code> to JNote: <code>cd JNote</code></li>
+<li>Build and Run App: <code>python3 -m shovel app.assembleAppRun</code></li>
+<li>Run App Afterwards: <code>python3 -m shovel app.runApp</code></li>
+</ol>
+<h3 id="windows">Windows</h3>
+<ol>
+<li>Clone This Repo in: <code>git clone https://github.com/Dev-I-J/JNote</code></li>
+<li>Install <code>shovel</code>: <code>python -m pip install shovel</code></li>
+<li><code>cd</code> to JNote: <code>cd JNote</code></li>
+<li>Build and Run App: <code>python -m shovel app.assembleAppRun</code></li>
+<li>Run App Afterwards: <code>python -m shovel app.runApp</code></li>
+</ol>
+<h2 id="price">Price</h2>
+<p>It&#39;s completely FREE and Open Source!</p>
+<h2 id="license">License</h2>
+<p>JNote is licensed under the GNU GPLv3 Open Source License.</p>
+<h2 id="documentation">Documentation</h2>
+<p>Available <a href="https://jnote-notepad.readthedocs.io/en/latest/">Here</a>.</p>
+<h2 id="additional-information">Additional Information</h2>
+<p>Additional Information about JNote</p>
+<h3 id="credits">Credits</h3>
+<ul>
+<li>All The Icons are provided by <a href="https://icons8.com">Icons8</a> For Free.</li>
+<li><a href="https://pypi.org/project/pipenv"><code>pipenv</code></a> Is Used For Dependency Management.</li>
+<li><a href="https://pypi.org/project/shovel"><code>shovel</code></a> Is Used To Make The Development Process Easier.</li>
+<li><a href="https://pypi.org/project/flake8"><code>flake8</code></a> Is Used For Linting Code.</li>
+<li><a href="https://pypi.org/project/rope"><code>rope</code></a> Is Used For Refactoring Code.</li>
+<li><a href="https://pypi.org/project/autopep8"><code>autopep8</code></a> Is Used For Formatting Code.</li>
+<li><a href="https://pypi.org/project/Sphinx/"><code>sphinx</code></a> Is Used To Generate Documentation.</li>
+<li>Code Hosted By <a href="https://github.com">GitHub</a>.</li>
+<li>Documentation Hosted By <a href="https://readthedocs.org">ReadTheDocs</a>.</li>
+<li>Continuous Integration (<code>CI/CD</code>) Provided By <a href="https://travis-ci.org">Travis CI</a>.</li>
+<li>The app is build with <a href="https://pypi.org/project/PyInstaller"><code>PyInstaller</code></a>.</li>
+<li>Special Thanks to <a href="https://vscode.com">VS Code</a> For Providing the Awesome Code Editor.</li>
+</ul>
+<h3 id="python-modules-used-in-development">Python Modules Used in Development</h3>
+<ul>
+<li><a href="https://pypi.org/project/PyQt5/"><code>PyQt5</code></a> for the GUI.</li>
+<li><a href="https://pypi.org/project/requests/"><code>requests</code></a> for Pinging the GitHub API to check for updates.</li>
+<li><a href="https://pypi.org/project/version-parser/"><code>version-parser</code></a> for Comparing Versions.</li>
+<li><a href="https://pypi.org/project/py-gfm/"><code>py-gfm</code></a> GitHub Flavored Markdown Extension for <code>markdown</code> module.</li>
+<li><a href="https://pypi.org/project/markdown/"><code>markdown</code></a> for Converting markdown from GitHub to HTML.</li>
+<li><a href="https://pypi.org/project/toml/"><code>toml</code></a> for parsing the settings file.</li>
+<li><a href="https://pypi.org/project/binaryornot/"><code>binaryornot</code></a> for <em>guessing</em> if files are binary or not.</li>
+<li><a href="https://pypi.org/project/cchardet/"><code>cchardet</code></a> for <em>guessing</em> the file encoding.</li>
+<li><a href="https://pypi.org/project/chardet/"><code>chardet</code></a> for backup plan if <code>cchardet</code> fails to determine the correct encoding.</li>
+</ul>
+<h2 id="coming-soon">Coming Soon</h2>
+<p>These functionalities are scheduled to be shipped with the future major releases.</p>
+<ul>
+<li>Command Line Access,</li>
+<li>Auto Updating,</li>
+<li>Settings dialog to control your preferences,</li>
+<li>Dark Mode!!</li>
+</ul>
