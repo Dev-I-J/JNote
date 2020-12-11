@@ -962,6 +962,31 @@ ApplicationWindow {
         onActivated: JNote.shellExec(mainTextArea.text)
     }
 
+    Shortcut {
+        sequence: "Ctrl+Shift+F"
+        onActivated: fontDialog.open()
+    }
+
+    Shortcut {
+        sequence: "Alt+Shift+A"
+        onActivated: aboutDialog.open()
+    }
+
+    Shortcut {
+        sequence: "Alt+Shift+L"
+        onActivated: licenseDialog.open()
+    }
+
+    Shortcut {
+        sequence: "Alt+Shift+D"
+        onActivated: Qt.openUrlExternally("https://jnote-notepad.readthedocs.io")
+    }
+
+    Shortcut {
+        sequence: "Alt+Shift+U"
+        onActivated: JNote.checkUpdates(true)
+    }
+
     Connections {
         target: JNote
 
