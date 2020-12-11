@@ -49,14 +49,13 @@ def cleanAppDebug():
     rmtree('./.debug/build', ignore_errors=True)
     rmtree('./.debug/dist', ignore_errors=True)
     rmtree('./.debug/icons', ignore_errors=True)
+    rmtree('./.debug/data', ignore_errors=True)
     remove("./.debug/signals.py")
     remove("./.debug/fileio.py")
     remove("./.debug/settings.py")
     remove("./.debug/main.py")
     remove("./.debug/main.qml")
     remove("./.debug/settings.toml")
-    remove("./.debug/README.md")
-    remove("./.debug/LICENSE.md")
 
 
 @task
@@ -74,9 +73,8 @@ def buildAppDebug():
     copyfile("./main.py", ".debug/main.py")
     copyfile("./main.qml", ".debug/main.qml")
     copyfile("./settings.toml", ".debug/settings.toml")
-    copyfile("./README.md", ".debug/README.md")
-    copyfile("./LICENSE.md", ".debug/LICENSE.md")
     copytree("./icons", ".debug/icons")
+    copytree("./data", ".debug/data")
     chdir("./.debug")
     shell(["pipenv", "run", "PyInstaller", "JNote.spec"])
     chdir("../")
