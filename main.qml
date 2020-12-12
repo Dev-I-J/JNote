@@ -984,7 +984,7 @@ ApplicationWindow {
 
     Shortcut {
         sequence: "Alt+Shift+U"
-        onActivated: JNote.checkUpdates(true)
+        onActivated: JNote.checkUpdates(false)
     }
 
     Connections {
