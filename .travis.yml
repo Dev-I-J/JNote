@@ -1,6 +1,6 @@
 os: linux
 dist: xenial
-language: shell
+language: python
 
 addons:
   homebrew:
@@ -9,9 +9,20 @@ addons:
 
 jobs:
   include:
+    - name: Lint Project With flake8
+      before_install: skip
+      install: pip install flake8
+      script: flake8 .
+      before_script: skip
+      after_success: skip
+      after_deploy: skip
+      deploy:
+        provider: script
+        script: true
     - name: PyInstaller Build - Mac
       if: commit_message =~ /\[build\]/ || commit_message =~ /\[mac\]/
       os: osx
+      language: shell
       osx_image: xcode11
       before_install: pip3 install --upgrade shovel
       before_deploy: shovel app.publishApp Mac $TRAVIS_TAG
@@ -19,6 +30,7 @@ jobs:
     - name: PyInstaller Build - Windows 32 bit
       if: commit_message =~ /\[build\]/ || commit_message =~ /\[win32\]/
       os: windows
+      language: shell
       env: PATH=/c/Python37:/c/Python37/Scripts:$PATH
       before_install: 
         - choco install python --version 3.7.6 --forcex86
@@ -29,6 +41,7 @@ jobs:
     - name: PyInstaller Build - Windows 64 bit
       if: commit_message =~ /\[build\]/ || commit_message =~ /\[win64\]/
       os: windows
+      language: shell
       env: PATH=/c/Python37:/c/Python37/Scripts:$PATH
       before_install: 
         - choco install python --version 3.7.6
