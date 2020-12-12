@@ -24,7 +24,7 @@ def cleanDoc():
 def runDoc():
     """Open Docs In New Browser Tab"""
     open_new_tab(
-        "file://{}".format(join(abspath("."), "docs/build/html/index.html"))
+        f"file://{join(abspath('.'), 'docs/build/html/index.html')}"
     )
 
 

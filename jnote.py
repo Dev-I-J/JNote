@@ -22,7 +22,7 @@ class JNote(FileIO):
 
     def __init__(self, parent: None = None) -> None:
         super().__init__(parent)
-        self._updateInfo: Dict[str, str] = {}
+        self.__updateInfo: Dict[str, str] = {}
         self.__cleanupFiles: List[Tuple[int, str]] = []
 
     @pyqtSlot(bool)
@@ -33,7 +33,7 @@ class JNote(FileIO):
                 "https://api.github.com/repos/Dev-I-J/JNote/releases/latest"
             )
             with get(url) as r:
-                currentVersionStr: str = "v1.6.2"
+                currentVersionStr: str = "v1.6.3"
                 currentVersion: Version = Version(currentVersionStr)
                 newVersionStr: str = r.json()['tag_name']
                 newVersion: Version = Version(newVersionStr)
@@ -90,22 +90,31 @@ class JNote(FileIO):
     def render(self, md: bool, source: str) -> None:
         try:
             file, name = mkstemp(suffix=".html", text=True)
+            self.__cleanupFiles.append((file, name))
             with open(name, "w") as tmpFile:
                 tmpFile.write(source if not md else markdown(source))
                 webbrowser.open_new_tab(name)
-                self.__cleanupFiles.append((file, name))
         except Exception:
             self.fatalError.emit()
 
     @pyqtSlot(str)
-    def shellExec(self, command: str) -> None:
+    def shellExec(self, script: str) -> None:
         try:
             if sys.platform == "win32":
-                subprocess.call("start cmd /k {}".format(command), shell=True)
+                file, name = mkstemp(suffix=".bat", text=True)
+                self.__cleanupFiles.append((file, name))
+                with open(name, "w") as tmpFile:
+                    tmpFile.write(script)
+                    subprocess.run(f"start cmd /k {name}", shell=True)
+            elif sys.platform == "darwin":
+                file, name = mkstemp(suffix=".sh", text=True)
+                self.__cleanupFiles.append((file, name))
+                with open(name, "w") as tmpFile:
+                    tmpFile.write(script)
+                    subprocess.run(f"open -W -a Terminal.app {name}")
             else:
                 self.platformNotSupported.emit(sys.platform)
-        except Exception as e:
-            print(e)
+        except Exception:
             self.fatalError.emit()
 
     @pyqtSlot()
@@ -152,7 +161,7 @@ class JNote(FileIO):
     @pyqtProperty("QVariant", constant=True)
     def updateInfo(self) -> Dict[str, str]:
         """Update Information"""
-        return self._updateInfo
+        return self.__updateInfo
 
     @pyqtProperty(str)
     def dateTime(self) -> str:
@@ -167,4 +176,4 @@ class JNote(FileIO):
 
     @updateInfo.setter
     def updateInfo(self, arg: Any) -> None:
-        self._updateInfo = arg
+        self.__updateInfo = arg

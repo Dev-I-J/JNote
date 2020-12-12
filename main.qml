@@ -987,6 +987,11 @@ ApplicationWindow {
         onActivated: JNote.checkUpdates(false)
     }
 
+    Shortcut {
+        sequence: "Alt+F4"
+        onActivated: confirmExit.open()
+    }
+
     Connections {
         target: JNote
 

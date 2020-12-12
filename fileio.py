@@ -67,10 +67,10 @@ class FileIO(Settings):
     @ pyqtSlot(str)
     def fileSave(self, fText: str) -> None:
         """Save File"""
+        fPath: str = self.getSettings("last-used-file")["path"]
         try:
             untitled: bool = self.getSettings("last-used-file")["untitled"]
             if not untitled:
-                fPath: str = self.getSettings("last-used-file")["path"]
                 fCoding: str = self.getSettings("last-used-file")["encoding"]
                 with open(fPath, "w", encoding=fCoding) as outFile:
                     outFile.write(fText)
@@ -105,8 +105,8 @@ class FileIO(Settings):
     @ pyqtSlot(result=str)
     def openLastOpenFile(self) -> str:
         """(re)Open last opened file"""
+        fPath: str = self.getSettings("last-used-file")["path"]
         try:
-            fPath: str = self.getSettings("last-used-file")["path"]
             fCoding: str = self.getSettings("last-used-file")["encoding"]
             with open(fPath, "r", encoding=fCoding) as text:
                 return text.read()

@@ -85,12 +85,12 @@ def publishApp(platform, version):
     """Put Builded Application In A Zip File Matching The Platform"""
     if platform.startswith("Mac"):
         shell([
-            "7z", "a", "JNote_{}_{}.zip".format(platform, version),
+            "7z", "a", f"JNote_{platform}_{version}.zip",
             "./dist/JNote.app"
         ])
     else:
         shell([
-            "7z", "a", "JNote_{}_{}.zip".format(platform, version),
+            "7z", "a", f"JNote_{platform}_{version}.zip",
             "./dist/JNote"
         ])
 

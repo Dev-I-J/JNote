@@ -67,13 +67,13 @@ class Settings(Signals):
         try:
             with open("settings.toml", "r") as settings:
                 toml_object: Dict[str, Any] = toml.load(settings)
+                return toml_object[category]
         except FileNotFoundError:
             self.settingsFileNotFound.emit()
         except toml.TomlDecodeError:
             self.settingsError.emit()
         except Exception:
             self.fatalError.emit()
-        return toml_object[category]
 
     @pyqtSlot()
     def addComments(self) -> None:
