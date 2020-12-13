@@ -10,6 +10,7 @@ addons:
 jobs:
   include:
     - name: Lint Project With flake8
+      cache: pip
       before_install: skip
       install: pip install flake8
       script: flake8 .
