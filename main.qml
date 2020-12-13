@@ -883,7 +883,6 @@ ApplicationWindow {
             JNote.setSettingsBool("last-used-formatting", "strikeout", fontDialog.strikeout)
             JNote.setSettingsBool("last-used-formatting", "bold", fontDialog.bold)
             JNote.setSettingsBool("last-used-formatting", "italic",fontDialog.italic)
-            JNote.addComments()
             JNote.clean()
             windowM.closing = true
             windowM.close()

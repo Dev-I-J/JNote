@@ -38,6 +38,7 @@ class FileIO(Settings):
                     self.setSettingsStr("last-used-file", "path", fPath)
                     self.setSettingsStr("last-used-file", "encoding", coding)
                     self.fileOpenSuccessful.emit()
+                    return fileText
             else:
                 self.fileOpenError.emit()
         except (UnicodeDecodeError, LookupError):

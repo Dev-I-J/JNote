@@ -33,7 +33,7 @@ class JNote(FileIO):
                 "https://api.github.com/repos/Dev-I-J/JNote/releases/latest"
             )
             with get(url) as r:
-                currentVersionStr: str = "v1.6.3"
+                currentVersionStr: str = "v1.6.4"
                 currentVersion: Version = Version(currentVersionStr)
                 newVersionStr: str = r.json()['tag_name']
                 newVersion: Version = Version(newVersionStr)
@@ -120,6 +120,7 @@ class JNote(FileIO):
     @pyqtSlot()
     def clean(self) -> None:
         try:
+            self.addComments()
             for file in self.__cleanupFiles:
                 try:
                     os.close(file[0])
