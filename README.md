@@ -5,6 +5,8 @@
 [![License](https://img.shields.io/badge/license-GPL%203.0-green.svg)](https://opensource.org/licenses/GPL-3.0)
 [![Run on Repl.it](https://repl.it/badge/github/Dev-I-J/JNote)](https://repl.it/github/Dev-I-J/JNote)
 
+[![Deepsource](https://static.deepsource.io/deepsource-badge-light.svg)](https://deepsource.io/gh/Dev-I-J/JNote/)
+
 ![JNote Logo](icons/logo.png)
 
 __JNote is a free NotePad__ application written in _Python and QML (PyQt5)._ Binaries are available for Windows and Mac, but you can _build from source_ for Linux (See Below).
