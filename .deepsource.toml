@@ -1,11 +1,12 @@
 version = 1
 
 exclude_patterns = [
-    ".debug/*",
-    "dist/*",
-    "build/*",
-    "docs/*",
-    "shovel/*"
+    "./.debug/**/*.*",
+    "./shovel/**/*.*",
+    "./dist/**/*.*",
+    "./build/**/*.*",
+    "./.vscode/**/*.*",
+    "./docs/**/*.*"
 ]
 
 [[analyzers]]
