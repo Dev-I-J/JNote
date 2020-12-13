@@ -10,8 +10,8 @@ class Settings(Signals):
 
     """All the Settings related stuff for JNote goes Here"""
 
-    def __init__(self, parent: None = None) -> None:
-        super().__init__(parent)
+    def __init__(self) -> None:
+        Signals.__init__(self)
 
     @pyqtSlot(str, str, str)
     def setSettingsStr(self, category: str, key: str, value: str) -> None:

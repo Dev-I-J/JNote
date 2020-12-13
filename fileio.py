@@ -9,8 +9,8 @@ class FileIO(Settings):
 
     """All the File I/O stuff of JNote goes Here"""
 
-    def __init__(self, parent: None = None) -> None:
-        super().__init__(parent)
+    def __init__(self) -> None:
+        Settings.__init__(self)
 
     @ pyqtSlot()
     def fileNew(self) -> None:

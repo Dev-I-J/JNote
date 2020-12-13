@@ -20,8 +20,8 @@ class JNote(FileIO):
 
     """Class Exposed to QML"""
 
-    def __init__(self, parent: None = None) -> None:
-        super().__init__(parent)
+    def __init__(self) -> None:
+        FileIO.__init__(self)
         self.__updateInfo: Dict[str, str] = {}
         self.__cleanupFiles: List[Tuple[int, str]] = []
 

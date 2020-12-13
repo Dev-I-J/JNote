@@ -5,8 +5,8 @@ class Signals(QObject):
 
     """Base Class For JNote"""
 
-    def __init__(self, parent: None = None) -> None:
-        super().__init__(parent)
+    def __init__(self) -> None:
+        QObject.__init__(self)
 
     platformNotSupported: pyqtSignal = pyqtSignal(str)
     settingsFileNotFound: pyqtSignal = pyqtSignal()
