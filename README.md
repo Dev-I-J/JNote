@@ -3,6 +3,7 @@
 [![Build Status](https://travis-ci.org/Dev-I-J/JNote.svg?branch=master)](https://travis-ci.org/Dev-I-J/JNote)
 [![Documentation Status](https://readthedocs.org/projects/jnote-notepad/badge/?version=latest)](https://jnote-notepad.readthedocs.io/en/latest/?badge=latest)
 [![License](https://img.shields.io/badge/license-GPL%203.0-green.svg)](https://opensource.org/licenses/GPL-3.0)
+[![DeepSource](https://deepsource.io/gh/Dev-I-J/JNote.svg/?label=active+issues&show_trend=true)](https://deepsource.io/gh/Dev-I-J/JNote/?ref=repository-badge)
 [![Run on Repl.it](https://repl.it/badge/github/Dev-I-J/JNote)](https://repl.it/github/Dev-I-J/JNote)
 
 [![Deepsource](https://static.deepsource.io/deepsource-badge-light.svg)](https://deepsource.io/gh/Dev-I-J/JNote/)
