@@ -967,6 +967,11 @@ ApplicationWindow {
     }
 
     Shortcut {
+        sequence: "Ctrl+Shift+W"
+        onActivated: wrapDialog.open()
+    }
+
+    Shortcut {
         sequence: "Alt+Shift+A"
         onActivated: aboutDialog.open()
     }

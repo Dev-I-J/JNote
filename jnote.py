@@ -33,7 +33,7 @@ class JNote(FileIO):
                 "https://api.github.com/repos/Dev-I-J/JNote/releases/latest"
             )
             with get(url) as r:
-                currentVersionStr: str = "v1.6.4"
+                currentVersionStr: str = "v1.6.5"
                 currentVersion: Version = Version(currentVersionStr)
                 newVersionStr: str = r.json()['tag_name']
                 newVersion: Version = Version(newVersionStr)
