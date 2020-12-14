@@ -84,8 +84,7 @@ class JNote(FileIO):
                         result.append([match.span()[0], match.span()[1]])
         except Exception:
             self.fatalError.emit()
-        finally:
-            return []
+        return []
 
     @pyqtSlot(bool, str)
     def render(self, md: bool, source: str) -> None:

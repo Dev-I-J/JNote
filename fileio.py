@@ -64,8 +64,7 @@ class FileIO(Settings):
             self.fileHandleError.emit()
         except Exception:
             self.fatalError.emit()
-        finally:
-            return ""
+        return ""
 
     @ pyqtSlot(str)
     def fileSave(self, fText: str) -> None:
@@ -121,5 +120,4 @@ class FileIO(Settings):
             self.fileHandleError.emit()
         except Exception:
             self.fatalError.emit()
-        finally:
-            return ""
+        return ""
