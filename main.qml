@@ -8,7 +8,7 @@ ApplicationWindow {
     property string winTitle: "JNote: A Free NotePad"
     property bool closing: false
     visible: true
-    width: 800
+    width: 900
     height: 600
     title: winTitle + " - Untitled"
 
@@ -222,6 +222,12 @@ ApplicationWindow {
             }
 
             MenuItem {
+                text: "Help"
+                icon.source: "icons/help.png"
+                onTriggered: Qt.openUrlExternally("https://github.com/Dev-I-J/JNote/discussions")
+            }
+
+            MenuItem {
                 text: "Documentation"
                 icon.source: "icons/documentation.png"
                 onTriggered: Qt.openUrlExternally("https://jnote-notepad.readthedocs.io")
@@ -371,7 +377,7 @@ ApplicationWindow {
 
     Dialog {
         id: aboutDialog
-        width: 400
+        width: 600
         height: 400
         title: "About - JNote"
         visible: false
@@ -403,7 +409,7 @@ ApplicationWindow {
         id: licenseDialog
         visible: false
         title: 'License - JNote'
-        width: 400
+        width: 600
         height: 400
             
         Flickable {
@@ -434,8 +440,8 @@ ApplicationWindow {
         visible: false
         title: 'Update - JNote'
         standardButtons: Dialog.No | Dialog.Yes
-        width: 400
-        height: 600
+        width: 600
+        height: 400
         onYes: Qt.openUrlExternally("https://github.com/Dev-I-J/JNote/releases/tag/"+updateText.newVersion)
 
         Flickable {
@@ -989,6 +995,11 @@ ApplicationWindow {
     Shortcut {
         sequence: "Alt+Shift+U"
         onActivated: JNote.checkUpdates(false)
+    }
+
+    Shortcut {
+        sequence: "Alt+Shift+H"
+        onActivated : Qt.openUrlExternally("https://github.com/Dev-I-J/JNote/discussions")
     }
 
     Shortcut {

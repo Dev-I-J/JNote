@@ -30,6 +30,10 @@ And Many More Cool Features...
 
 Download [Here](https://github.com/Dev-I-J/JNote/releases/latest)
 
+## Help
+
+Available At [Github Discussions](https://github.com/Dev-I-J/JNote/discussions)
+
 ## Build From Source
 
 __Assuming you already have _Python along with 'pip'_ and _Git_ installed on your computer__,
