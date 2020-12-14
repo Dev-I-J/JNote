@@ -74,6 +74,8 @@ class Settings(Signals):
             self.settingsError.emit()
         except Exception:
             self.fatalError.emit()
+        finally:
+            return {}
 
     @staticmethod
     def addComments() -> None:

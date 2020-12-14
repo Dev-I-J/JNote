@@ -82,9 +82,10 @@ class JNote(FileIO):
                 else:
                     for match in re.finditer(pattern, text):
                         result.append([match.span()[0], match.span()[1]])
-            return result
         except Exception:
             self.fatalError.emit()
+        finally:
+            return []
 
     @pyqtSlot(bool, str)
     def render(self, md: bool, source: str) -> None:
