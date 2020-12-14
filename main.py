@@ -6,7 +6,7 @@ from jnote import JNote
 import sys
 
 
-de run() -> int:
+def run() -> int:
     """
     Function To Run The Script
 
