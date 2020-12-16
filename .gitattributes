@@ -1,1 +1,2 @@
 *.toml linguist-detectable=true
+*.iss linguist-detectable=false
