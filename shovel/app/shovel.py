@@ -83,12 +83,20 @@ def buildAppDebug():
 @task
 def publishApp(platform, version):
     """Put Builded Application In A Zip File Matching The Platform"""
-    if platform.startswith("Mac"):
+    if platform == "Mac":
         shell([
             "7z", "a", f"JNote_{platform}_{version}.zip",
             "./dist/JNote.app"
         ])
     else:
+        if platform = "Windows_32bit":
+            shell([
+                "iscc", "inno_setup_32.iss"
+            ])
+        elif platform = "Windows_64bit":
+            shell([
+                "iscc", "inno_setup_64.iss"
+            ])
         shell([
             "7z", "a", f"JNote_{platform}_{version}.zip",
             "./dist/JNote"
