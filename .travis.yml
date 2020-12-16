@@ -33,6 +33,7 @@ jobs:
       env: PATH=/c/Python37:/c/Python37/Scripts:$PATH
       before_install: 
         - choco install python --version 3.7.6 --forcex86
+        - choco install innosetup --forcex86
         - choco install 7zip --forcex86
         - pip3 install --upgrade shovel
       before_deploy: shovel app.publishApp Windows_32bit $TRAVIS_TAG
@@ -44,6 +45,7 @@ jobs:
       env: PATH=/c/Python37:/c/Python37/Scripts:$PATH
       before_install: 
         - choco install python --version 3.7.6
+        - choco install innosetup
         - choco install 7zip
         - pip3 install --upgrade shovel
       before_deploy: shovel app.publishApp Windows_64bit $TRAVIS_TAG
@@ -62,7 +64,9 @@ deploy:
   provider: releases
   token: $RELEASE_TOKEN
   file_glob: true
-  file: JNote_*.zip
+  file:
+    - JNote_*.zip
+    - JNote_*.exe
   skip_cleanup: true
   draft: true
   on:
