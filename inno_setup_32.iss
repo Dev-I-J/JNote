@@ -34,8 +34,8 @@ Name: desktopicon\common; Description: "{cm:AllUsers}"; GroupDescription: "Addit
 Name: desktopicon\user; Description: "{cm:CurrentUser}"; GroupDescription: "Additional icons:"; Flags: exclusive unchecked
 
 [Files]
-Source: "D:\Dev\Wing\JNote\dist\JNote\JNote.exe"; DestDir: "{app}"; Flags: ignoreversion
-Source: "D:\Dev\Wing\JNote\dist\JNote\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
+Source: ".\dist\JNote\JNote.exe"; DestDir: "{app}"; Flags: ignoreversion
+Source: ".\dist\JNote\*"; DestDir: "{app}"; Flags: ignoreversion recursesubdirs createallsubdirs
 
 [Icons]
 Name: "{group}\{#JAppName}"; Filename: "{app}\{#JAppExeName}"
