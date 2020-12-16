@@ -89,11 +89,11 @@ def publishApp(platform, version):
             "./dist/JNote.app"
         ])
     else:
-        if platform = "Windows_32bit":
+        if platform == "Windows_32bit":
             shell([
                 "iscc", "inno_setup_32.iss"
             ])
-        elif platform = "Windows_64bit":
+        elif platform == "Windows_64bit":
             shell([
                 "iscc", "inno_setup_64.iss"
             ])
