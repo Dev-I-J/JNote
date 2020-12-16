@@ -8,9 +8,13 @@
 		"cSpell.words": [
 			"Arial",
 			"Casesensitive",
+			"Codepage",
 			"Deepsource",
 			"Deps",
 			"Flickable",
+			"Induwara",
+			"Jayaweera",
+			"Jayaweera's",
 			"Structify",
 			"VCSs",
 			"Virtualenv",
@@ -54,6 +58,7 @@
 			"tmpdir",
 			"toctree",
 			"undos",
+			"wixpy",
 			"zipfiles"
 		],
 		"travis.username": "Dev-I-J",
