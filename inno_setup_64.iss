@@ -1,8 +1,4 @@
-#define JAppName "JNote"
-#define JAppVersion "1.6.7"
-#define JAppPublisher "Induwara Jayaweera"
-#define JAppURL "http://www.github.com/dev-i-j/jnote"
-#define JAppExeName "JNote.exe"
+#include "vars.iss"
 
 [Setup]
 AppId={{FF21436A-C5D8-442A-9CC4-6FA8C6D0E84A}

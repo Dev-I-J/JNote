@@ -222,8 +222,8 @@ ApplicationWindow {
             }
 
             MenuItem {
-                text: "Help"
-                icon.source: "icons/help.png"
+                text: "Support"
+                icon.source: "icons/support.png"
                 onTriggered: Qt.openUrlExternally("https://github.com/Dev-I-J/JNote/discussions")
             }
 
