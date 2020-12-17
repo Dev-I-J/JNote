@@ -1,5 +1,6 @@
 from PyQt5.QtCore import pyqtSlot
 from signals import Signals
+import traceback
 import toml
 
 # Typing Imports
@@ -27,7 +28,7 @@ class Settings(Signals):
         except toml.TomlDecodeError:
             self.settingsError.emit()
         except Exception:
-            self.fatalError.emit()
+            self.fatalError.emit(traceback.format_exc())
 
     @pyqtSlot(str, str, int)
     def setSettingsInt(self, category: str, key: str, value: int) -> None:
@@ -43,7 +44,7 @@ class Settings(Signals):
         except toml.TomlDecodeError:
             self.settingsError.emit()
         except Exception:
-            self.fatalError.emit()
+            self.fatalError.emit(traceback.format_exc())
 
     @pyqtSlot(str, str, bool)
     def setSettingsBool(self, category: str, key: str, value: bool) -> None:
@@ -59,7 +60,7 @@ class Settings(Signals):
         except toml.TomlDecodeError:
             self.settingsError.emit()
         except Exception:
-            self.fatalError.emit()
+            self.fatalError.emit(traceback.format_exc())
 
     @pyqtSlot(str, result='QVariant')
     def getSettings(self, category: str) -> Dict[str, Any]:
@@ -73,5 +74,5 @@ class Settings(Signals):
         except toml.TomlDecodeError:
             self.settingsError.emit()
         except Exception:
-            self.fatalError.emit()
+            self.fatalError.emit(traceback.format_exc())
         return {}

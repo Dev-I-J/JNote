@@ -7,6 +7,7 @@ from tempfile import mkstemp
 from fileio import FileIO
 import webbrowser
 import subprocess
+import traceback
 import datetime
 import sys
 import os
@@ -33,7 +34,7 @@ class JNote(FileIO):
                 "https://api.github.com/repos/Dev-I-J/JNote/releases/latest"
             )
             with get(url) as r:
-                currentVersionStr: str = "v1.6.7"
+                currentVersionStr: str = "v1.6.9"
                 currentVersion: Version = Version(currentVersionStr)
                 newVersionStr: str = r.json()['tag_name']
                 newVersion: Version = Version(newVersionStr)
@@ -58,7 +59,7 @@ class JNote(FileIO):
         except KeyError:
             self.apiError.emit()
         except Exception:
-            self.fatalError.emit()
+            self.fatalError.emit(traceback.format_exc())
         finally:
             sys.exit()
 
@@ -84,8 +85,11 @@ class JNote(FileIO):
                 else:
                     for match in re.finditer(pattern, text):
                         result.append([match.span()[0], match.span()[1]])
+            return result
+        except re.error as e:
+            self.regexError.emit(pattern, e.msg)
         except Exception:
-            self.fatalError.emit()
+            self.fatalError.emit(traceback.format_exc())
         return []
 
     @pyqtSlot(bool, str)
@@ -97,7 +101,7 @@ class JNote(FileIO):
                 tmpFile.write(source if not md else markdown(source))
                 webbrowser.open_new_tab(name)
         except Exception:
-            self.fatalError.emit()
+            self.fatalError.emit(traceback.format_exc())
 
     @pyqtSlot(str)
     def shellExec(self, script: str) -> None:
@@ -117,7 +121,7 @@ class JNote(FileIO):
             else:
                 self.platformNotSupported.emit(sys.platform)
         except Exception:
-            self.fatalError.emit()
+            self.fatalError.emit(traceback.format_exc())
 
     @pyqtSlot()
     def clean(self) -> None:
@@ -130,9 +134,9 @@ class JNote(FileIO):
                 except OSError:
                     pass
                 except Exception:
-                    self.fatalError.emit()
+                    self.fatalError.emit(traceback.format_exc())
         except Exception:
-            self.fatalError.emit()
+            self.fatalError.emit(traceback.format_exc())
 
     @staticmethod
     def __addComments() -> None:
@@ -160,7 +164,7 @@ class JNote(FileIO):
             self.readmeFileNotFound.emit()
             return "data/about.html Not Found."
         except Exception:
-            self.fatalError.emit()
+            self.fatalError.emit(traceback.format_exc())
             return ""
 
     @pyqtProperty(str, constant=True)
@@ -174,7 +178,7 @@ class JNote(FileIO):
             self.licenseFileNotFound.emit()
             return "data/license.html Not Found."
         except Exception:
-            self.fatalError.emit()
+            self.fatalError.emit(traceback.format_exc())
             return ""
 
     @pyqtProperty("QVariant", constant=True)

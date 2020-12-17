@@ -765,8 +765,10 @@ ApplicationWindow {
 
     MessageDialog {
         id: fatalError
+        property string error: ""
         title: "Fatal Error"
         text: "A Fatal Error Occurred!"
+        detailedText: error
         icon: StandardIcon.Critical
         onAccepted: Qt.quit()
         onRejected: Qt.quit()
@@ -862,6 +864,17 @@ ApplicationWindow {
         title: "Platform Not Supported"
         text: "This Functions Isn't Supported On You Operating System " + platform + " Yet."
         icon: StandardIcon.Warning
+        visible: false
+    }
+
+    MessageDialog {
+        id: regexError
+        property string error: ""
+        property string regex: ""
+        title: "Regex Error"
+        text: "The Following Error Occurred With Your Regular Expression \"" + regex + "\":"
+        informativeText : error
+        icon: StandardIcon.Information
         visible: false
     }
 
@@ -1035,8 +1048,9 @@ ApplicationWindow {
             statusText.text = "An Error Occurred with the GitHub API"
         }
 
-        function onFatalError() {
+        function onFatalError(error) {
             statusText.text = "A Fatal Error Occurred!"
+            fatalError.error = error
             fatalError.open()
         }
 
@@ -1111,6 +1125,12 @@ ApplicationWindow {
         function onPlatformNotSupported(platform) {
             platformNotSupportedError.platform = platform
             platformNotSupportedError.open()
+        }
+
+        function onRegexError(regex, error) {
+            regexError.regex = regex
+            regexError.error = error
+            regexError.open()
         }
     }
 

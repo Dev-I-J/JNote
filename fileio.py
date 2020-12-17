@@ -1,6 +1,7 @@
 from PyQt5.QtCore import pyqtSlot
 from settings import Settings
 from binaryornot import check
+import traceback
 import cchardet
 import chardet
 
@@ -22,7 +23,7 @@ class FileIO(Settings):
             self.setSettingsStr("last-used-file", "text", "")
             self.newDocumentCreated.emit()
         except Exception:
-            self.fatalError.emit()
+            self.fatalError.emit(traceback.format_exc())
 
     @ pyqtSlot(str, result=str)
     def fileOpen(self, fPath: str) -> str:
@@ -57,13 +58,13 @@ class FileIO(Settings):
             except IOError:
                 self.fileHandleError.emit()
             except Exception:
-                self.fatalError.emit()
+                self.fatalError.emit(traceback.format_exc())
         except FileNotFoundError:
             self.fileNotFound.emit(fPath)
         except IOError:
             self.fileHandleError.emit()
         except Exception:
-            self.fatalError.emit()
+            self.fatalError.emit(traceback.format_exc())
         return ""
 
     @ pyqtSlot(str)
@@ -84,7 +85,7 @@ class FileIO(Settings):
         except IOError:
             self.fileHandleError.emit()
         except Exception:
-            self.fatalError.emit()
+            self.fatalError.emit(traceback.format_exc())
 
     @ pyqtSlot(str, str)
     def fileSaveAs(self, fPath: str, fText: str) -> None:
@@ -99,7 +100,7 @@ class FileIO(Settings):
         except IOError:
             self.fileHandleError.emit()
         except Exception:
-            self.fatalError.emit()
+            self.fatalError.emit(traceback.format_exc())
         else:
             self.setSettingsBool("last-used-file", "untitled", False)
             self.setSettingsStr("last-used-file", "path", fPath)
@@ -119,5 +120,5 @@ class FileIO(Settings):
         except IOError:
             self.fileHandleError.emit()
         except Exception:
-            self.fatalError.emit()
+            self.fatalError.emit(traceback.format_exc())
         return ""
