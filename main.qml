@@ -766,8 +766,10 @@ ApplicationWindow {
     MessageDialog {
         id: fatalError
         property string error: ""
+        property string shortError: ""
         title: "Fatal Error"
-        text: "A Fatal Error Occurred!"
+        text: "The Following Fatal Error Had Occurred:"
+        informativeText: shortError
         detailedText: error
         icon: StandardIcon.Critical
         onAccepted: Qt.quit()
@@ -1048,9 +1050,10 @@ ApplicationWindow {
             statusText.text = "An Error Occurred with the GitHub API"
         }
 
-        function onFatalError(error) {
+        function onFatalError(shortError, error) {
             statusText.text = "A Fatal Error Occurred!"
             fatalError.error = error
+            fatalError.shortError = shortError
             fatalError.open()
         }
 
@@ -1128,6 +1131,7 @@ ApplicationWindow {
         }
 
         function onRegexError(regex, error) {
+            statusText.text = "Invalid Regular Expression - \"" + regex + "\"!"
             regexError.regex = regex
             regexError.error = error
             regexError.open()

@@ -27,8 +27,8 @@ class Settings(Signals):
             self.settingsFileNotFound.emit()
         except toml.TomlDecodeError:
             self.settingsError.emit()
-        except Exception:
-            self.fatalError.emit(traceback.format_exc())
+        except Exception as e:
+            self.fatalError.emit(str(e), traceback.format_exc())
 
     @pyqtSlot(str, str, int)
     def setSettingsInt(self, category: str, key: str, value: int) -> None:
@@ -43,8 +43,8 @@ class Settings(Signals):
             self.settingsFileNotFound.emit()
         except toml.TomlDecodeError:
             self.settingsError.emit()
-        except Exception:
-            self.fatalError.emit(traceback.format_exc())
+        except Exception as e:
+            self.fatalError.emit(str(e), traceback.format_exc())
 
     @pyqtSlot(str, str, bool)
     def setSettingsBool(self, category: str, key: str, value: bool) -> None:
@@ -59,8 +59,8 @@ class Settings(Signals):
             self.settingsFileNotFound.emit()
         except toml.TomlDecodeError:
             self.settingsError.emit()
-        except Exception:
-            self.fatalError.emit(traceback.format_exc())
+        except Exception as e:
+            self.fatalError.emit(str(e), traceback.format_exc())
 
     @pyqtSlot(str, result='QVariant')
     def getSettings(self, category: str) -> Dict[str, Any]:
@@ -73,6 +73,6 @@ class Settings(Signals):
             self.settingsFileNotFound.emit()
         except toml.TomlDecodeError:
             self.settingsError.emit()
-        except Exception:
-            self.fatalError.emit(traceback.format_exc())
+        except Exception as e:
+            self.fatalError.emit(str(e), traceback.format_exc())
         return {}

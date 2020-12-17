@@ -34,7 +34,7 @@ class JNote(FileIO):
                 "https://api.github.com/repos/Dev-I-J/JNote/releases/latest"
             )
             with get(url) as r:
-                currentVersionStr: str = "v1.6.10"
+                currentVersionStr: str = "v1.6.11"
                 currentVersion: Version = Version(currentVersionStr)
                 newVersionStr: str = r.json()['tag_name']
                 newVersion: Version = Version(newVersionStr)
@@ -58,8 +58,8 @@ class JNote(FileIO):
             self.apiConnectError.emit()
         except KeyError:
             self.apiError.emit()
-        except Exception:
-            self.fatalError.emit(traceback.format_exc())
+        except Exception as e:
+            self.fatalError.emit(str(e), traceback.format_exc())
 
     @pyqtSlot(str, str, bool, bool, result=list)
     def findText(
@@ -86,8 +86,8 @@ class JNote(FileIO):
             return result
         except re.error as e:
             self.regexError.emit(pattern, e.msg)
-        except Exception:
-            self.fatalError.emit(traceback.format_exc())
+        except Exception as e:
+            self.fatalError.emit(str(e), traceback.format_exc())
         return []
 
     @pyqtSlot(bool, str)
@@ -98,8 +98,8 @@ class JNote(FileIO):
             with open(name, "w") as tmpFile:
                 tmpFile.write(source if not md else markdown(source))
                 webbrowser.open_new_tab(name)
-        except Exception:
-            self.fatalError.emit(traceback.format_exc())
+        except Exception as e:
+            self.fatalError.emit(str(e), traceback.format_exc())
 
     @pyqtSlot(str)
     def shellExec(self, script: str) -> None:
@@ -118,8 +118,8 @@ class JNote(FileIO):
                     subprocess.run(f"open -W -a Terminal.app {name}")
             else:
                 self.platformNotSupported.emit(sys.platform)
-        except Exception:
-            self.fatalError.emit(traceback.format_exc())
+        except Exception as e:
+            self.fatalError.emit(str(e), traceback.format_exc())
 
     @pyqtSlot()
     def clean(self) -> None:
@@ -133,8 +133,8 @@ class JNote(FileIO):
                     pass
                 except Exception:
                     self.fatalError.emit(traceback.format_exc())
-        except Exception:
-            self.fatalError.emit(traceback.format_exc())
+        except Exception as e:
+            self.fatalError.emit(str(e), traceback.format_exc())
 
     @staticmethod
     def __addComments() -> None:
@@ -161,8 +161,8 @@ class JNote(FileIO):
         except FileNotFoundError:
             self.readmeFileNotFound.emit()
             return "data/about.html Not Found."
-        except Exception:
-            self.fatalError.emit(traceback.format_exc())
+        except Exception as e:
+            self.fatalError.emit(str(e), traceback.format_exc())
             return ""
 
     @pyqtProperty(str, constant=True)
@@ -175,8 +175,8 @@ class JNote(FileIO):
         except FileNotFoundError:
             self.licenseFileNotFound.emit()
             return "data/license.html Not Found."
-        except Exception:
-            self.fatalError.emit(traceback.format_exc())
+        except Exception as e:
+            self.fatalError.emit(str(e), traceback.format_exc())
             return ""
 
     @pyqtProperty("QVariant", constant=True)

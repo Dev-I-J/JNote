@@ -22,8 +22,8 @@ class FileIO(Settings):
             self.setSettingsStr("last-used-file", "path", "")
             self.setSettingsStr("last-used-file", "text", "")
             self.newDocumentCreated.emit()
-        except Exception:
-            self.fatalError.emit(traceback.format_exc())
+        except Exception as e:
+            self.fatalError.emit(str(e), traceback.format_exc())
 
     @ pyqtSlot(str, result=str)
     def fileOpen(self, fPath: str) -> str:
@@ -63,8 +63,8 @@ class FileIO(Settings):
             self.fileNotFound.emit(fPath)
         except IOError:
             self.fileHandleError.emit()
-        except Exception:
-            self.fatalError.emit(traceback.format_exc())
+        except Exception as e:
+            self.fatalError.emit(str(e), traceback.format_exc())
         return ""
 
     @ pyqtSlot(str)
@@ -84,8 +84,8 @@ class FileIO(Settings):
             self.fileNotFound.emit(fPath)
         except IOError:
             self.fileHandleError.emit()
-        except Exception:
-            self.fatalError.emit(traceback.format_exc())
+        except Exception as e:
+            self.fatalError.emit(str(e), traceback.format_exc())
 
     @ pyqtSlot(str, str)
     def fileSaveAs(self, fPath: str, fText: str) -> None:
@@ -99,8 +99,8 @@ class FileIO(Settings):
             self.fileNotFound.emit(fPath)
         except IOError:
             self.fileHandleError.emit()
-        except Exception:
-            self.fatalError.emit(traceback.format_exc())
+        except Exception as e:
+            self.fatalError.emit(str(e), traceback.format_exc())
         else:
             self.setSettingsBool("last-used-file", "untitled", False)
             self.setSettingsStr("last-used-file", "path", fPath)
@@ -119,6 +119,6 @@ class FileIO(Settings):
             self.fileOpenError.emit()
         except IOError:
             self.fileHandleError.emit()
-        except Exception:
-            self.fatalError.emit(traceback.format_exc())
+        except Exception as e:
+            self.fatalError.emit(str(e), traceback.format_exc())
         return ""
