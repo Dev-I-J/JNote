@@ -8,7 +8,7 @@ ApplicationWindow {
     property string winTitle: "JNote: A Free NotePad"
     property bool closing: false
     visible: true
-    width: 900
+    width: 1000
     height: 600
     title: winTitle + " - Untitled"
 
