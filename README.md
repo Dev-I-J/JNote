@@ -12,7 +12,7 @@ __JNote is a free NotePad__ application written in _Python and QML (PyQt5)._ Bin
 
 ## Features
 
-The current version is v1.6.11 and additional for basic functions of a note pad, it can
+The current version is v1.6.12 and additional for basic functions of a note pad, it can
 
 * Automatically Check For Updates,
 * Determine A File Is Binary Or Not And Show Message,
@@ -83,6 +83,7 @@ Additional Information about JNote
 * Documentation Hosted By [ReadTheDocs](https://readthedocs.org).
 * Continuous Integration (`CI/CD`) Provided By [Travis CI](https://travis-ci.org).
 * The app is build with [`PyInstaller`](https://pypi.org/project/PyInstaller).
+* The `Executable Installers (.exe)` for `Windows` are created with [`InnoSetup`](https://jrsoftware.org/isinfo.php)
 * Special Thanks to [VS Code](https://vscode.com) For Providing the Awesome Code Editor.
 
 ### Python Modules Used in Development

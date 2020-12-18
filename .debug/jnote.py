@@ -34,7 +34,7 @@ class JNote(FileIO):
                 "https://api.github.com/repos/Dev-I-J/JNote/releases/latest"
             )
             with get(url) as r:
-                currentVersionStr: str = "v1.6.11"
+                currentVersionStr: str = "v1.6.12"
                 currentVersion: Version = Version(currentVersionStr)
                 newVersionStr: str = r.json()['tag_name']
                 newVersion: Version = Version(newVersionStr)
@@ -50,6 +50,8 @@ class JNote(FileIO):
                     self.updateInfo["details"] = info
                     self.updateInfo["date"] = date
                     self.updateAvailable.emit()
+                elif currentVersion < newVersion:
+                    self.apiError.emit()
                 else:
                     if not isStartup:
                         self.updateInfo["currentVersion"] = currentVersionStr
