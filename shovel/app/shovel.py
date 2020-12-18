@@ -9,6 +9,7 @@ from shutil import rmtree, copyfile, copytree
 def installDeps(pipPath="pip"):
     """Install Dependencies"""
     shell([pipPath, "install", "--upgrade", "pipenv"])
+    shell(["pipenv", "lock"])
     shell(["pipenv", "install", "--dev"])
 
 
