@@ -656,8 +656,11 @@ ApplicationWindow {
         title: "Select Wrap Mode"
         visible: false
 
-        ColumnLayout {
+        RowLayout {
+            anchors.fill: parent
+
             RadioButton {
+                Layout.alignment: Qt.AlignLeft
                 id: wrapText
                 text: "Wrap"
                 checked: true
@@ -671,6 +674,7 @@ ApplicationWindow {
             }
 
             RadioButton {
+                Layout.alignment: Qt.AlignRight
                 id: doNotWrapText
                 text: "Don't Wrap"
                 onClicked: mainTextArea.wrapMode = TextArea.NoWrap
@@ -681,7 +685,7 @@ ApplicationWindow {
     Dialog {
         id: findDialog
         title: "Find"
-        width: 200
+        width: 300
         height: 100
         modality: Qt.NonModal
         standardButtons: StandardButton.NoButton
@@ -691,7 +695,7 @@ ApplicationWindow {
             anchors.fill: parent
 
             TextField {
-                Layout.alignment: Qt.AlignHCenter
+                Layout.fillWidth: true
                 id: findInput
                 text: ""
                 placeholderText: "Put your text here!"
