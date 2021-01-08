@@ -176,10 +176,10 @@
         },
         "version-parser": {
             "hashes": [
-                "sha256:9ba1e08df3f37db72a1c17b1d184127ae785c34b6c41499678df3b2ad20e9058"
+                "sha256:7320b00cab8a04694206818c9129864dd0783cec0c0eff25b1c922e7d838dbc0"
             ],
             "index": "pypi",
-            "version": "==1.0.0"
+            "version": "==1.0.1"
         },
         "zipp": {
             "hashes": [
@@ -400,7 +400,6 @@
                 "sha256:16962c5fb8db4a8f63a26646d8886e9d769b6c511543557bc84e9569fb9a9cb4",
                 "sha256:180befebb1927b16f6b57101720075a984c019ac16b1b7575673bea42c6c3da5"
             ],
-            "index": "pypi",
             "version": "==2020.5"
         },
         "recommonmark": {
