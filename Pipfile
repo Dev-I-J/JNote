@@ -4,7 +4,7 @@ url = "https://pypi.org/simple"
 verify_ssl = true
 
 [dev-packages]
-PyInstaller = "4.0"
+PyInstaller = "4.2"
 macholib = {version = "1.14", sys_platform = "== 'darwin'"}
 flake8 = "*"
 recommonmark = "*"

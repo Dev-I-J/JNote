@@ -1,7 +1,7 @@
 {
     "_meta": {
         "hash": {
-            "sha256": "ea851ae7c0f2febc8aad2e46d2bb4bece8a481e2072c780b209d2a2d1ac3c419"
+            "sha256": "9304b5cb82571c10e170884b2ba7e10b6c4cd17d7e7efdd2a6641df5a23ee832"
         },
         "pipfile-spec": 6,
         "requires": {
@@ -377,10 +377,10 @@
         },
         "pyinstaller": {
             "hashes": [
-                "sha256:954ae81de9a4bc096ff02433b3e245b9272fe53f27cac319e71fe7540952bd3d"
+                "sha256:f5c0eeb2aa663cce9a5404292c0195011fa500a6501c873a466b2e8cad3c950c"
             ],
             "index": "pypi",
-            "version": "==4.1"
+            "version": "==4.2"
         },
         "pyinstaller-hooks-contrib": {
             "hashes": [
