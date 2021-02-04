@@ -206,10 +206,11 @@
         },
         "autopep8": {
             "hashes": [
-                "sha256:d21d3901cb0da6ebd1e83fc9b0dfbde8b46afc2ede4fe32fbda0c7c6118ca094"
+                "sha256:9e136c472c475f4ee4978b51a88a494bfcd4e3ed17950a44a988d9e434837bea",
+                "sha256:cae4bc0fb616408191af41d062d7ec7ef8679c7f27b068875ca3a9e2878d5443"
             ],
             "index": "pypi",
-            "version": "==1.5.4"
+            "version": "==1.5.5"
         },
         "babel": {
             "hashes": [
@@ -282,7 +283,6 @@
                 "sha256:03e47ad063331dd6a3f04a43eddca8a966a26ba0c5b7207a9a9e4e08f1b29419",
                 "sha256:a6d58433de0ae800347cab1fa3043cebbabe8baa9d29e668f1c768cb87a333c6"
             ],
-            "index": "pypi",
             "version": "==2.11.3"
         },
         "macholib": {
@@ -417,10 +417,10 @@
         },
         "pytz": {
             "hashes": [
-                "sha256:16962c5fb8db4a8f63a26646d8886e9d769b6c511543557bc84e9569fb9a9cb4",
-                "sha256:180befebb1927b16f6b57101720075a984c019ac16b1b7575673bea42c6c3da5"
+                "sha256:83a4a90894bf38e243cf052c8b58f381bfe9a7a483f6a9cab140bc7f702ac4da",
+                "sha256:eb10ce3e7736052ed3623d49975ce333bcd712c7bb19a58b9e2089d4057d0798"
             ],
-            "version": "==2020.5"
+            "version": "==2021.1"
         },
         "recommonmark": {
             "hashes": [
