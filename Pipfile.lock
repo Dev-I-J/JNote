@@ -389,10 +389,10 @@
         },
         "pygments": {
             "hashes": [
-                "sha256:bc9591213a8f0e0ca1a5e68a479b4887fdc3e75d0774e5c71c31920c427de435",
-                "sha256:df49d09b498e83c1a73128295860250b0b7edd4c723a32e9bc0d295c7c2ec337"
+                "sha256:37a13ba168a02ac54cc5891a42b1caec333e59b66addb7fa633ea8a6d73445c0",
+                "sha256:b21b072d0ccdf29297a82a2363359d99623597b8a265b8081760e4d0f7153c88"
             ],
-            "version": "==2.7.4"
+            "version": "==2.8.0"
         },
         "pyinstaller": {
             "hashes": [
@@ -420,7 +420,6 @@
                 "sha256:83a4a90894bf38e243cf052c8b58f381bfe9a7a483f6a9cab140bc7f702ac4da",
                 "sha256:eb10ce3e7736052ed3623d49975ce333bcd712c7bb19a58b9e2089d4057d0798"
             ],
-            "index": "pypi",
             "version": "==2021.1"
         },
         "recommonmark": {
@@ -462,11 +461,11 @@
         },
         "sphinx": {
             "hashes": [
-                "sha256:41cad293f954f7d37f803d97eb184158cfd90f51195131e94875bc07cd08b93c",
-                "sha256:c314c857e7cd47c856d2c5adff514ac2e6495f8b8e0f886a8a37e9305dfea0d8"
+                "sha256:68da66ca3d6b35b22bea5c53d938d5f8988663dca042f0a46429a1eba1010051",
+                "sha256:deb468efb3abaa70d790add4147d18782d86fdeacf648d6e8afb7a99807f1546"
             ],
             "index": "pypi",
-            "version": "==3.4.3"
+            "version": "==3.5.0"
         },
         "sphinx-markdown-tables": {
             "hashes": [
