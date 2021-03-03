@@ -470,11 +470,11 @@
         },
         "sphinx": {
             "hashes": [
-                "sha256:41cad293f954f7d37f803d97eb184158cfd90f51195131e94875bc07cd08b93c",
-                "sha256:c314c857e7cd47c856d2c5adff514ac2e6495f8b8e0f886a8a37e9305dfea0d8"
+                "sha256:11d521e787d9372c289472513d807277caafb1684b33eb4f08f7574c405893a9",
+                "sha256:e90161222e4d80ce5fc811ace7c6787a226b4f5951545f7f42acf97277bfc35c"
             ],
             "index": "pypi",
-            "version": "==3.4.3"
+            "version": "==3.5.1"
         },
         "sphinx-markdown-tables": {
             "hashes": [
