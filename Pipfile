@@ -23,7 +23,7 @@ chardet = "*"
 requests = "*"
 binaryornot = "*"
 version-parser = "*"
-PyQt5 = "5.15.3"
+PyQt5 = "5.15.4"
 Markdown = "*"
 
 [requires]
