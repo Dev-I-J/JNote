@@ -1,3 +1,6 @@
+**THIS REPO IS ARCHIVED!! AWAIT JNOTE2!!!**
+
+
 # JNote - A Free NotePad
 
 [![Build Status](https://travis-ci.org/Dev-I-J/JNote.svg?branch=master)](https://travis-ci.org/Dev-I-J/JNote)
